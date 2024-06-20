@@ -1,7 +1,12 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-require("dotenv").config();
+
+const path = require("node:path");
+
+const envPath = path.join(__dirname, "..", ".env");
+
+require("dotenv").config({ path: envPath });
 
 const app = express();
 
