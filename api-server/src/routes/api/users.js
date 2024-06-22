@@ -8,9 +8,7 @@ const router = Router();
 
 router.post("/register", validateBody(validationSchemes.user), ctrl.register);
 
-router.post("/login", (_, res) => {
-  res.json({ message: "In work" });
-});
+router.post("/login", validateBody(validationSchemes.login), ctrl.login);
 
 router.post("/logout", (_, res) => {
   res.json({ message: "In work" });
