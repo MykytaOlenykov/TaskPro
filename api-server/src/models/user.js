@@ -33,7 +33,7 @@ const User = model("user", userSchema);
 
 const nameSchema = Joi.string().trim().max(100).required();
 const emailSchema = Joi.string().trim().max(255).pattern(emailReg).required();
-const passwordSchema = Joi.string().trim().min(8).max(100).required();
+const passwordSchema = Joi.string().trim().min(8).max(255).required();
 
 const user = Joi.object({
   name: nameSchema,
