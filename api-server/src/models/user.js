@@ -41,8 +41,14 @@ const user = Joi.object({
   password: passwordSchema,
 });
 
+const login = Joi.object({
+  email: emailSchema,
+  password: passwordSchema,
+});
+
 const validationSchemes = {
   user,
+  login,
 };
 
 module.exports = {
