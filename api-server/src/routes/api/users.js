@@ -10,8 +10,6 @@ router.post("/register", validateBody(validationSchemes.user), ctrl.register);
 
 router.post("/login", validateBody(validationSchemes.login), ctrl.login);
 
-router.post("/logout", authenticate, (_, res) => {
-  res.json({ message: "In work" });
-});
+router.post("/logout", authenticate, ctrl.logout);
 
 module.exports = router;
