@@ -19,6 +19,12 @@ const boardSchema = new Schema({
     ref: "background",
     default: null,
   },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    index: true,
+    required: true,
+  },
 });
 
 boardSchema.post("save", handleMongooseError);
