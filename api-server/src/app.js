@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/static", express.static(staticPath));
 
-app.get("/api/static/icons", staticCtrl.getIcons);
+app.get("/api/static/icons", authenticate, staticCtrl.getIcons);
 
 app.use("/api/users", usersRouter);
 
