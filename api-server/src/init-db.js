@@ -30,7 +30,8 @@ const initDbDataPath = path.join(__dirname, "..", "fixtures", "init-db");
       { encoding: "utf-8" }
     );
     await Icon.insertMany(JSON.parse(iconData));
-    process.exit(1);
+
+    await mongoose.disconnect();
   } catch (error) {
     console.log(error.message);
     process.exit(1);

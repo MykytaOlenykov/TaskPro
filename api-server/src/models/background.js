@@ -2,16 +2,19 @@ const { Schema, model } = require("mongoose");
 
 const { handleMongooseError } = require("../helpers");
 
-const backgroundTypeSchema = new Schema({
-  baseUrl: {
-    type: String,
-    required: true,
+const backgroundTypeSchema = new Schema(
+  {
+    baseUrl: {
+      type: String,
+      required: true,
+    },
+    largeUrl: {
+      type: String,
+      required: true,
+    },
   },
-  largeUrl: {
-    type: String,
-    required: true,
-  },
-});
+  { _id: false }
+);
 
 const backgroundSchema = new Schema(
   {
