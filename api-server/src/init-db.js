@@ -21,13 +21,13 @@ const initDbDataPath = path.join(__dirname, "..", "fixtures", "init-db");
 
     const backgroundData = await fs.readFile(
       path.join(initDbDataPath, "backgrounds.json"),
-      { encoding: "utf-8" }
+      "utf-8"
     );
     await Background.insertMany(JSON.parse(backgroundData));
 
     const iconData = await fs.readFile(
       path.join(initDbDataPath, "icons.json"),
-      { encoding: "utf-8" }
+      "utf-8"
     );
     await Icon.insertMany(JSON.parse(iconData));
 

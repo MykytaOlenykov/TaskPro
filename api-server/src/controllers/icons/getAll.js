@@ -1,18 +1,22 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 
-const iconsPath = path.join(__dirname, "..", "..", "static", "icons");
+const { Icon } = require("../../models/icon");
+
+const rootPath = path.join(__dirname, "..", "..");
 
 const getAll = async (_, res) => {
-  const files = await fs.readdir(iconsPath);
+  const icons = await Icon.find();
 
-  const svgs = {};
+  const svgs = [];
 
-  for (const file of files) {
-    if (path.extname(file) === ".svg") {
-      const svgContent = await fs.readFile(path.join(iconsPath, file), "utf8");
-      svgs[file] = svgContent;
-    }
+  for (const { _id, url } of icons) {
+    const svgContent = await fs.readFile(path.join(rootPath, url), "utf8");
+    svgs.push({
+      _id,
+      url,
+      svg: svgContent,
+    });
   }
 
   res.json(svgs);
