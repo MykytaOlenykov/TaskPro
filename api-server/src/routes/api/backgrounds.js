@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const ctrl = require("../../controllers/icons");
+const ctrl = require("../../controllers/backgrounds");
 
 const router = Router();
 

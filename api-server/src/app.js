@@ -11,6 +11,7 @@ require("dotenv").config({ path: envPath });
 
 const usersRouter = require("./routes/api/users");
 const iconsRouter = require("./routes/api/icons");
+const backgroundsRouter = require("./routes/api/backgrounds");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/api/static", express.static(staticPath));
 
 app.use("/api/users", usersRouter);
 app.use("/api/icons", iconsRouter);
+app.use("/api/backgrounds", backgroundsRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Not found" });
