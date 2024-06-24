@@ -2,6 +2,17 @@ const { Schema, model } = require("mongoose");
 
 const { handleMongooseError } = require("../helpers");
 
+const backgroundTypeSchema = new Schema({
+  baseUrl: {
+    type: String,
+    required: true,
+  },
+  largeUrl: {
+    type: String,
+    required: true,
+  },
+});
+
 const backgroundSchema = new Schema(
   {
     previewUrl: {
@@ -9,40 +20,16 @@ const backgroundSchema = new Schema(
       required: true,
     },
     mobile: {
-      type: Object,
+      type: backgroundTypeSchema,
       required: true,
-      baseUrl: {
-        type: String,
-        required: true,
-      },
-      largeUrl: {
-        type: String,
-        required: true,
-      },
     },
     tablet: {
-      type: Object,
+      type: backgroundTypeSchema,
       required: true,
-      baseUrl: {
-        type: String,
-        required: true,
-      },
-      largeUrl: {
-        type: String,
-        required: true,
-      },
     },
     desktop: {
-      type: Object,
+      type: backgroundTypeSchema,
       required: true,
-      baseUrl: {
-        type: String,
-        required: true,
-      },
-      largeUrl: {
-        type: String,
-        required: true,
-      },
     },
   },
   { versionKey: false, timestamps: true }
