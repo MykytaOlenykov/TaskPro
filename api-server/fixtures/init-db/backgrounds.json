@@ -212,6 +212,7 @@
   {
     "previewUrl": "/static/backgrounds/preview/28b8d9d4-ae76-4ffe-971e-b420573981a0.jpg",
     "desktop": {
+      "baseUrl": "/static/backgrounds/desktop/28b8d9d4-ae76-4ffe-971e-b420573981a0.jpg",
       "largeUrl": "/static/backgrounds/desktop/28b8d9d4-ae76-4ffe-971e-b420573981a0@2x.jpg"
     },
     "tablet": {
