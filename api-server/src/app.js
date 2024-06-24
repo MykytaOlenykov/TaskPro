@@ -3,7 +3,6 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const path = require("node:path");
-const fs = require("fs/promises");
 
 const envPath = path.join(__dirname, "..", ".env");
 const staticPath = path.join(__dirname, "static");
@@ -21,9 +20,9 @@ const formatLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatLogger));
 app.use(cors());
 app.use(express.json());
-app.use("/static", express.static(staticPath));
+app.use("/api/static", express.static(staticPath));
 
-app.get("/static/icons", staticCtrl.getIcons);
+app.get("/api/static/icons", staticCtrl.getIcons);
 
 app.use("/api/users", usersRouter);
 
