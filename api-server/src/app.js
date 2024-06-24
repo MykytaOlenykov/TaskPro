@@ -9,9 +9,8 @@ const staticPath = path.join(__dirname, "static");
 
 require("dotenv").config({ path: envPath });
 
-const { authenticate } = require("./middlewares");
-const staticCtrl = require("./controllers/static");
 const usersRouter = require("./routes/api/users");
+const iconsRouter = require("./routes/api/icons");
 
 const app = express();
 
@@ -22,9 +21,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/static", express.static(staticPath));
 
-app.get("/api/static/icons", authenticate, staticCtrl.getIcons);
-
 app.use("/api/users", usersRouter);
+app.use("/api/icons", iconsRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Not found" });

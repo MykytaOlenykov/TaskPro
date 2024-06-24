@@ -3,7 +3,7 @@ const path = require("node:path");
 
 const iconsPath = path.join(__dirname, "..", "..", "static", "icons");
 
-const getIcons = async (_, res) => {
+const getAll = async (_, res) => {
   const files = await fs.readdir(iconsPath);
 
   const svgs = {};
@@ -18,4 +18,4 @@ const getIcons = async (_, res) => {
   res.json(svgs);
 };
 
-module.exports = getIcons;
+module.exports = getAll;
