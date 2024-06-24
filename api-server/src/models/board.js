@@ -3,29 +3,32 @@ const Joi = require("joi");
 
 const { handleMongooseError } = require("../helpers");
 
-const boardSchema = new Schema({
-  name: {
-    type: String,
-    maxlength: 255,
-    required: true,
+const boardSchema = new Schema(
+  {
+    name: {
+      type: String,
+      maxlength: 255,
+      required: true,
+    },
+    icon: {
+      type: Schema.Types.ObjectId,
+      ref: "icon",
+      required: true,
+    },
+    background: {
+      type: Schema.Types.ObjectId,
+      ref: "background",
+      default: null,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      index: true,
+      required: true,
+    },
   },
-  icon: {
-    type: Schema.Types.ObjectId,
-    ref: "icon",
-    required: true,
-  },
-  background: {
-    type: Schema.Types.ObjectId,
-    ref: "background",
-    default: null,
-  },
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-    index: true,
-    required: true,
-  },
-});
+  { versionKey: false, timestamps: true }
+);
 
 boardSchema.post("save", handleMongooseError);
 
