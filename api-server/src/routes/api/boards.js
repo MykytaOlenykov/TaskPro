@@ -1,6 +1,10 @@
 const { Router } = require("express");
 
-const { validateBody, authenticate, isValidId } = require("../../middlewares");
+const {
+  validateBody,
+  authenticate,
+  isValidObjectId,
+} = require("../../middlewares");
 const { validationSchemes } = require("../../models/board");
 const ctrl = require("../../controllers/boards");
 
@@ -18,11 +22,11 @@ router.post(
 router.put(
   "/:id",
   authenticate,
-  isValidId,
+  isValidObjectId,
   validateBody(validationSchemes.board),
   ctrl.updateById
 );
 
-router.delete("/:id", authenticate, isValidId, ctrl.deleteById);
+router.delete("/:id", authenticate, isValidObjectId, ctrl.deleteById);
 
 module.exports = router;
