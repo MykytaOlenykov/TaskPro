@@ -1,7 +1,7 @@
-const { Schema, model, isValidObjectId } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
-const { handleMongooseError } = require("../helpers");
+const { handleMongooseError, isValidObjectId } = require("../helpers");
 
 const boardSchema = new Schema(
   {
@@ -36,20 +36,13 @@ const Board = model("board", boardSchema);
 
 const board = Joi.object({
   name: Joi.string().trim().max(255).required(),
-  icon: Joi.string()
-    .custom((value, helpers) => {
-      if (isValidObjectId(value)) {
-        return value;
-      }
-      return helpers.message(`icon: ${value} is not valid id`);
-    })
-    .required(),
+  icon: Joi.string().custom(isValidObjectId).required(),
   background: Joi.string()
     .custom((value, helpers) => {
-      if (!value || isValidObjectId(value)) {
+      if (!value) {
         return value;
       }
-      return helpers.message(`background: ${value} is not valid id`);
+      return isValidObjectId(value, helpers);
     })
     .allow(null),
 });
