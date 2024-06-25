@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, isValidObjectId } = require("mongoose");
 const Joi = require("joi");
 
 const { handleMongooseError } = require("../helpers");
@@ -31,6 +31,14 @@ const Column = model("column", columnSchema);
 
 const column = Joi.object({
   name: Joi.string().trim().max(255).required(),
+  board: Joi.string()
+    .custom((value, helpers) => {
+      if (isValidObjectId(value)) {
+        return value;
+      }
+      return helpers.message(`board: ${value} is not valid id`);
+    })
+    .required(),
 });
 
 const validationSchemes = {
