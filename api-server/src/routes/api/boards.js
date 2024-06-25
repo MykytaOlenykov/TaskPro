@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const { validateBody, authenticate } = require("../../middlewares");
+const { validateBody, authenticate, isValidId } = require("../../middlewares");
 const { validationSchemes } = require("../../models/board");
 const ctrl = require("../../controllers/boards");
 
@@ -15,9 +15,13 @@ router.post(
   ctrl.create
 );
 
-router.put("/:id", authenticate, (_, res) => {
-  res.json({ message: "In work" });
-});
+router.put(
+  "/:id",
+  authenticate,
+  isValidId,
+  validateBody(validationSchemes.board),
+  ctrl.updateById
+);
 
 router.delete("/:id", authenticate, (_, res) => {
   res.json({ message: "In work" });
