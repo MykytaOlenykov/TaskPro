@@ -1,13 +1,13 @@
 const { Board } = require("../../models/board");
 
 const getAll = async (req, res) => {
-  const { _id: owner } = req.user;
-  const boards = await Board.find({ owner })
+  const { _id: owner_id } = req.user;
+  const boards = await Board.find({ owner_id })
     .populate({
       path: "background_id icon_id",
       select: "-createdAt -updatedAt",
     })
-    .select("-createdAt -updatedAt -owner");
+    .select("-createdAt -updatedAt -owner_id");
   res.json(boards);
 };
 

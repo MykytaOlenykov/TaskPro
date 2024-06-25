@@ -20,7 +20,7 @@ const boardSchema = new Schema(
       ref: "background",
       default: null,
     },
-    owner: {
+    owner_id: {
       type: Schema.Types.ObjectId,
       ref: "user",
       index: true,
