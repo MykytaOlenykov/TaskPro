@@ -22,7 +22,7 @@ router.get("/", authenticate, validateQuery(querySchema), ctrl.getAll);
 router.post(
   "/",
   authenticate,
-  validateBody(validationSchemes.column),
+  validateBody(validationSchemes.createColumn),
   ctrl.create
 );
 
@@ -30,10 +30,8 @@ router.put(
   "/:id",
   authenticate,
   isValidObjectId,
-  validateBody(validationSchemes.column),
-  (_, res) => {
-    res.json({ message: "In work" });
-  }
+  validateBody(validationSchemes.updateColumn),
+  ctrl.updateById
 );
 
 router.delete("/:id", authenticate, (_, res) => {

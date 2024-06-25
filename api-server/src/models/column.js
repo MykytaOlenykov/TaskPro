@@ -29,13 +29,21 @@ columnSchema.post("save", handleMongooseError);
 
 const Column = model("column", columnSchema);
 
-const column = Joi.object({
-  name: Joi.string().trim().max(255).required(),
-  board: Joi.string().custom(isValidObjectId).required(),
+const nameSchema = Joi.string().trim().max(255).required();
+const boardSchema = Joi.string().custom(isValidObjectId).required();
+
+const createColumn = Joi.object({
+  name: nameSchema,
+  board: boardSchema,
+});
+
+const updateColumn = Joi.object({
+  name: nameSchema,
 });
 
 const validationSchemes = {
-  column,
+  createColumn,
+  updateColumn,
 };
 
 module.exports = {
