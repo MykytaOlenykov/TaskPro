@@ -13,6 +13,7 @@ const usersRouter = require("./routes/api/users");
 const iconsRouter = require("./routes/api/icons");
 const backgroundsRouter = require("./routes/api/backgrounds");
 const boardsRouter = require("./routes/api/boards");
+const columsRouter = require("./routes/api/columns");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/icons", iconsRouter);
 app.use("/api/backgrounds", backgroundsRouter);
 app.use("/api/boards", boardsRouter);
+app.use("/api/columns", columsRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: "Not found" });
