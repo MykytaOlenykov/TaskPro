@@ -23,9 +23,7 @@ router.post(
   "/",
   authenticate,
   validateBody(validationSchemes.column),
-  (_, res) => {
-    res.json({ message: "In work" });
-  }
+  ctrl.create
 );
 
 router.put(
