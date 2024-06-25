@@ -6,9 +6,7 @@ const ctrl = require("../../controllers/boards");
 
 const router = Router();
 
-router.get("/", authenticate, (_, res) => {
-  res.json({ message: "In work" });
-});
+router.get("/", authenticate, ctrl.getAll);
 
 router.post(
   "/",
