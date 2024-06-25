@@ -23,8 +23,6 @@ router.put(
   ctrl.updateById
 );
 
-router.delete("/:id", authenticate, (_, res) => {
-  res.json({ message: "In work" });
-});
+router.delete("/:id", authenticate, isValidId, ctrl.deleteById);
 
 module.exports = router;
