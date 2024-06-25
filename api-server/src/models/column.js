@@ -10,13 +10,13 @@ const columnSchema = new Schema(
       maxlength: 255,
       required: true,
     },
-    board: {
+    board_id: {
       type: Schema.Types.ObjectId,
       ref: "board",
       index: true,
       required: true,
     },
-    owner: {
+    owner_id: {
       type: Schema.Types.ObjectId,
       ref: "user",
       required: true,
@@ -34,7 +34,7 @@ const boardSchema = Joi.string().custom(isValidObjectId).required();
 
 const createColumn = Joi.object({
   name: nameSchema,
-  board: boardSchema,
+  board_id: boardSchema,
 });
 
 const updateColumn = Joi.object({

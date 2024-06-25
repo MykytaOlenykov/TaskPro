@@ -3,8 +3,8 @@ const { HttpError } = require("../../helpers");
 
 const deleteById = async (req, res) => {
   const { id } = req.params;
-  const { _id: owner } = req.user;
-  const result = await Column.findOneAndDelete({ _id: id, owner });
+  const { _id: owner_id } = req.user;
+  const result = await Column.findOneAndDelete({ _id: id, owner_id });
 
   if (!result) {
     throw HttpError(404);
