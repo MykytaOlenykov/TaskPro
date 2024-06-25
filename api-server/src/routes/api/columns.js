@@ -2,12 +2,11 @@ const { Router } = require("express");
 
 const { validateBody, authenticate, isValidId } = require("../../middlewares");
 const { validationSchemes } = require("../../models/column");
+const ctrl = require("../../controllers/columns");
 
 const router = Router();
 
-router.get("/", authenticate, (_, res) => {
-  res.json({ message: "In work" });
-});
+router.get("/", authenticate, ctrl.getAll);
 
 router.post(
   "/",
