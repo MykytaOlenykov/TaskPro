@@ -4,7 +4,10 @@ const create = async (req, res) => {
   const { _id: owner } = req.user;
   const newBoard = await Board.create({ ...req.body, owner });
   const board = await Board.findById(newBoard._id)
-    .populate({ path: "background icon", select: "-createdAt -updatedAt" })
+    .populate({
+      path: "background_id icon_id",
+      select: "-createdAt -updatedAt",
+    })
     .select("-createdAt -updatedAt -owner");
   res.status(201).json(board);
 };

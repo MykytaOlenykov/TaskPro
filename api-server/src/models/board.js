@@ -10,12 +10,12 @@ const boardSchema = new Schema(
       maxlength: 255,
       required: true,
     },
-    icon: {
+    icon_id: {
       type: Schema.Types.ObjectId,
       ref: "icon",
       required: true,
     },
-    background: {
+    background_id: {
       type: Schema.Types.ObjectId,
       ref: "background",
       default: null,
@@ -36,8 +36,8 @@ const Board = model("board", boardSchema);
 
 const board = Joi.object({
   name: Joi.string().trim().max(255).required(),
-  icon: Joi.string().custom(isValidObjectId).required(),
-  background: Joi.string()
+  icon_id: Joi.string().custom(isValidObjectId).required(),
+  background_id: Joi.string()
     .custom((value, helpers) => {
       if (!value) {
         return value;
