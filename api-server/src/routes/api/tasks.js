@@ -9,6 +9,7 @@ const {
 } = require("../../middlewares");
 const { isValidObjectId: isValidObjectIdHelper } = require("../../helpers");
 const { validationSchemes } = require("../../models/task");
+const ctrl = require("../../controllers/tasks");
 
 const router = Router();
 
@@ -16,9 +17,7 @@ const querySchema = Joi.object({
   column_id: Joi.string().custom(isValidObjectIdHelper).required(),
 });
 
-router.get("/", authenticate, validateQuery(querySchema), (_, res) => {
-  res.json({ message: "In work" });
-});
+router.get("/", authenticate, validateQuery(querySchema), ctrl.getAll);
 
 router.post(
   "/",
