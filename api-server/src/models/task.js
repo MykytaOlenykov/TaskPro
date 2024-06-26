@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
 const { handleMongooseError, isValidObjectId } = require("../helpers");
+const { Column } = require("./column");
 
 const taskPrioritySchema = new Schema(
   {
@@ -41,12 +42,25 @@ const taskSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "task_priority",
       default: null,
+      validate: {
+        validator: async function (value) {
+          if (value === null) return true;
+          return await TaskPriority.exists({ _id: value });
+        },
+        message: "task_priority with the specified ID does not exist",
+      },
     },
     column_id: {
       type: Schema.Types.ObjectId,
       ref: "column",
       index: true,
       required: true,
+      validate: {
+        validator: async function (value) {
+          return await Column.exists({ _id: value });
+        },
+        message: "column with the specified ID does not exist",
+      },
     },
     owner_id: {
       type: Schema.Types.ObjectId,
