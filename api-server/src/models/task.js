@@ -3,6 +3,21 @@ const Joi = require("joi");
 
 const { handleMongooseError, isValidObjectId } = require("../helpers");
 
+const taskPrioritySchema = new Schema(
+  {
+    name: {
+      type: String,
+      maxlength: 255,
+      required: true,
+    },
+  },
+  { versionKey: false, timestamps: true }
+);
+
+taskPrioritySchema.post("save", handleMongooseError);
+
+const TaskPriority = model("task_priority", taskPrioritySchema);
+
 const taskSchema = new Schema(
   {
     name: {
@@ -21,7 +36,7 @@ const taskSchema = new Schema(
     },
     priority_id: {
       type: Schema.Types.ObjectId,
-      ref: "priority",
+      ref: "task_priority",
       default: null,
     },
     column_id: {
@@ -85,5 +100,6 @@ const validationSchemes = {
 
 module.exports = {
   Task,
+  TaskPriority,
   validationSchemes,
 };

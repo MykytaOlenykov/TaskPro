@@ -5,6 +5,7 @@ const path = require("node:path");
 
 const { Background } = require("./models/background");
 const { Icon } = require("./models/icon");
+const { TaskPriority } = require("./models/task");
 
 const envPath = path.join(__dirname, "..", ".env");
 
@@ -19,6 +20,10 @@ const initDbDataPath = path.join(__dirname, "..", "fixtures", "init-db");
     await mongoose.connect(MONGO_DB_HOST);
     console.log("Database connection successful");
 
+    await Background.collection.drop().catch((err) => console.log(err));
+    await Icon.collection.drop().catch((err) => console.log(err));
+    await TaskPriority.collection.drop().catch((err) => console.log(err));
+
     const backgroundData = await fs.readFile(
       path.join(initDbDataPath, "backgrounds.json"),
       "utf-8"
@@ -30,6 +35,12 @@ const initDbDataPath = path.join(__dirname, "..", "fixtures", "init-db");
       "utf-8"
     );
     await Icon.insertMany(JSON.parse(iconData));
+
+    const taskPriorityData = await fs.readFile(
+      path.join(initDbDataPath, "task-priorities.json"),
+      "utf-8"
+    );
+    await TaskPriority.insertMany(JSON.parse(taskPriorityData));
 
     await mongoose.disconnect();
   } catch (error) {
