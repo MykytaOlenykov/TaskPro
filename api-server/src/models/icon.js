@@ -9,7 +9,7 @@ const iconSchema = new Schema(
       required: true,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false }
 );
 
 iconSchema.post("save", handleMongooseError);

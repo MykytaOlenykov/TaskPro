@@ -11,7 +11,7 @@ const taskPrioritySchema = new Schema(
       required: true,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false }
 );
 
 taskPrioritySchema.post("save", handleMongooseError);

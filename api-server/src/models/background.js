@@ -35,7 +35,7 @@ const backgroundSchema = new Schema(
       required: true,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false }
 );
 
 backgroundSchema.post("save", handleMongooseError);
