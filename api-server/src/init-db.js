@@ -20,27 +20,35 @@ const initDbDataPath = path.join(__dirname, "..", "fixtures", "init-db");
     await mongoose.connect(MONGO_DB_HOST);
     console.log("Database connection successful");
 
-    await Background.collection.drop().catch((err) => console.log(err));
-    await Icon.collection.drop().catch((err) => console.log(err));
-    await TaskPriority.collection.drop().catch((err) => console.log(err));
+    const backgroundIsExists = await Background.exists();
 
-    const backgroundData = await fs.readFile(
-      path.join(initDbDataPath, "backgrounds.json"),
-      "utf-8"
-    );
-    await Background.insertMany(JSON.parse(backgroundData));
+    if (!backgroundIsExists) {
+      const backgroundData = await fs.readFile(
+        path.join(initDbDataPath, "backgrounds.json"),
+        "utf-8"
+      );
+      await Background.insertMany(JSON.parse(backgroundData));
+    }
 
-    const iconData = await fs.readFile(
-      path.join(initDbDataPath, "icons.json"),
-      "utf-8"
-    );
-    await Icon.insertMany(JSON.parse(iconData));
+    const iconIsExists = await Icon.exists();
 
-    const taskPriorityData = await fs.readFile(
-      path.join(initDbDataPath, "task-priorities.json"),
-      "utf-8"
-    );
-    await TaskPriority.insertMany(JSON.parse(taskPriorityData));
+    if (!iconIsExists) {
+      const iconData = await fs.readFile(
+        path.join(initDbDataPath, "icons.json"),
+        "utf-8"
+      );
+      await Icon.insertMany(JSON.parse(iconData));
+    }
+
+    const taskPriorityIsExists = await TaskPriority.exists();
+
+    if (!taskPriorityIsExists) {
+      const taskPriorityData = await fs.readFile(
+        path.join(initDbDataPath, "task-priorities.json"),
+        "utf-8"
+      );
+      await TaskPriority.insertMany(JSON.parse(taskPriorityData));
+    }
 
     await mongoose.disconnect();
   } catch (error) {
