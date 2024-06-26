@@ -59,11 +59,19 @@ taskSchema.post("save", handleMongooseError);
 const Task = model("task", taskSchema);
 
 const nameSchema = Joi.string().trim().max(255).required();
-const commentSchema = Joi.string().trim().max(1000).required();
+const commentSchema = Joi.string().trim().max(1000);
 const deadlineSchema = Joi.date()
   .custom((value, helpers) => {
-    console.log(value, new Date());
-    if (value <= new Date()) {
+    const currentUTCDatetime = new Date();
+    const currentUTCDate = new Date(
+      Date.UTC(
+        currentUTCDatetime.getUTCFullYear(),
+        currentUTCDatetime.getUTCMonth(),
+        currentUTCDatetime.getUTCDate()
+      )
+    );
+
+    if (value >= currentUTCDate) {
       return value;
     }
     const fieldName = helpers.state.path.join(".");
