@@ -7,10 +7,7 @@ const updateById = async (req, res) => {
   const board = await Board.findOneAndUpdate({ owner_id, _id: id }, req.body, {
     new: true,
   })
-    .populate({
-      path: "background_id icon_id",
-      select: "-createdAt -updatedAt",
-    })
+    .populate("background_id icon_id")
     .select("-createdAt -updatedAt -owner_id");
 
   if (!board) {
