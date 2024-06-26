@@ -34,9 +34,7 @@ router.put(
   ctrl.updateById
 );
 
-router.delete("/:id", authenticate, isValidObjectId, (_, res) => {
-  res.json({ message: "In work" });
-});
+router.delete("/:id", authenticate, isValidObjectId, ctrl.deleteById);
 
 router.get("/priorities", authenticate, (_, res) => {
   res.json({ message: "In work" });
