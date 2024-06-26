@@ -1,6 +1,8 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
+const { Icon } = require("./icon");
+const { Background } = require("./background");
 const { handleMongooseError, isValidObjectId } = require("../helpers");
 
 const boardSchema = new Schema(
@@ -14,11 +16,24 @@ const boardSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "icon",
       required: true,
+      validate: {
+        validator: async function (value) {
+          return await Icon.exists({ _id: value });
+        },
+        message: "icon with the specified ID does not exist",
+      },
     },
     background_id: {
       type: Schema.Types.ObjectId,
       ref: "background",
       default: null,
+      validate: {
+        validator: async function (value) {
+          if (value === null) return true;
+          return await Background.exists({ _id: value });
+        },
+        message: "background with the specified ID does not exist",
+      },
     },
     owner_id: {
       type: Schema.Types.ObjectId,
