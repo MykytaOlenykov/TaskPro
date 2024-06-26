@@ -129,9 +129,14 @@ const updateTask = Joi.object({
   priority_id: priorityIdSchema,
 });
 
+const changeTaskColumnId = Joi.object({
+  column_id: columnIdSchema,
+});
+
 const validationSchemes = {
   createTask,
   updateTask,
+  changeTaskColumnId,
 };
 
 module.exports = {

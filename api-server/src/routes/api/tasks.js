@@ -34,6 +34,14 @@ router.put(
   ctrl.updateById
 );
 
+router.patch(
+  "/:id",
+  authenticate,
+  isValidObjectId,
+  validateBody(validationSchemes.changeTaskColumnId),
+  ctrl.updateById
+);
+
 router.delete("/:id", authenticate, isValidObjectId, ctrl.deleteById);
 
 router.get("/priorities", authenticate, ctrl.getPriorities);
