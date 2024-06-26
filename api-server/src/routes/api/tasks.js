@@ -36,8 +36,6 @@ router.put(
 
 router.delete("/:id", authenticate, isValidObjectId, ctrl.deleteById);
 
-router.get("/priorities", authenticate, (_, res) => {
-  res.json({ message: "In work" });
-});
+router.get("/priorities", authenticate, ctrl.getPriorities);
 
 module.exports = router;
