@@ -12,10 +12,6 @@ const getAll = async (req, res) => {
     throw HttpError(404);
   }
 
-  if (!board_id) {
-    throw HttpError(400, "board_id query is required");
-  }
-
   const columns = await Column.find({ owner_id, board_id }).select(
     "-createdAt -updatedAt -owner_id"
   );
