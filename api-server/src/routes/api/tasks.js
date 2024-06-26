@@ -31,9 +31,7 @@ router.put(
   authenticate,
   isValidObjectId,
   validateBody(validationSchemes.updateTask),
-  (_, res) => {
-    res.json({ message: "In work" });
-  }
+  ctrl.updateById
 );
 
 router.delete("/:id", authenticate, isValidObjectId, (_, res) => {
