@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
+const { Board } = require("./board");
 const { handleMongooseError, isValidObjectId } = require("../helpers");
 
 const columnSchema = new Schema(
@@ -15,6 +16,12 @@ const columnSchema = new Schema(
       ref: "board",
       index: true,
       required: true,
+      validate: {
+        validator: async function (value) {
+          return await Board.exists({ _id: value });
+        },
+        message: "board with the specified ID does not exist",
+      },
     },
     owner_id: {
       type: Schema.Types.ObjectId,
