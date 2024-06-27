@@ -23,7 +23,11 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    token: {
+    accessToken: {
+      type: String,
+      default: "",
+    },
+    refreshToken: {
       type: String,
       default: "",
     },

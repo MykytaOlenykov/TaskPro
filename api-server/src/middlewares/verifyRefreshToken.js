@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../models/user");
 const { HttpError } = require("../helpers");
 
-const { ACCESS_TOKEN_SECRET_KEY } = process.env;
+const { REFRESH_TOKEN_SECRET_KEY } = process.env;
 
-const authenticate = async (req, _, next) => {
+const verifyRefreshToken = async (req, _, next) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
 
@@ -14,10 +14,10 @@ const authenticate = async (req, _, next) => {
   }
 
   try {
-    const { id } = jwt.verify(token, ACCESS_TOKEN_SECRET_KEY);
+    const { id } = jwt.verify(token, REFRESH_TOKEN_SECRET_KEY);
     const user = await User.findById(id);
 
-    if (!user || !user.accessToken || user.accessToken !== token) {
+    if (!user || !user.refreshToken || user.refreshToken !== token) {
       return next(HttpError(401));
     }
 
@@ -29,4 +29,4 @@ const authenticate = async (req, _, next) => {
   }
 };
 
-module.exports = authenticate;
+module.exports = verifyRefreshToken;
