@@ -14,7 +14,14 @@ const ctrl = require("../../controllers/tasks");
 const router = Router();
 
 const querySchema = Joi.object({
-  column_id: Joi.string().custom(isValidObjectIdHelper).required(),
+  column_id: Joi.string()
+    .custom((value, helpers) => {
+      const ids = value.split(",");
+      const results = ids.map((id) => isValidObjectIdHelper(id, helpers));
+      const errorResult = results.find((result) => typeof result === "object");
+      return errorResult ?? value;
+    })
+    .required(),
 });
 
 router.get("/", authenticate, validateQuery(querySchema), ctrl.getAll);

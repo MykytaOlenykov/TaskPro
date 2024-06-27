@@ -1,16 +1,8 @@
-const { Board } = require("../../models/board");
 const { Column } = require("../../models/column");
-const { HttpError } = require("../../helpers");
 
 const getAll = async (req, res) => {
   const { _id: owner_id } = req.user;
   const { board_id } = req.query;
-
-  const board = await Board.findOne({ owner_id, _id: board_id });
-
-  if (!board) {
-    throw HttpError(404);
-  }
 
   const columns = await Column.find({ owner_id, board_id }).select(
     "-createdAt -updatedAt -owner_id"
