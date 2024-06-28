@@ -12,6 +12,8 @@ const router = Router();
 
 router.get("/", authenticate, ctrl.getAll);
 
+router.get("/:id", authenticate, isValidObjectId, ctrl.getById);
+
 router.post(
   "/",
   authenticate,
