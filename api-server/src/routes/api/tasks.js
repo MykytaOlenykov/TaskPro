@@ -1,30 +1,14 @@
 const { Router } = require("express");
-const Joi = require("joi");
 
 const {
   validateBody,
-  validateQuery,
   authenticate,
   isValidObjectId,
 } = require("../../middlewares");
-const { isValidObjectId: isValidObjectIdHelper } = require("../../helpers");
 const { validationSchemes } = require("../../models/task");
 const ctrl = require("../../controllers/tasks");
 
 const router = Router();
-
-const querySchema = Joi.object({
-  column_id: Joi.string()
-    .custom((value, helpers) => {
-      const ids = value.split(",");
-      const results = ids.map((id) => isValidObjectIdHelper(id, helpers));
-      const errorResult = results.find((result) => typeof result === "object");
-      return errorResult ?? value;
-    })
-    .required(),
-});
-
-router.get("/", authenticate, validateQuery(querySchema), ctrl.getAll);
 
 router.post(
   "/",
