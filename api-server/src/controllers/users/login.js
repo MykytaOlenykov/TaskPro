@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const { User } = require("../../models/user");
 const { HttpError, createTokens } = require("../../helpers");
 
+const { COOKIE_REFRESH_TOKEN_EXPIRE_TIME } = process.env;
+
 const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -25,13 +27,17 @@ const login = async (req, res) => {
 
   await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
 
+  res.cookie("refreshToken", refreshToken, {
+    maxAge: Number(COOKIE_REFRESH_TOKEN_EXPIRE_TIME),
+    httpOnly: true,
+  });
+
   res.json({
     user: {
       name: user.name,
       email: user.email,
     },
     accessToken,
-    refreshToken,
   });
 };
 

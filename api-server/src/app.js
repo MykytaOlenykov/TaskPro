@@ -1,6 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const path = require("node:path");
 
@@ -22,6 +23,7 @@ const formatLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatLogger));
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api/static", express.static(staticPath));
 
