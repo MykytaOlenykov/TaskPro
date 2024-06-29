@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-function App() {
+export function App() {
   return (
     <Routes>
       <Route path="/welcome" element={<p>/welcome</p>} />
@@ -13,5 +13,3 @@ function App() {
     </Routes>
   );
 }
-
-export default App;
