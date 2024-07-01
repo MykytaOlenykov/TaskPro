@@ -1,0 +1,74 @@
+import { ThemeOptions, createTheme } from "@mui/material";
+import RegularPoppinsFont from "../assets/fonts/poppins-v21-latin-regular.woff2";
+import MediumPoppinsFont from "../assets/fonts/poppins-v21-latin-500.woff2";
+import SemiBoldPoppinsFont from "../assets/fonts/poppins-v21-latin-600.woff2";
+
+const base: ThemeOptions = {
+  typography: {
+    fontFamily: "Poppins, sans-serif",
+    fontWeightLight: 400,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 600,
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        @font-face {
+          font-display: swap;
+          font-family: "Poppins";
+          font-style: normal;
+          font-weight: 400;
+          src: url(${RegularPoppinsFont}) format("woff2");
+        }
+        @font-face {
+          font-display: swap;
+          font-family: "Poppins";
+          font-style: normal;
+          font-weight: 500;
+          src: url(${MediumPoppinsFont}) format("woff2");
+        }
+        @font-face {
+          font-display: swap;
+          font-family: "Poppins";
+          font-style: normal;
+          font-weight: 600;
+          src: url(${SemiBoldPoppinsFont}) format("woff2");
+        }
+      `,
+    },
+  },
+};
+
+const lightTheme = createTheme({
+  ...base,
+  palette: {
+    mode: "light",
+    text: {},
+    background: {},
+  },
+});
+
+const darkTheme = createTheme({
+  ...base,
+  palette: {
+    mode: "dark",
+    text: {},
+    background: {},
+  },
+});
+
+const violetTheme = createTheme({
+  ...base,
+  palette: {
+    mode: "light",
+    text: {},
+    background: {},
+  },
+});
+
+export const themes = {
+  light: lightTheme,
+  dark: darkTheme,
+  violet: violetTheme,
+};
