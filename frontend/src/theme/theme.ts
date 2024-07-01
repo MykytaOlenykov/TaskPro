@@ -11,6 +11,15 @@ const base: ThemeOptions = {
     fontWeightMedium: 500,
     fontWeightBold: 600,
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 375,
+      md: 758,
+      lg: 1440,
+      xl: 1440,
+    },
+  },
   components: {
     MuiCssBaseline: {
       styleOverrides: `
