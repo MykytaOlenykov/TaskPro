@@ -6,6 +6,7 @@ const updateById = async (req, res) => {
   const { _id: owner_id } = req.user;
   const task = await Task.findOneAndUpdate({ owner_id, _id: id }, req.body, {
     new: true,
+    runValidators: true,
   }).select("-createdAt -updatedAt -owner_id");
 
   if (!task) {
