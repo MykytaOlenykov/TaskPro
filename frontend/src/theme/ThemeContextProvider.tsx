@@ -8,7 +8,7 @@ import type { IThemeMode } from "./useThemeContext";
 export const ThemeContextProvider: React.FC<{
   children: React.ReactNode | React.ReactNode[];
 }> = ({ children }) => {
-  const [themeMode, setThemeMode] = useState<IThemeMode>("light");
+  const [themeMode, setThemeMode] = useState<IThemeMode>("dark");
 
   const currentTheme = useMemo(() => themes[themeMode], [themeMode]);
 

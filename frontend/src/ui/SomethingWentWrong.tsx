@@ -1,17 +1,17 @@
 import React, { Suspense } from "react";
-import { useThemeContext } from "../theme";
+import { useThemeContext } from "theme";
 
 const SomethingWentWrongDark = React.lazy(
-  () => import("../assets/images/something-went-wrong-dark.svg?react")
+  () => import("assets/images/something-went-wrong-dark.svg?react")
 );
 const SomethingWentWrongLight = React.lazy(
-  () => import("../assets/images/something-went-wrong-light.svg?react")
+  () => import("assets/images/something-went-wrong-light.svg?react")
 );
 const SomethingWentWrongViolet = React.lazy(
-  () => import("../assets/images/something-went-wrong-violet.svg?react")
+  () => import("assets/images/something-went-wrong-violet.svg?react")
 );
 
-export const SomethingWentWrong: React.FC = () => {
+export const SomethingWentWrong: React.FC = (props) => {
   const { mode } = useThemeContext();
 
   let SVGComponent: React.LazyExoticComponent<
@@ -28,7 +28,7 @@ export const SomethingWentWrong: React.FC = () => {
 
   return (
     <Suspense>
-      <SVGComponent />
+      <SVGComponent {...props} />
     </Suspense>
   );
 };

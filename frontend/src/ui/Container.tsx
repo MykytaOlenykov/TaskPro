@@ -5,6 +5,7 @@ export const Container = styled(MuiContainer)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   minHeight: "100vh",
+  backgroundColor: "#F6F6F7",
   backgroundImage:
     "linear-gradient(180deg, rgba(196, 196, 196, 0) 25%, #bedbb0 92.19%)",
 

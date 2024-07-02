@@ -1,14 +1,14 @@
 import React, { Suspense } from "react";
-import { useThemeContext } from "../theme";
+import { useThemeContext } from "theme";
 
 const NotFoundDark = React.lazy(
-  () => import("../assets/images/not-found-dark.svg?react")
+  () => import("assets/images/not-found-dark.svg?react")
 );
 const NotFoundLight = React.lazy(
-  () => import("../assets/images/not-found-light.svg?react")
+  () => import("assets/images/not-found-light.svg?react")
 );
 const NotFoundViolet = React.lazy(
-  () => import("../assets/images/not-found-violet.svg?react")
+  () => import("assets/images/not-found-violet.svg?react")
 );
 
 export const NotFound: React.FC = () => {

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 
+import { SomethingWentWrong } from "ui/SomethingWentWrong";
+
 interface IProps {
-  fallback: React.ReactNode;
+  fallback?: React.ReactNode;
   children: React.ReactNode | React.ReactNode[];
 }
 
@@ -10,6 +12,10 @@ interface IState {
 }
 
 export class ErrorBoundary extends Component<IProps, IState> {
+  static defaultProps = {
+    fallback: <SomethingWentWrong />,
+  };
+
   state = { hasError: false };
 
   static getDerivedStateFromError() {

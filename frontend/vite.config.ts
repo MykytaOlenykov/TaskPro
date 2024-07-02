@@ -8,8 +8,20 @@ export default defineConfig({
     react(),
     svgr({
       svgrOptions: {
-        svgo: true, // Оптимизация SVG
+        svgo: true,
       },
     }),
   ],
+  resolve: {
+    alias: {
+      assets: "/src/assets",
+      components: "/src/components",
+      pages: "/src/pages",
+      services: "/src/services",
+      store: "/src/store",
+      theme: "/src/theme",
+      types: "/src/types",
+      ui: "/src/ui",
+    },
+  },
 });

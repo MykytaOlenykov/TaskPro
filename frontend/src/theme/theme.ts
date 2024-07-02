@@ -1,7 +1,7 @@
 import { ThemeOptions, createTheme } from "@mui/material";
-import RegularPoppinsFont from "../assets/fonts/poppins-v21-latin-regular.woff2";
-import MediumPoppinsFont from "../assets/fonts/poppins-v21-latin-500.woff2";
-import SemiBoldPoppinsFont from "../assets/fonts/poppins-v21-latin-600.woff2";
+import RegularPoppinsFont from "assets/fonts/poppins-v21-latin-regular.woff2";
+import MediumPoppinsFont from "assets/fonts/poppins-v21-latin-500.woff2";
+import SemiBoldPoppinsFont from "assets/fonts/poppins-v21-latin-600.woff2";
 
 const base: ThemeOptions = {
   typography: {
