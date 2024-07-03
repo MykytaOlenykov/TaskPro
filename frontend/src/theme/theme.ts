@@ -47,20 +47,6 @@ const base: ThemeOptions = {
         }
       `,
     },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          width: "100%",
-          borderRadius: 8,
-          [".MuiInputBase-input"]: {
-            padding: "14px 18px",
-            fontSize: 14,
-            lineHeight: 1.5,
-            letterSpacing: "-0.02em",
-          },
-        },
-      },
-    },
   },
   palette: {
     common: {
@@ -94,6 +80,10 @@ const darkTheme = createTheme({
     background: {
       default: "#1F1F1F",
       primaryBox: "#151515",
+      primaryInput: "#1F1F1F",
+    },
+    border: {
+      input: "#BEDBB0",
     },
   },
 });

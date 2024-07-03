@@ -18,7 +18,7 @@ const AuthLink = styled(NavLink)(() => ({
   letterSpacing: "-0.02em",
   textDecoration: "none",
   color: "rgba(255, 255, 255, 0.3)",
-  ["&.active"]: {
+  "&.active": {
     color: "inherit",
   },
 }));
