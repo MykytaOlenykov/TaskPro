@@ -12,11 +12,7 @@ const SomethingWentWrongViolet = React.lazy(
   () => import("assets/images/something-went-wrong-violet.svg?react")
 );
 
-interface IProps {
-  children?: React.ReactNode | React.ReactNode[];
-}
-
-export const SomethingWentWrong: React.FC<IProps> = ({ children }) => {
+export const SomethingWentWrong: React.FC = () => {
   const { mode } = useThemeContext();
 
   let SVGComponent: React.LazyExoticComponent<
@@ -33,8 +29,11 @@ export const SomethingWentWrong: React.FC<IProps> = ({ children }) => {
 
   return (
     <Suspense>
-      <SVGComponent style={{ maxWidth: 500 }} width="100%" height="auto" />
-      {children}
+      <SVGComponent
+        style={{ maxWidth: 500, maxHeight: 500 }}
+        width="100%"
+        height="100%"
+      />
     </Suspense>
   );
 };

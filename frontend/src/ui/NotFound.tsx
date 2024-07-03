@@ -12,11 +12,7 @@ const NotFoundViolet = React.lazy(
   () => import("assets/images/not-found-violet.svg?react")
 );
 
-interface IProps {
-  children?: React.ReactNode | React.ReactNode[];
-}
-
-export const NotFound: React.FC<IProps> = ({ children }) => {
+export const NotFound: React.FC = () => {
   const { mode } = useThemeContext();
 
   let SVGComponent: React.LazyExoticComponent<
@@ -33,8 +29,11 @@ export const NotFound: React.FC<IProps> = ({ children }) => {
 
   return (
     <Suspense>
-      <SVGComponent style={{ maxWidth: 500 }} width="100%" height="auto" />
-      {children}
+      <SVGComponent
+        style={{ maxWidth: 500, maxHeight: 500 }}
+        width="100%"
+        height="100%"
+      />
     </Suspense>
   );
 };

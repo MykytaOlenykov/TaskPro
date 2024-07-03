@@ -70,31 +70,53 @@ const base: ThemeOptions = {
 
 const lightTheme = createTheme({
   ...base,
+  components: {
+    ...base.components,
+  },
   palette: {
     ...base.palette,
     mode: "light",
-    text: {},
-    background: {},
+    text: {
+      primary: "#161616",
+    },
+    background: {
+      default: "#F6F6F7",
+    },
   },
 });
 
 const darkTheme = createTheme({
   ...base,
+  components: {
+    ...base.components,
+  },
   palette: {
     ...base.palette,
     mode: "dark",
-    text: {},
-    background: {},
+    text: {
+      primary: "#FFFFFF",
+    },
+    background: {
+      default: "#1F1F1F",
+      primaryBox: "#151515",
+    },
   },
 });
 
 const violetTheme = createTheme({
   ...base,
+  components: {
+    ...base.components,
+  },
   palette: {
     ...base.palette,
     mode: "light",
-    text: {},
-    background: {},
+    text: {
+      primary: "#161616",
+    },
+    background: {
+      default: "#ECEDFD",
+    },
   },
 });
 
