@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+
 import { useThemeContext } from "theme";
 
 const SomethingWentWrongDark = React.lazy(
@@ -11,7 +12,11 @@ const SomethingWentWrongViolet = React.lazy(
   () => import("assets/images/something-went-wrong-violet.svg?react")
 );
 
-export const SomethingWentWrong: React.FC = (props) => {
+interface IProps {
+  children?: React.ReactNode | React.ReactNode[];
+}
+
+export const SomethingWentWrong: React.FC<IProps> = ({ children }) => {
   const { mode } = useThemeContext();
 
   let SVGComponent: React.LazyExoticComponent<
@@ -28,7 +33,8 @@ export const SomethingWentWrong: React.FC = (props) => {
 
   return (
     <Suspense>
-      <SVGComponent {...props} />
+      <SVGComponent style={{ maxWidth: 500 }} width="100%" height="auto" />
+      {children}
     </Suspense>
   );
 };

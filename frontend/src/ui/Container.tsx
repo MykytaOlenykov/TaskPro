@@ -4,6 +4,7 @@ export const Container = styled(MuiContainer)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  flexDirection: "column",
   minHeight: "100vh",
   backgroundColor: "#F6F6F7",
   backgroundImage:

@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+
 import { useThemeContext } from "theme";
 
 const NotFoundDark = React.lazy(
@@ -11,7 +12,11 @@ const NotFoundViolet = React.lazy(
   () => import("assets/images/not-found-violet.svg?react")
 );
 
-export const NotFound: React.FC = () => {
+interface IProps {
+  children?: React.ReactNode | React.ReactNode[];
+}
+
+export const NotFound: React.FC<IProps> = ({ children }) => {
   const { mode } = useThemeContext();
 
   let SVGComponent: React.LazyExoticComponent<
@@ -28,7 +33,8 @@ export const NotFound: React.FC = () => {
 
   return (
     <Suspense>
-      <SVGComponent />
+      <SVGComponent style={{ maxWidth: 500 }} width="100%" height="auto" />
+      {children}
     </Suspense>
   );
 };
