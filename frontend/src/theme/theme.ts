@@ -1,4 +1,5 @@
 import { ThemeOptions, createTheme } from "@mui/material";
+
 import RegularPoppinsFont from "assets/fonts/poppins-v21-latin-regular.woff2";
 import MediumPoppinsFont from "assets/fonts/poppins-v21-latin-500.woff2";
 import SemiBoldPoppinsFont from "assets/fonts/poppins-v21-latin-600.woff2";
@@ -46,17 +47,17 @@ const base: ThemeOptions = {
         }
       `,
     },
-    MuiButton: {
+    MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          padding: "14px 8px",
           width: "100%",
-          fontWeight: 500,
-          fontSize: 14,
-          lineHeight: 1.5,
-          letterSpacing: "-0.02em",
-          textTransform: "none",
           borderRadius: 8,
+          [".MuiInputBase-input"]: {
+            padding: "14px 18px",
+            fontSize: 14,
+            lineHeight: 1.5,
+            letterSpacing: "-0.02em",
+          },
         },
       },
     },
@@ -70,9 +71,6 @@ const base: ThemeOptions = {
 
 const lightTheme = createTheme({
   ...base,
-  components: {
-    ...base.components,
-  },
   palette: {
     ...base.palette,
     mode: "light",
@@ -87,9 +85,6 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
   ...base,
-  components: {
-    ...base.components,
-  },
   palette: {
     ...base.palette,
     mode: "dark",
@@ -105,9 +100,6 @@ const darkTheme = createTheme({
 
 const violetTheme = createTheme({
   ...base,
-  components: {
-    ...base.components,
-  },
   palette: {
     ...base.palette,
     mode: "light",

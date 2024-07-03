@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Typography, Link as MuiLink, Button, styled } from "@mui/material";
+import { Typography, Link as MuiLink, styled } from "@mui/material";
+
+import { BaseButton } from "ui/BaseButton";
 
 import userIcon from "assets/images/user-icon.png";
 import Logo from "assets/images/logo.svg?react";
@@ -59,7 +61,7 @@ const Text = styled(Typography)(({ theme }) => ({
   color: theme.palette.common.black,
 }));
 
-const RegisterButton = styled(Button)(({ theme }) => ({
+const RegisterButton = styled(BaseButton)(({ theme }) => ({
   marginBottom: 14,
   maxWidth: 344,
   color: "#fff",

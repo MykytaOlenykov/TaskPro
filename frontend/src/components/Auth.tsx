@@ -17,9 +17,9 @@ const AuthLink = styled(NavLink)(() => ({
   lineHeight: 1.5,
   letterSpacing: "-0.02em",
   textDecoration: "none",
-  color: "inherit",
+  color: "rgba(255, 255, 255, 0.3)",
   ["&.active"]: {
-    color: "rgba(255, 255, 255, 0.3)",
+    color: "inherit",
   },
 }));
 
