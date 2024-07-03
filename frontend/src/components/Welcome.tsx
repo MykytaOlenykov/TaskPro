@@ -1,11 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Typography,
-  Link as MuiLink,
-  Button as MuiButton,
-  styled,
-} from "@mui/material";
+import { Typography, Link as MuiLink, Button, styled } from "@mui/material";
 
 import userIcon from "assets/images/user-icon.png";
 import Logo from "assets/images/logo.svg?react";
@@ -29,14 +24,14 @@ const LogoContainer = styled("div")(() => ({
   marginBottom: 24,
 }));
 
-const LogoIconBox = styled("div")(() => ({
+const LogoIconBox = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   width: 40,
   height: 40,
 
-  backgroundColor: "#161616",
+  backgroundColor: theme.palette.common.black,
   borderRadius: 8,
 }));
 
@@ -47,39 +42,31 @@ const LogoIcon = styled(Logo)(() => ({
   fill: "#fff",
 }));
 
-const LogoText = styled(Typography)(() => ({
+const LogoText = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   fontSize: 28,
   letterSpacing: "-0.04em",
-  color: "#161616",
+  color: theme.palette.common.black,
 }));
 
-const Text = styled(Typography)(() => ({
+const Text = styled(Typography)(({ theme }) => ({
   marginBottom: "48px",
   maxWidth: 473,
   textAlign: "center",
-  fontWeight: 400,
   fontSize: 14,
   lineHeight: 1.29,
   letterSpacing: "-0.02em",
-  color: "#161616",
+  color: theme.palette.common.black,
 }));
 
-const Button = styled(MuiButton)(() => ({
+const RegisterButton = styled(Button)(({ theme }) => ({
   marginBottom: 14,
-  padding: "14px 8px",
-  width: "100%",
-
-  fontWeight: 500,
-  fontSize: 14,
-  letterSpacing: "-0.02em",
+  maxWidth: 344,
   color: "#fff",
-
-  backgroundColor: "#161616",
-  borderRadius: 8,
+  backgroundColor: theme.palette.common.black,
 
   ":hover": {
-    backgroundColor: "#161616",
+    backgroundColor: theme.palette.common.black,
   },
 }));
 
@@ -99,7 +86,9 @@ export const Welcome: React.FC = () => {
         Supercharge your productivity and take control of your tasks with Task
         Pro - Don't wait, start achieving your goals now!
       </Text>
-      <Button onClick={() => navigate("/auth/register")}>Registration</Button>
+      <RegisterButton onClick={() => navigate("/auth/register")}>
+        Registration
+      </RegisterButton>
       <MuiLink
         component={Link}
         to="/auth/login"
@@ -107,7 +96,7 @@ export const Welcome: React.FC = () => {
         fontWeight={500}
         fontSize={14}
         letterSpacing="-0.02em"
-        color="#161616"
+        color={(theme) => theme.palette.common.black}
       >
         Log In
       </MuiLink>

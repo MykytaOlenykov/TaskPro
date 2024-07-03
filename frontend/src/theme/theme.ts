@@ -46,12 +46,32 @@ const base: ThemeOptions = {
         }
       `,
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          padding: "14px 8px",
+          width: "100%",
+          fontWeight: 500,
+          fontSize: 14,
+          lineHeight: 1.5,
+          letterSpacing: "-0.02em",
+          textTransform: "none",
+          borderRadius: 8,
+        },
+      },
+    },
+  },
+  palette: {
+    common: {
+      black: "#161616",
+    },
   },
 };
 
 const lightTheme = createTheme({
   ...base,
   palette: {
+    ...base.palette,
     mode: "light",
     text: {},
     background: {},
@@ -61,6 +81,7 @@ const lightTheme = createTheme({
 const darkTheme = createTheme({
   ...base,
   palette: {
+    ...base.palette,
     mode: "dark",
     text: {},
     background: {},
@@ -70,6 +91,7 @@ const darkTheme = createTheme({
 const violetTheme = createTheme({
   ...base,
   palette: {
+    ...base.palette,
     mode: "light",
     text: {},
     background: {},
