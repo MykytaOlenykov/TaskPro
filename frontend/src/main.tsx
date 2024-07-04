@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { CssBaseline } from "@mui/material";
 
 import { store } from "store";
-import { ThemeContextProvider } from "theme";
+import { ThemeProvider } from "theme";
 
 import { App } from "./App.tsx";
 
@@ -13,10 +13,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter basename="/">
-        <ThemeContextProvider>
+        <ThemeProvider>
           <CssBaseline />
           <App />
-        </ThemeContextProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

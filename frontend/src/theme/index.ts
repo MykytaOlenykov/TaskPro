@@ -1,7 +1,7 @@
-import { ThemeContextProvider } from "./ThemeContextProvider";
+import { ThemeProvider } from "./ThemeProvider";
 import { useThemeContext } from "./useThemeContext";
 import type { IThemeMode } from "./theme";
 
-export { ThemeContextProvider, useThemeContext };
+export { ThemeProvider, useThemeContext };
 
 export type { IThemeMode };
