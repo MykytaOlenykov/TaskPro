@@ -23,6 +23,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    theme: {
+      type: String,
+      default: "dark",
+    },
     accessToken: {
       type: String,
       default: "",
@@ -54,9 +58,14 @@ const login = Joi.object({
   password: passwordSchema,
 });
 
+const theme = Joi.object({
+  theme: Joi.string().required(),
+});
+
 const validationSchemes = {
   user,
   login,
+  theme,
 };
 
 module.exports = {

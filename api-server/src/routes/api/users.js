@@ -20,4 +20,11 @@ router.get("/current", authenticate, ctrl.getCurrent);
 
 router.post("/refresh", verifyRefreshToken, ctrl.refresh);
 
+router.patch(
+  "/",
+  authenticate,
+  validateBody(validationSchemes.theme),
+  ctrl.changeTheme
+);
+
 module.exports = router;
