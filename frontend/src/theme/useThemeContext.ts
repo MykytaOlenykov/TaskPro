@@ -1,9 +1,7 @@
 import { createContext, useContext } from "react";
 import { Theme } from "@mui/material";
 
-import { themes } from "./theme";
-
-export type IThemeMode = keyof typeof themes;
+import type { IThemeMode } from "./theme";
 
 interface IThemeContextProps {
   mode: IThemeMode;

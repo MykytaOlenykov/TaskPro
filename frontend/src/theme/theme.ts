@@ -110,3 +110,5 @@ export const themes = {
   dark: darkTheme,
   violet: violetTheme,
 };
+
+export type IThemeMode = keyof typeof themes;

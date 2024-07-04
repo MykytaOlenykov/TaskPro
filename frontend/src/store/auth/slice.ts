@@ -12,6 +12,7 @@ const initialState: IInitialState = {
   user: {
     name: null,
     email: null,
+    theme: "dark",
   },
   isLoggedIn: false,
   isRefreshing: false,

@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/material";
 
 import { themes } from "./theme";
 import { ThemeContext } from "./useThemeContext";
-import type { IThemeMode } from "./useThemeContext";
+import type { IThemeMode } from "./theme";
 
 export const ThemeContextProvider: React.FC<{
   children: React.ReactNode | React.ReactNode[];
