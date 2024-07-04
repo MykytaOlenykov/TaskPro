@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material";
 
 import { selectTheme } from "store/auth/selectors";
+import { useAppSelector } from "hooks/useAppSelector";
 import { themes } from "./theme";
 
 const defaultTheme = createTheme();
@@ -10,7 +10,7 @@ const defaultTheme = createTheme();
 export const ThemeProvider: React.FC<{
   children: React.ReactNode | React.ReactNode[];
 }> = ({ children }) => {
-  const themeMode = useSelector(selectTheme);
+  const themeMode = useAppSelector(selectTheme);
 
   const currentTheme = useMemo(
     () => themes[themeMode] || defaultTheme,

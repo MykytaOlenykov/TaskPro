@@ -1,5 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+import { refreshUser } from "./operations";
+
 import type { IThemeMode } from "theme";
 import type { IUser } from "types/IUser";
 
@@ -26,6 +28,19 @@ const authSlice = createSlice({
     changeTheme(state, action: PayloadAction<{ theme: IThemeMode }>) {
       state.user.theme = action.payload.theme;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isRefreshing = false;
+      })
+      .addCase(refreshUser.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshUser.rejected, (state) => {
+        state.isRefreshing = false;
+      });
   },
 });
 
