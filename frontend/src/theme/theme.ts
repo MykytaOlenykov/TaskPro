@@ -76,11 +76,14 @@ const darkTheme = createTheme({
     mode: "dark",
     text: {
       primary: "#FFFFFF",
+      primaryButton: "#161616",
     },
     background: {
       default: "#1F1F1F",
       primaryBox: "#151515",
       primaryInput: "#1F1F1F",
+      primaryButton: "#BEDBB0",
+      primaryButtonHover: "#9DC888",
     },
     border: {
       input: "#BEDBB0",

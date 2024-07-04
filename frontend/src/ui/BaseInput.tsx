@@ -19,12 +19,14 @@ export const BaseInput = styled(OutlinedInput)(({ theme }) => ({
   ".MuiOutlinedInput-notchedOutline": {
     borderColor: theme.palette.border?.input,
   },
-  "&.Mui-focused, &.not-empty": {
+  "&.Mui-focused": {
     opacity: 1,
   },
-  "&.Mui-focused .MuiOutlinedInput-notchedOutline, &.not-empty .MuiOutlinedInput-notchedOutline":
-    {
-      borderWidth: 1,
-      borderColor: theme.palette.border?.input,
-    },
+  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderWidth: 1,
+    borderColor: theme.palette.border?.input,
+  },
+  "&:hover .MuiOutlinedInput-notchedOutline": {
+    borderColor: theme.palette.border?.input,
+  },
 }));

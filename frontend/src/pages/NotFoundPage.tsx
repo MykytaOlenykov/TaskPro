@@ -16,8 +16,9 @@ const GoBackLink = styled(Link)(({ theme }) => ({
 const NotFoundPage: React.FC = () => {
   return (
     <Container>
-      <NotFound />
-      <GoBackLink to="/welcome">Go back</GoBackLink>
+      <NotFound>
+        <GoBackLink to="/welcome">Go back</GoBackLink>
+      </NotFound>
     </Container>
   );
 };

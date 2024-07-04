@@ -88,7 +88,7 @@ export const Welcome: React.FC = () => {
         Supercharge your productivity and take control of your tasks with Task
         Pro - Don't wait, start achieving your goals now!
       </Text>
-      <RegisterButton onClick={() => navigate("/auth/register")}>
+      <RegisterButton type="button" onClick={() => navigate("/auth/register")}>
         Registration
       </RegisterButton>
       <MuiLink

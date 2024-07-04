@@ -13,8 +13,14 @@ declare module "@mui/material/styles" {
     };
   }
 
+  interface TypeText {
+    primaryButton?: string;
+  }
+
   interface TypeBackground {
     primaryBox?: string;
     primaryInput?: string;
+    primaryButton?: string;
+    primaryButtonHover?: string;
   }
 }
