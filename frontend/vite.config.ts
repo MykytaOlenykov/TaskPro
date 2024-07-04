@@ -22,6 +22,7 @@ export default defineConfig({
       theme: "/src/theme",
       types: "/src/types",
       ui: "/src/ui",
+      utils: "/src/utils",
     },
   },
 });
