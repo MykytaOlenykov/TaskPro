@@ -1,17 +1,18 @@
 import { api } from "services";
-import { convertAsyncError, createAppAsyncThunk } from "utils";
+import { convertAsyncError, createAppAsyncThunk, token } from "utils";
 
 import type { IUser } from "types";
 
 export const register = createAppAsyncThunk<
-  Pick<IUser, "name" | "email">,
-  Pick<IUser, "name" | "email"> & { password: string }
+  NonNullable<Pick<IUser, "name" | "email">>,
+  NonNullable<Pick<IUser, "name" | "email">> & { password: string }
 >("auth/register", async (credentials, { rejectWithValue }) => {
   try {
-    const { data } = await api.post<Pick<IUser, "name" | "email">>(
+    const { data } = await api.post<NonNullable<Pick<IUser, "name" | "email">>>(
       "users/register",
       credentials
     );
+
     return data;
   } catch (error) {
     const asyncError = convertAsyncError(error);
@@ -25,10 +26,23 @@ export const register = createAppAsyncThunk<
   }
 });
 
-export const logIn = createAppAsyncThunk<void, void>(
-  "auth/logIn",
-  async () => {}
-);
+export const logIn = createAppAsyncThunk<
+  NonNullable<IUser>,
+  NonNullable<Pick<IUser, "email">> & { password: string }
+>("auth/logIn", async (credentials, { rejectWithValue }) => {
+  try {
+    const { data } = await api.post<{
+      user: NonNullable<IUser>;
+      accessToken: string;
+    }>("users/login", credentials);
+
+    token.save(data.accessToken);
+
+    return data.user;
+  } catch (error) {
+    return rejectWithValue(convertAsyncError(error));
+  }
+});
 
 export const logOut = createAppAsyncThunk<void, void>(
   "auth/logOut",

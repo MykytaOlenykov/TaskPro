@@ -103,12 +103,7 @@ export const RegisterForm: React.FC = () => {
       {errors.password && (
         <HelperText error>{errors.password.message}</HelperText>
       )}
-      <LoadingButton
-        style={{ marginTop: 24 }}
-        size="small"
-        type="submit"
-        loading={loading}
-      >
+      <LoadingButton style={{ marginTop: 24 }} type="submit" loading={loading}>
         Register Now
       </LoadingButton>
     </form>

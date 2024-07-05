@@ -29,4 +29,13 @@ const registerSchema = yup.object({
   password,
 });
 
-export { registerSchema };
+const logInSchema = yup.object({
+  email,
+  password: yup
+    .string()
+    .trim()
+    .max(255, "Password must be at most 255 characters long.")
+    .required("Password is required."),
+});
+
+export { registerSchema, logInSchema };
