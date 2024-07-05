@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { getCurrentUser } from "./operations";
+import { getCurrentUser, register } from "./operations";
 
 import type { IThemeMode } from "theme";
 import type { IUser } from "types";
@@ -41,6 +41,10 @@ const authSlice = createSlice({
       })
       .addCase(getCurrentUser.rejected, (state) => {
         state.refreshing = false;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.user.name = action.payload.name;
+        state.user.email = action.payload.name;
       });
   },
 });

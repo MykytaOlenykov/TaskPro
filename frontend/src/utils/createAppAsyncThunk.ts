@@ -1,11 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { RootState, AppDispatch } from "store";
+import type { IError } from "types";
 
 interface IAppAsyncThunkConfig {
   state: RootState;
   dispatch: AppDispatch;
-  rejectValue: any;
+  rejectValue: IError | null;
 }
 
 type ICreateAppAsyncThunk = ReturnType<
