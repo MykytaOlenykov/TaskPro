@@ -7,8 +7,8 @@ import type { IUser } from "types";
 
 export interface IInitialState {
   user: IUser;
-  isLoggedIn: boolean;
-  isRefreshing: boolean;
+  loggedIn: boolean;
+  refreshing: boolean;
 }
 
 const initialState: IInitialState = {
@@ -17,8 +17,8 @@ const initialState: IInitialState = {
     email: null,
     theme: "dark",
   },
-  isLoggedIn: false,
-  isRefreshing: false,
+  loggedIn: false,
+  refreshing: false,
 };
 
 const authSlice = createSlice({
@@ -33,13 +33,14 @@ const authSlice = createSlice({
     builder
       .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isRefreshing = false;
+        state.loggedIn = true;
+        state.refreshing = false;
       })
       .addCase(getCurrentUser.pending, (state) => {
-        state.isRefreshing = true;
+        state.refreshing = true;
       })
       .addCase(getCurrentUser.rejected, (state) => {
-        state.isRefreshing = false;
+        state.refreshing = false;
       });
   },
 });
