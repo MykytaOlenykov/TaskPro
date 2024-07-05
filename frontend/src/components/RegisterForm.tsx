@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { isFulfilled } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IconButton, InputAdornment, styled } from "@mui/material";
@@ -11,6 +13,7 @@ import { register as registerUser } from "store/auth/operations";
 
 import { BaseInput } from "ui/BaseInput";
 import { LoadingButton } from "ui/LoadingButton";
+import { HelperText } from "ui/HelperText";
 
 const VisibilityIcon = styled(VisibilityOutlinedIcon)(() => ({
   width: 18,
@@ -36,8 +39,13 @@ const defaultValues: IFormData = {
 
 export const RegisterForm: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm<IFormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormData>({
     defaultValues,
     resolver: yupResolver(registerSchema),
   });
@@ -47,9 +55,11 @@ export const RegisterForm: React.FC = () => {
 
   const onSubmit: SubmitHandler<IFormData> = async (data) => {
     setLoading(true);
-    const res = await dispatch(registerUser(data));
-    console.log(res);
+    const result = await dispatch(registerUser(data));
     setLoading(false);
+    if (isFulfilled(result)) {
+      navigate("/auth/login");
+    }
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -57,21 +67,25 @@ export const RegisterForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <BaseInput
-        style={{ marginBottom: 14 }}
         type="text"
         placeholder="Enter your name"
+        error={!!errors.name}
         {...register("name")}
       />
+      {errors.name && <HelperText error>{errors.name.message}</HelperText>}
       <BaseInput
-        style={{ marginBottom: 14 }}
+        style={{ marginTop: 14 }}
         type="email"
         placeholder="Enter your email"
+        error={!!errors.email}
         {...register("email")}
       />
+      {errors.email && <HelperText error>{errors.email.message}</HelperText>}
       <BaseInput
-        style={{ marginBottom: 24, paddingRight: 10 }}
+        style={{ marginTop: 14, paddingRight: 10 }}
         type={showPassword ? "text" : "password"}
         placeholder="Create a password"
+        error={!!errors.password}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -86,7 +100,15 @@ export const RegisterForm: React.FC = () => {
         }
         {...register("password")}
       />
-      <LoadingButton size="small" type="submit" loading={loading}>
+      {errors.password && (
+        <HelperText error>{errors.password.message}</HelperText>
+      )}
+      <LoadingButton
+        style={{ marginTop: 24 }}
+        size="small"
+        type="submit"
+        loading={loading}
+      >
         Register Now
       </LoadingButton>
     </form>

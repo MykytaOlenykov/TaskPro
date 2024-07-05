@@ -14,7 +14,14 @@ export const register = createAppAsyncThunk<
     );
     return data;
   } catch (error) {
-    return rejectWithValue(convertAsyncError(error));
+    const asyncError = convertAsyncError(error);
+    return rejectWithValue({
+      ...asyncError,
+      message:
+        asyncError.statusCode === 409
+          ? "A user with this email already exists."
+          : asyncError.message,
+    });
   }
 });
 
