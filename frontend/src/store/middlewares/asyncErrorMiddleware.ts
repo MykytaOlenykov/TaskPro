@@ -1,4 +1,5 @@
 import { Middleware, isRejected } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 import type { RootState } from "store";
 import { isAsyncError } from "utils";
@@ -8,7 +9,7 @@ export const asyncErrorMiddleware: any =
     if (!isRejected(action)) return next(action);
     if (!isAsyncError(action.payload)) return next(action);
 
-    console.log(action.payload.message, action.payload.statusCode);
+    toast.error(action.payload.message);
 
     next(action);
   };

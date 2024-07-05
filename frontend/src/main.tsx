@@ -8,6 +8,7 @@ import { store } from "store";
 import { ThemeProvider } from "theme";
 
 import { App } from "./App.tsx";
+import { Notifier } from "components/Notifier.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <ThemeProvider>
           <CssBaseline />
           <App />
+          <Notifier />
         </ThemeProvider>
       </BrowserRouter>
     </Provider>
