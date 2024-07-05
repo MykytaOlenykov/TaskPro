@@ -1,8 +1,11 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { IconButton, InputAdornment, styled } from "@mui/material";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+
+import { registerSchema } from "utils";
 
 import { BaseButton } from "ui/BaseButton";
 import { BaseInput } from "ui/BaseInput";
@@ -23,8 +26,17 @@ interface IFormData {
   password: string;
 }
 
+const defaultValues: IFormData = {
+  name: "",
+  email: "",
+  password: "",
+};
+
 export const RegisterForm: React.FC = () => {
-  const { register, handleSubmit } = useForm<IFormData>();
+  const { register, handleSubmit } = useForm<IFormData>({
+    defaultValues,
+    resolver: yupResolver(registerSchema),
+  });
 
   const [showPassword, setShowPassword] = React.useState(false);
 
