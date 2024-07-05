@@ -7,7 +7,7 @@ import { BaseButton } from "ui/BaseButton";
 import userIcon from "assets/images/user-icon.png";
 import Logo from "assets/images/logo.svg?react";
 
-const UserIcon = styled("div")(() => ({
+const UserIcon = styled("div")(({ theme }) => ({
   marginBottom: 14,
   width: 124,
   height: 124,
@@ -16,6 +16,12 @@ const UserIcon = styled("div")(() => ({
   backgroundRepeat: "no-repeat",
   backgroundSize: "100% auto",
   backgroundPosition: "center",
+
+  [theme.breakpoints.up("md")]: {
+    marginBottom: 24,
+    width: 162,
+    height: 162,
+  },
 }));
 
 const LogoContainer = styled("div")(() => ({
@@ -35,13 +41,23 @@ const LogoIconBox = styled("div")(({ theme }) => ({
 
   backgroundColor: theme.palette.common.black,
   borderRadius: 8,
+
+  [theme.breakpoints.up("md")]: {
+    width: 48,
+    height: 48,
+  },
 }));
 
-const LogoIcon = styled(Logo)(() => ({
+const LogoIcon = styled(Logo)(({ theme }) => ({
   width: 15,
   height: 20,
 
   fill: "#fff",
+
+  [theme.breakpoints.up("md")]: {
+    width: 18,
+    height: 24,
+  },
 }));
 
 const LogoText = styled(Typography)(({ theme }) => ({
@@ -49,10 +65,14 @@ const LogoText = styled(Typography)(({ theme }) => ({
   fontSize: 28,
   letterSpacing: "-0.04em",
   color: theme.palette.common.black,
+
+  [theme.breakpoints.up("md")]: {
+    fontSize: 40,
+  },
 }));
 
 const Text = styled(Typography)(({ theme }) => ({
-  marginBottom: "48px",
+  marginBottom: 48,
   maxWidth: 473,
   textAlign: "center",
   fontSize: 14,
