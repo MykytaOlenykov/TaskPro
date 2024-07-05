@@ -9,6 +9,10 @@ const Container = styled("div")(({ theme }) => ({
 
   backgroundColor: theme.palette.background.primaryBox,
   borderRadius: 8,
+
+  [theme.breakpoints.up("md")]: {
+    padding: 40,
+  },
 }));
 
 const AuthLink = styled(NavLink)(() => ({
