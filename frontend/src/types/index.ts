@@ -1,4 +1,4 @@
 import type { IUser } from "./IUser";
-import type { IError } from "./IError";
+import type { IAsyncError } from "./IAsyncError";
 
-export type { IUser, IError };
+export type { IUser, IAsyncError };

@@ -1,6 +1,6 @@
 import { isAxiosError } from "axios";
 
-import type { IError } from "types";
+import type { IAsyncError } from "types";
 
 const errorMessages = {
   400: "Invalid request. Please check your input.",
@@ -11,7 +11,7 @@ const errorMessages = {
   500: "Something went wrong. Please try again later.",
 };
 
-export const convertAsyncError = (error: unknown): IError => {
+export const convertAsyncError = (error: unknown): IAsyncError => {
   if (isAxiosError(error)) {
     const statusCode = (error.response?.status ??
       500) as keyof typeof errorMessages;

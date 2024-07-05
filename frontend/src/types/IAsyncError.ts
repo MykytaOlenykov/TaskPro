@@ -1,4 +1,4 @@
-export interface IError {
+export interface IAsyncError {
   statusCode: number;
   message: string;
 }

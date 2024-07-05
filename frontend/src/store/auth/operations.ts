@@ -29,7 +29,7 @@ export const logOut = createAppAsyncThunk<void, void>(
 );
 
 export const getCurrentUser = createAppAsyncThunk<NonNullable<IUser>, void>(
-  "auth/refresh",
+  "auth/getCurrentUser",
   async (_, { rejectWithValue }) => {
     try {
       const { data: user } = await api.get<NonNullable<IUser>>("users/current");
