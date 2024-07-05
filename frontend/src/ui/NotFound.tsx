@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 
-import { useAppSelector } from "hooks/useAppSelector";
+import { useAppSelector } from "hooks";
 import { selectTheme } from "store/auth/selectors";
 
 const NotFoundDark = React.lazy(

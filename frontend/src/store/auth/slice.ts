@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getCurrentUser } from "./operations";
 
 import type { IThemeMode } from "theme";
-import type { IUser } from "types/IUser";
+import type { IUser } from "types";
 
 export interface IInitialState {
   user: IUser;

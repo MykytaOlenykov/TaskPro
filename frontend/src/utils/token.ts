@@ -1,4 +1,4 @@
-export class Token {
+class Token {
   private TOKEN_KEY = "token";
 
   get() {

@@ -3,7 +3,8 @@ import axios, {
   isAxiosError,
   InternalAxiosRequestConfig,
 } from "axios";
-import { token } from "utils/token";
+
+import { token } from "utils";
 
 interface IAxiosRequestConfig extends InternalAxiosRequestConfig {
   _isRetry?: boolean;

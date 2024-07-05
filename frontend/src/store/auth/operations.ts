@@ -1,6 +1,7 @@
 import { api } from "services";
 import { createAppAsyncThunk } from "utils/createAppAsyncThunk";
-import { IUser } from "types/IUser";
+
+import type { IUser } from "types";
 
 export const register = createAppAsyncThunk<void, void>(
   "auth/register",

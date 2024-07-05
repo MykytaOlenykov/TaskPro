@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material";
 
 import { selectTheme } from "store/auth/selectors";
-import { useAppSelector } from "hooks/useAppSelector";
+import { useAppSelector } from "hooks";
 import { themes } from "./theme";
 
 const defaultTheme = createTheme();
