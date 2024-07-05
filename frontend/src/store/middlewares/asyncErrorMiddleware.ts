@@ -11,5 +11,9 @@ export const asyncErrorMiddleware: any =
 
     toast.error(action.payload.message);
 
+    if (action.payload.statusCode === 401) {
+      //
+    }
+
     next(action);
   };

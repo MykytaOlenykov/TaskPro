@@ -14,4 +14,7 @@ export const BaseButton = styled(Button)(({ theme }) => ({
   "&:hover": {
     backgroundColor: theme.palette.background.primaryButtonHover,
   },
+  "&:disabled": {
+    color: theme.palette.text.primaryButton,
+  },
 }));

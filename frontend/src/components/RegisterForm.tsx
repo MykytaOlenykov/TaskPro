@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IconButton, InputAdornment, styled } from "@mui/material";
@@ -6,9 +6,11 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 
 import { registerSchema } from "utils";
+import { useAppDispatch } from "hooks";
+import { register as registerUser } from "store/auth/operations";
 
-import { BaseButton } from "ui/BaseButton";
 import { BaseInput } from "ui/BaseInput";
+import { LoadingButton } from "ui/LoadingButton";
 
 const VisibilityIcon = styled(VisibilityOutlinedIcon)(() => ({
   width: 18,
@@ -33,15 +35,21 @@ const defaultValues: IFormData = {
 };
 
 export const RegisterForm: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const { register, handleSubmit } = useForm<IFormData>({
     defaultValues,
     resolver: yupResolver(registerSchema),
   });
 
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit: SubmitHandler<IFormData> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormData> = async (data) => {
+    setLoading(true);
+    const res = await dispatch(registerUser(data));
+    console.log(res);
+    setLoading(false);
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -78,7 +86,9 @@ export const RegisterForm: React.FC = () => {
         }
         {...register("password")}
       />
-      <BaseButton type="submit">Register Now</BaseButton>
+      <LoadingButton size="small" type="submit" loading={loading}>
+        Register Now
+      </LoadingButton>
     </form>
   );
 };
