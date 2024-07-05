@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { refreshUser } from "./operations";
+import { getCurrentUser } from "./operations";
 
 import type { IThemeMode } from "theme";
 import type { IUser } from "types/IUser";
@@ -31,14 +31,14 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(refreshUser.fulfilled, (state, action) => {
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isRefreshing = false;
       })
-      .addCase(refreshUser.pending, (state) => {
+      .addCase(getCurrentUser.pending, (state) => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.rejected, (state) => {
+      .addCase(getCurrentUser.rejected, (state) => {
         state.isRefreshing = false;
       });
   },

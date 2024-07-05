@@ -1,15 +1,19 @@
-import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from "axios";
+import axios, {
+  AxiosError,
+  isAxiosError,
+  InternalAxiosRequestConfig,
+} from "axios";
 import { token } from "utils/token";
 
-interface MyAxiosRequestConfig extends AxiosRequestConfig {
+interface IAxiosRequestConfig extends InternalAxiosRequestConfig {
   _isRetry?: boolean;
 }
 
 const { VITE_API_URL } = import.meta.env;
 
 const api = axios.create({
-  withCredentials: true,
   baseURL: VITE_API_URL,
+  withCredentials: true,
 });
 
 api.interceptors.request.use((config) => {
@@ -23,14 +27,16 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   async (err: AxiosError) => {
-    const originalReq: MyAxiosRequestConfig | undefined = err.config;
+    const originalReq: IAxiosRequestConfig | undefined = err.config;
 
     if (err.response?.status === 401 && originalReq && !originalReq._isRetry) {
-      try {
-        originalReq._isRetry = true;
+      originalReq._isRetry = true;
 
-        const { data } = await api.post<{ accessToken: string }>(
-          "users/refresh"
+      try {
+        const { data } = await axios.post<{ accessToken: string }>(
+          `${VITE_API_URL}/users/refresh`,
+          undefined,
+          { withCredentials: true }
         );
 
         token.save(data.accessToken);
@@ -40,12 +46,10 @@ api.interceptors.response.use(
         if (isAxiosError(error) && error.response?.status === 401) {
           token.clear();
         }
-
-        throw error;
       }
     }
 
-    throw err;
+    return Promise.reject(err);
   }
 );
 

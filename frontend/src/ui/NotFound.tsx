@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 
-import { useThemeContext } from "theme";
+import { useAppSelector } from "hooks/useAppSelector";
+import { selectTheme } from "store/auth/selectors";
 
 const NotFoundDark = React.lazy(
   () => import("assets/images/not-found-dark.svg?react")
@@ -17,7 +18,7 @@ interface IProps {
 }
 
 export const NotFound: React.FC<IProps> = ({ children }) => {
-  const { mode } = useThemeContext();
+  const mode = useAppSelector(selectTheme);
 
   let SVGComponent: React.LazyExoticComponent<
     React.FunctionComponent<React.SVGProps<SVGSVGElement>>

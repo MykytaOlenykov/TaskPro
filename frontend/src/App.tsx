@@ -1,5 +1,8 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+
+import { getCurrentUser } from "store/auth/operations";
+import { useAppDispatch } from "hooks/useAppDispatch";
 
 import { RegisterForm } from "components/RegisterForm";
 import { LoginForm } from "components/LoginForm";
@@ -10,6 +13,12 @@ const AuthPage = lazy(() => import("pages/AuthPage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 
 export function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
+
   return (
     <Suspense fallback={<PageFallback />}>
       <Routes>
