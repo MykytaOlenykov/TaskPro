@@ -7,8 +7,9 @@ import { useAppSelector, useAppDispatch } from "hooks";
 
 import { RegisterForm } from "components/RegisterForm";
 import { LoginForm } from "components/LoginForm";
-import { PageFallback } from "ui/PageFallback";
 import { RestrictedRoute } from "components/RestrictedRoute";
+import { PrivateRoute } from "components/PrivateRoute";
+import { PageFallback } from "ui/PageFallback";
 
 const WelcomePage = lazy(() => import("pages/WelcomePage"));
 const AuthPage = lazy(() => import("pages/AuthPage"));
@@ -47,7 +48,14 @@ export function App() {
           <Route path="login" element={<LoginForm />} />
         </Route>
 
-        <Route path="/home" element={<p>/home</p>}>
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <p>/home</p>
+            </PrivateRoute>
+          }
+        >
           <Route index element={<p>index</p>} />
           <Route path=":boardId" element={<p>boardId</p>} />
         </Route>

@@ -18,7 +18,7 @@ const initialState: IInitialState = {
     theme: "dark",
   },
   loggedIn: false,
-  refreshing: false,
+  refreshing: true,
 };
 
 const authSlice = createSlice({
