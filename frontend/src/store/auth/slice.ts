@@ -1,8 +1,7 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { getCurrentUser, logIn, register } from "./operations";
+import { getCurrentUser, logIn, register, changeTheme } from "./operations";
 
-import type { IThemeMode } from "theme";
 import type { IUser } from "types";
 
 export interface IInitialState {
@@ -24,11 +23,7 @@ const initialState: IInitialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    changeTheme(state, action: PayloadAction<{ theme: IThemeMode }>) {
-      state.user.theme = action.payload.theme;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getCurrentUser.fulfilled, (state, action) => {
@@ -49,10 +44,11 @@ const authSlice = createSlice({
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload;
         state.loggedIn = true;
+      })
+      .addCase(changeTheme.fulfilled, (state, action) => {
+        state.user.theme = action.payload;
       });
   },
 });
-
-export const { changeTheme } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

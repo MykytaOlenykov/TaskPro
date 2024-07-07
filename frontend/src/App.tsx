@@ -15,6 +15,8 @@ const WelcomePage = lazy(() => import("pages/WelcomePage"));
 const AuthPage = lazy(() => import("pages/AuthPage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 
+const Layout = lazy(() => import("components/Layout"));
+
 export function App() {
   const dispatch = useAppDispatch();
   const refreshing = useAppSelector(selectRefreshing);
@@ -52,7 +54,7 @@ export function App() {
           path="/home"
           element={
             <PrivateRoute>
-              <p>/home</p>
+              <Layout />
             </PrivateRoute>
           }
         >

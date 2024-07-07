@@ -1,6 +1,7 @@
 import { api } from "services";
 import { convertAsyncError, createAppAsyncThunk, token } from "utils";
 
+import type { IThemeMode } from "theme";
 import type { IUser } from "types";
 
 export const register = createAppAsyncThunk<
@@ -55,6 +56,20 @@ export const getCurrentUser = createAppAsyncThunk<NonNullable<IUser>, void>(
     try {
       const { data: user } = await api.get<NonNullable<IUser>>("users/current");
       return user;
+    } catch (error) {
+      return rejectWithValue(null);
+    }
+  }
+);
+
+export const changeTheme = createAppAsyncThunk<IThemeMode, string>(
+  "auth/changeTheme",
+  async (theme, { rejectWithValue }) => {
+    try {
+      const { data } = await api.patch<{ theme: IThemeMode }>("users", {
+        theme,
+      });
+      return data.theme;
     } catch (error) {
       return rejectWithValue(null);
     }

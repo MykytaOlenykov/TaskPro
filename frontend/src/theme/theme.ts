@@ -62,9 +62,20 @@ const lightTheme = createTheme({
     mode: "light",
     text: {
       primary: "#161616",
+      primaryAccent: "#BEDBB0",
+      primaryHeader: "rgba(22, 22, 22, 0.8)",
+      popup: "#161616",
     },
     background: {
       default: "#F6F6F7",
+      header: "#FCFCFC",
+      modal: "#FCFCFC",
+    },
+    border: {
+      popup: "#BEDBB0",
+    },
+    icon: {
+      avatarPlaceholder: "#FFFFFF",
     },
   },
 });
@@ -76,7 +87,10 @@ const darkTheme = createTheme({
     mode: "dark",
     text: {
       primary: "#FFFFFF",
+      primaryAccent: "#BEDBB0",
       primaryButton: "#161616",
+      primaryHeader: "rgba(255, 255, 255, 0.8)",
+      popup: "rgba(255, 255, 255, 0.5)",
     },
     background: {
       default: "#1F1F1F",
@@ -84,9 +98,15 @@ const darkTheme = createTheme({
       primaryInput: "#1F1F1F",
       primaryButton: "#BEDBB0",
       primaryButtonHover: "#9DC888",
+      header: "#161616",
+      modal: "#151515",
     },
     border: {
       input: "#BEDBB0",
+      popup: "#BEDBB0",
+    },
+    icon: {
+      avatarPlaceholder: "#151515",
     },
   },
 });
@@ -98,9 +118,20 @@ const violetTheme = createTheme({
     mode: "light",
     text: {
       primary: "#161616",
+      primaryAccent: "#5255BC",
+      primaryHeader: "rgba(22, 22, 22, 0.8)",
+      popup: "#161616",
     },
     background: {
       default: "#ECEDFD",
+      header: "#FCFCFC",
+      modal: "#FCFCFC",
+    },
+    border: {
+      popup: "#ECEDFD",
+    },
+    icon: {
+      avatarPlaceholder: "#FFFFFF",
     },
   },
 });
