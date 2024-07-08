@@ -5,10 +5,15 @@ import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
 const Button = styled(ButtonBase)(({ theme }) => ({
   justifyContent: "start",
   gap: 14,
+  fontFamily: "inherit",
   fontWeight: 500,
   fontSize: 14,
+  lineHeight: 1.5,
   color: theme.palette.text.primarySideBar,
   borderRadius: 8,
+  [theme.breakpoints.up("lg")]: {
+    fontSize: 16,
+  },
 }));
 
 const Icon = styled(LoginRoundedIcon)(({ theme }) => ({

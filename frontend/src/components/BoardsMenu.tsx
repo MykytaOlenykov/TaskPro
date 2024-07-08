@@ -4,6 +4,13 @@ import AddIcon from "@mui/icons-material/Add";
 
 import { BaseButton } from "ui/BaseButton";
 
+const Container = styled(Box)(({ theme }) => ({
+  padding: "0 14px",
+  [theme.breakpoints.up("md")]: {
+    padding: "0 20px",
+  },
+}));
+
 const Title = styled(Typography)(({ theme }) => ({
   marginBottom: 8,
   fontWeight: 400,
@@ -13,7 +20,7 @@ const Title = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.light,
 }));
 
-const Container = styled(Box)(({ theme }) => ({
+const BtnContainer = styled(Box)(({ theme }) => ({
   position: "relative",
   display: "flex",
   alignItems: "center",
@@ -43,24 +50,28 @@ const Text = styled(Typography)(({ theme }) => ({
   fontSize: 14,
   lineHeight: 1.5,
   letterSpacing: "-0.02em",
-  color: theme.palette.text.primary,
+  color: theme.palette.text.primarySideBar,
+}));
+
+const Button = styled(BaseButton)(({ theme }) => ({
+  padding: "8px 10px",
+  maxWidth: 40,
+  minWidth: 0,
+  backgroundColor: theme.palette.background.sideBarButton,
 }));
 
 export const BoardsMenu: React.FC = () => {
   return (
-    <Box style={{ padding: "0 14px" }}>
+    <Container>
       <Title variant="body1">My boards</Title>
-      <Container>
+      <BtnContainer>
         <Text variant="body1">
           Create a<br /> new board
         </Text>
-        <BaseButton
-          style={{ padding: "8px 10px", maxWidth: "40px", minWidth: 0 }}
-          aria-label="create a new board"
-        >
+        <Button aria-label="create a new board">
           <AddIcon style={{ width: "20px", height: "20px" }} />
-        </BaseButton>
-      </Container>
-    </Box>
+        </Button>
+      </BtnContainer>
+    </Container>
   );
 };

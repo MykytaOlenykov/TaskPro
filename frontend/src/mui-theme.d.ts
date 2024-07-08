@@ -36,9 +36,11 @@ declare module "@mui/material/styles" {
     primaryInput?: string;
     primaryButton?: string;
     primaryButtonHover?: string;
+    primarySideBar?: string;
+    secondarySideBar?: string;
+    sideBarButton?: string;
     header?: string;
     modal?: string;
-    sideBar?: string;
     logo?: string;
     backdrop?: string;
     sideBarLine?: string;

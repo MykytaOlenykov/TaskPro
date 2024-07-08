@@ -7,7 +7,10 @@ import decorativeIcon from "assets/images/decorative-icon.png";
 const Container = styled(Box)(({ theme }) => ({
   padding: 14,
   borderRadius: 8,
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.background.secondarySideBar,
+  [theme.breakpoints.up("md")]: {
+    padding: 20,
+  },
 }));
 
 const Icon = styled("div")(() => ({
@@ -28,6 +31,11 @@ const Text = styled(Typography)(({ theme }) => ({
   lineHeight: 1.33,
   letterSpacing: "-0.02em",
   color: theme.palette.text.primarySideBar,
+  [theme.breakpoints.up("md")]: {
+    fontSize: 14,
+    lineHeight: 1.43,
+    letterSpacing: "-0.02em",
+  },
 }));
 
 const AccentText = styled("span")(({ theme }) => ({
@@ -36,6 +44,7 @@ const AccentText = styled("span")(({ theme }) => ({
 
 const Button = styled(ButtonBase)(({ theme }) => ({
   display: "flex",
+  fontFamily: "inherit",
   fontWeight: 500,
   fontSize: 12,
   lineHeight: 1.5,

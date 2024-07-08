@@ -27,7 +27,18 @@ const Container = styled(Box)(({ theme }) => ({
   padding: "14px 0",
   width: 225,
   minHeight: "100vh",
-  backgroundColor: theme.palette.background.sideBar,
+  backgroundColor: theme.palette.background.primarySideBar,
+  [theme.breakpoints.up("md")]: {
+    padding: "24px 0",
+    width: 260,
+  },
+}));
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  padding: "0 14px",
+  [theme.breakpoints.up("md")]: {
+    padding: "0 20px",
+  },
 }));
 
 const CloseButton = styled(IconButton)(({ theme }) => ({
@@ -39,12 +50,12 @@ export const SideBar: React.FC<IProps> = ({ open, onCloseSideBar }) => {
   return (
     <StyledDrawer open={open} onClose={onCloseSideBar} variant="temporary">
       <Container>
-        <Box
+        <StyledBox
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "0 14px",
+
             marginBottom: 70,
           }}
         >
@@ -52,16 +63,14 @@ export const SideBar: React.FC<IProps> = ({ open, onCloseSideBar }) => {
           <CloseButton onClick={onCloseSideBar}>
             <ChevronLeftIcon />
           </CloseButton>
-        </Box>
+        </StyledBox>
         <BoardsMenu />
-        <Box
-          style={{ padding: "0 14px", marginTop: "auto", marginBottom: "24px" }}
-        >
+        <StyledBox style={{ marginTop: "auto", marginBottom: "24px" }}>
           <Help />
-        </Box>
-        <Box style={{ padding: "0 14px" }}>
+        </StyledBox>
+        <StyledBox>
           <LogOut />
-        </Box>
+        </StyledBox>
       </Container>
     </StyledDrawer>
   );
