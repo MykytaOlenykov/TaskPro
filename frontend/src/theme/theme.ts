@@ -47,6 +47,22 @@ const base: ThemeOptions = {
         }
       `,
     },
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          h1: "h1",
+          h2: "h2",
+          h3: "h3",
+          h4: "h4",
+          h5: "h5",
+          h6: "h6",
+          subtitle1: "h2",
+          subtitle2: "h3",
+          body1: "p",
+          body2: "span",
+        },
+      },
+    },
   },
   palette: {
     common: {
@@ -90,7 +106,9 @@ const darkTheme = createTheme({
       primaryAccent: "#BEDBB0",
       primaryButton: "#161616",
       primaryHeader: "rgba(255, 255, 255, 0.8)",
+      primarySideBar: "#FFFFFF",
       popup: "rgba(255, 255, 255, 0.5)",
+      light: "rgba(255, 255, 255, 0.5)",
     },
     background: {
       default: "#1F1F1F",
@@ -100,6 +118,10 @@ const darkTheme = createTheme({
       primaryButtonHover: "#9DC888",
       header: "#161616",
       modal: "#151515",
+      sideBar: "#121212",
+      logo: "#1F1F1F",
+      backdrop: "rgba(21, 21, 21, 0.5)",
+      sideBarLine: "rgba(255, 255, 255, 0.1)",
     },
     border: {
       input: "#BEDBB0",
@@ -107,6 +129,8 @@ const darkTheme = createTheme({
     },
     icon: {
       avatarPlaceholder: "#151515",
+      logo: "#FFFFFF",
+      logOut: "#BEDBB0",
     },
   },
 });

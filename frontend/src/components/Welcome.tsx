@@ -49,6 +49,7 @@ const LogoIconBox = styled("div")(({ theme }) => ({
 }));
 
 const LogoIcon = styled(Logo)(({ theme }) => ({
+  display: "block",
   width: 15,
   height: 20,
 

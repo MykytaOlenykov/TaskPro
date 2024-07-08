@@ -33,7 +33,11 @@ const BurgerIcon = styled(MenuRoundedIcon)(({ theme }) => ({
   },
 }));
 
-export const Header: React.FC = () => {
+interface IProps {
+  onOpenSideBar: () => void;
+}
+
+export const Header: React.FC<IProps> = ({ onOpenSideBar }) => {
   return (
     <>
       <StyledAppBar>
@@ -44,6 +48,7 @@ export const Header: React.FC = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={onOpenSideBar}
           >
             <BurgerIcon />
           </IconButton>

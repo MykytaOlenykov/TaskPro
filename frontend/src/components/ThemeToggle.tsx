@@ -13,7 +13,7 @@ const Text = styled(Typography)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
 
-  fontWeight: "500",
+  fontWeight: 500,
   fontSize: 14,
   lineHeight: 1.5,
 
@@ -88,7 +88,7 @@ export const ThemeToggle: React.FC = () => {
   return (
     <>
       <ButtonBase sx={{ borderRadius: "8px" }}>
-        <Text onClick={handleOpenThemeMenu}>
+        <Text onClick={handleOpenThemeMenu} variant="body2">
           Theme
           <ExpandMoreRoundedIcon
             color="inherit"

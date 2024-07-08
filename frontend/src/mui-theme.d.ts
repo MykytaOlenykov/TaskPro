@@ -8,6 +8,8 @@ declare module "@mui/material/styles" {
 
   interface TypeIcon {
     avatarPlaceholder?: string;
+    logo?: string;
+    logOut?: string;
   }
 
   interface Palette {
@@ -24,7 +26,9 @@ declare module "@mui/material/styles" {
     primaryButton?: string;
     primaryAccent?: string;
     primaryHeader?: string;
+    primarySideBar?: string;
     popup?: string;
+    light?: string;
   }
 
   interface TypeBackground {
@@ -34,5 +38,9 @@ declare module "@mui/material/styles" {
     primaryButtonHover?: string;
     header?: string;
     modal?: string;
+    sideBar?: string;
+    logo?: string;
+    backdrop?: string;
+    sideBarLine?: string;
   }
 }

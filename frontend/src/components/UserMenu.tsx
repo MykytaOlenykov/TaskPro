@@ -27,6 +27,7 @@ const UserName = styled(Typography)(() => ({
 }));
 
 const Placeholder = styled(AvatarPlaceholder)(({ theme }) => ({
+  display: "block",
   width: 32,
   height: 22.5,
   fill: theme.palette.icon?.avatarPlaceholder,

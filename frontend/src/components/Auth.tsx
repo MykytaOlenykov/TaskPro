@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { styled } from "@mui/material";
+import { Box, styled } from "@mui/material";
 
 const Container = styled("div")(({ theme }) => ({
   padding: 24,
@@ -30,10 +30,10 @@ const AuthLink = styled(NavLink)(() => ({
 export const Auth: React.FC = () => {
   return (
     <Container>
-      <div style={{ display: "flex", gap: 14, marginBottom: 40 }}>
+      <Box style={{ display: "flex", gap: 14, marginBottom: 40 }}>
         <AuthLink to="/auth/register">Registration</AuthLink>
         <AuthLink to="/auth/login">Log In</AuthLink>
-      </div>
+      </Box>
 
       <Outlet />
     </Container>
