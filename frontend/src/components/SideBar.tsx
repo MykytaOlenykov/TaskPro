@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, Drawer, IconButton, styled } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  IconButton,
+  useMediaQuery,
+  useTheme,
+  styled,
+} from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 import { AppLogo } from "./AppLogo";
@@ -18,6 +25,7 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
   },
   ".MuiPaper-root": {
     boxShadow: "none",
+    border: "none",
   },
 }));
 
@@ -47,15 +55,21 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
 }));
 
 export const SideBar: React.FC<IProps> = ({ open, onCloseSideBar }) => {
+  const theme = useTheme();
+  const isDekstop = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
-    <StyledDrawer open={open} onClose={onCloseSideBar} variant="temporary">
+    <StyledDrawer
+      open={open}
+      onClose={onCloseSideBar}
+      variant={isDekstop ? "persistent" : "temporary"}
+    >
       <Container>
         <StyledBox
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-
             marginBottom: 70,
           }}
         >

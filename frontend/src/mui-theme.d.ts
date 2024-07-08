@@ -29,6 +29,7 @@ declare module "@mui/material/styles" {
     primarySideBar?: string;
     popup?: string;
     light?: string;
+    logo?: string;
   }
 
   interface TypeBackground {

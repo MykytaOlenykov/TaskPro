@@ -1,10 +1,31 @@
 import React, { useState } from "react";
-import { Container, Typography } from "@mui/material";
+import { styled, Typography, useTheme, useMediaQuery } from "@mui/material";
 
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
 
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
+  open?: boolean;
+}>(({ theme, open }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create("margin", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  marginLeft: 0,
+  ...(open && {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 260,
+  }),
+}));
+
 const Layout: React.FC = () => {
+  const theme = useTheme();
+  const isDekstop = useMediaQuery(theme.breakpoints.up("lg"));
   const [open, setOpen] = useState(false);
 
   const handleOpenSideBar = () => {
@@ -19,7 +40,7 @@ const Layout: React.FC = () => {
     <>
       <Header onOpenSideBar={handleOpenSideBar} />
       <SideBar open={open} onCloseSideBar={handleCloseSideBar} />
-      <Container>
+      <Main open={open && isDekstop}>
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
@@ -49,7 +70,7 @@ const Layout: React.FC = () => {
           eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
           posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
-      </Container>
+      </Main>
     </>
   );
 };

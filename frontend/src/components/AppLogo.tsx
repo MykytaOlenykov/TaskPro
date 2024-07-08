@@ -32,7 +32,7 @@ const LogoText = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
   fontSize: 16,
   letterSpacing: "-0.04em",
-  color: theme.palette.icon?.logo,
+  color: theme.palette.text.logo,
 }));
 
 export const AppLogo: React.FC = () => {

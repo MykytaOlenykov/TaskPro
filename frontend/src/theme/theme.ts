@@ -84,6 +84,7 @@ const lightTheme = createTheme({
       primarySideBar: "#161616",
       popup: "#161616",
       light: "rgba(22, 22, 22, 0.5)",
+      logo: "#161616",
     },
     background: {
       default: "#F6F6F7",
@@ -121,6 +122,7 @@ const darkTheme = createTheme({
       primarySideBar: "#FFFFFF",
       popup: "rgba(255, 255, 255, 0.5)",
       light: "rgba(255, 255, 255, 0.5)",
+      logo: "#FFFFFF",
     },
     background: {
       default: "#1F1F1F",
@@ -161,6 +163,7 @@ const violetTheme = createTheme({
       primarySideBar: "#FFFFFF",
       popup: "#161616",
       light: "rgba(255, 255, 255, 0.5)",
+      logo: "#FFFFFF",
     },
     background: {
       default: "#ECEDFD",
