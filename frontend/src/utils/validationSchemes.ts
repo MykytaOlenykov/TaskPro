@@ -38,4 +38,14 @@ const logInSchema = yup.object({
     .required("Password is required."),
 });
 
-export { registerSchema, logInSchema };
+const boardSchema = yup.object({
+  name: yup
+    .string()
+    .trim()
+    .max(100, "Title must be at most 100 characters long.")
+    .required("Title is required."),
+  icon_id: yup.string().trim().required("Icon is required."),
+  background_id: yup.string().nullable(),
+});
+
+export { registerSchema, logInSchema, boardSchema };

@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { authReducer } from "./auth/slice";
 import { staticReducer } from "./static/slice";
+import { boardReducer } from "./board/slice";
 import { asyncErrorMiddleware } from "./middlewares";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     static: staticReducer,
+    board: boardReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(asyncErrorMiddleware()),

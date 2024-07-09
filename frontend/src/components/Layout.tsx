@@ -63,7 +63,7 @@ const Loader = styled(LinearProgress)(({ theme }) => ({
 const Layout: React.FC = () => {
   const theme = useTheme();
   const isDekstop = useMediaQuery(theme.breakpoints.up("lg"));
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(isDekstop);
 
   const handleOpenSideBar = () => {
     setOpen(true);

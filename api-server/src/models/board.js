@@ -9,7 +9,7 @@ const boardSchema = new Schema(
   {
     name: {
       type: String,
-      maxlength: 255,
+      maxlength: 100,
       required: true,
     },
     icon_id: {
@@ -50,7 +50,7 @@ boardSchema.post("save", handleMongooseError);
 const Board = model("board", boardSchema);
 
 const board = Joi.object({
-  name: Joi.string().trim().max(255).required(),
+  name: Joi.string().trim().max(100).required(),
   icon_id: Joi.string().custom(isValidObjectId).required(),
   background_id: Joi.string()
     .custom((value, helpers) => {

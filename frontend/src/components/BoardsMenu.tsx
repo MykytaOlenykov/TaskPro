@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { Box, Typography, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
+import { useAppDispatch } from "hooks";
+import { createBoard } from "store/board/operations";
+
 import { BoardForm } from "./BoardForm";
 import { BaseButton } from "ui/BaseButton";
 import { Modal } from "ui/Modal";
+
+import type { IBoard } from "types";
 
 const Container = styled(Box)(({ theme }) => ({
   padding: "0 14px",
@@ -63,6 +68,7 @@ const Button = styled(BaseButton)(({ theme }) => ({
 }));
 
 export const BoardsMenu: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -73,6 +79,11 @@ export const BoardsMenu: React.FC = () => {
     reason: "backdropClick" | "escapeKeyDown" | "button"
   ) => {
     if (reason === "backdropClick") return;
+    setOpen(false);
+  };
+
+  const handleCreateBoard = (data: Omit<IBoard, "_id">) => {
+    dispatch(createBoard(data));
     setOpen(false);
   };
 
@@ -89,7 +100,11 @@ export const BoardsMenu: React.FC = () => {
       </BtnContainer>
 
       <Modal open={open} onClose={handleClose}>
-        <BoardForm title="New board" buttonText="Create" />
+        <BoardForm
+          title="New board"
+          buttonText="Create"
+          onSubmitForm={handleCreateBoard}
+        />
       </Modal>
     </Container>
   );

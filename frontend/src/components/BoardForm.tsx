@@ -1,17 +1,26 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Radio, RadioGroup, styled, Typography } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  Radio,
+  RadioGroup,
+  styled,
+  Typography,
+  FormHelperText,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 import { useAppSelector } from "hooks";
+import { boardSchema } from "utils";
 import { selectBackgrounds, selectIcons } from "store/static/selectors";
 
 import { BaseInput } from "ui/BaseInput";
-import { HelperText } from "ui/HelperText";
 import { InputLabel } from "ui/InputLabel";
+import { BaseButton } from "ui/BaseButton";
+
+import type { IBoard } from "types";
 
 import BackgroundPlaceholderIcon from "assets/images/background-placeholder.svg?react";
-import { BaseButton } from "ui/BaseButton";
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -38,7 +47,6 @@ const RadioBtn = styled(Radio)(({ theme }) => ({
 const IconsList = styled(RadioGroup)({
   flexDirection: "row",
   gap: 8,
-  marginBottom: 24,
 });
 
 const Icon = styled("span")<{ url: string; checked?: boolean }>(
@@ -122,7 +130,7 @@ const AddIconContainer = styled("span")(({ theme }) => ({
 }));
 
 interface IForm {
-  title: string;
+  name: string;
   icon_id: string;
   background_id?: string | null;
 }
@@ -130,10 +138,14 @@ interface IForm {
 interface IProps {
   title: string;
   buttonText: string;
-  //   onSubmitForm: () => void;
+  onSubmitForm: (data: Omit<IBoard, "_id">) => void;
 }
 
-export const BoardForm: React.FC<IProps> = ({ title, buttonText }) => {
+export const BoardForm: React.FC<IProps> = ({
+  title,
+  buttonText,
+  onSubmitForm,
+}) => {
   const icons = useAppSelector(selectIcons);
   const backgrounds = useAppSelector(selectBackgrounds);
 
@@ -141,26 +153,30 @@ export const BoardForm: React.FC<IProps> = ({ title, buttonText }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IForm>({});
+  } = useForm<IForm>({
+    resolver: yupResolver(boardSchema),
+  });
 
   const onSubmit: SubmitHandler<IForm> = (data) => {
-    console.log(data);
+    onSubmitForm({ ...data, background_id: data.background_id || null });
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
       <Title variant="body1">{title}</Title>
 
       <BaseInput
         type="text"
         placeholder="Title"
-        error={!!errors.title}
-        {...register("title")}
+        error={!!errors.name}
+        {...register("name")}
       />
-      {errors.title && <HelperText error>{errors.title.message}</HelperText>}
+      {errors.name && (
+        <FormHelperText error>{errors.name.message}</FormHelperText>
+      )}
 
       <InputLabel style={{ marginTop: 24, marginBottom: 14 }}>Icons</InputLabel>
-      <IconsList style={{}}>
+      <IconsList>
         {icons.map(({ _id, url }) => (
           <RadioBtn
             key={_id}
@@ -171,8 +187,13 @@ export const BoardForm: React.FC<IProps> = ({ title, buttonText }) => {
           />
         ))}
       </IconsList>
+      {errors.icon_id && (
+        <FormHelperText error>{errors.icon_id.message}</FormHelperText>
+      )}
 
-      <InputLabel style={{ marginBottom: 14 }}>Background</InputLabel>
+      <InputLabel style={{ marginBottom: 14, marginTop: 24 }}>
+        Background
+      </InputLabel>
       <BackgroundsList>
         <RadioBtn
           value=""
@@ -190,6 +211,10 @@ export const BoardForm: React.FC<IProps> = ({ title, buttonText }) => {
           />
         ))}
       </BackgroundsList>
+      {errors.background_id && (
+        <FormHelperText error>{errors.background_id.message}</FormHelperText>
+      )}
+
       <BaseButton
         type="submit"
         style={{ gap: 8, paddingTop: 10, paddingBottom: 11 }}
