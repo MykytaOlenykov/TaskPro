@@ -47,7 +47,14 @@ export const logIn = createAppAsyncThunk<
 
 export const logOut = createAppAsyncThunk<void, void>(
   "auth/logOut",
-  async () => {}
+  async (_, { rejectWithValue }) => {
+    try {
+      await api.post("users/logout");
+      token.clear();
+    } catch (error) {
+      return rejectWithValue(convertAsyncError(error));
+    }
+  }
 );
 
 export const getCurrentUser = createAppAsyncThunk<NonNullable<IUser>, void>(

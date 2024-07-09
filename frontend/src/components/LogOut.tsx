@@ -2,6 +2,9 @@ import React from "react";
 import { ButtonBase, styled } from "@mui/material";
 import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
 
+import { useAppDispatch } from "hooks";
+import { logOut } from "store/auth/operations";
+
 const Button = styled(ButtonBase)(({ theme }) => ({
   justifyContent: "start",
   gap: 14,
@@ -23,8 +26,12 @@ const Icon = styled(LoginRoundedIcon)(({ theme }) => ({
 }));
 
 export const LogOut: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  const handleLogOut = () => dispatch(logOut());
+
   return (
-    <Button>
+    <Button onClick={handleLogOut}>
       <Icon />
       Log out
     </Button>

@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getCurrentUser, logIn, register, changeTheme } from "./operations";
+import {
+  getCurrentUser,
+  logIn,
+  register,
+  changeTheme,
+  logOut,
+} from "./operations";
 
 import type { IUser } from "types";
 
@@ -47,6 +53,10 @@ const authSlice = createSlice({
       })
       .addCase(changeTheme.fulfilled, (state, action) => {
         state.user.theme = action.payload;
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.user = initialState.user;
+        state.loggedIn = initialState.loggedIn;
       });
   },
 });
