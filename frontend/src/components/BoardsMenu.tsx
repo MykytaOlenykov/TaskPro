@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 import { BaseButton } from "ui/BaseButton";
+import { Modal } from "ui/Modal";
 
 const Container = styled(Box)(({ theme }) => ({
   padding: "0 14px",
@@ -61,6 +62,19 @@ const Button = styled(BaseButton)(({ theme }) => ({
 }));
 
 export const BoardsMenu: React.FC = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (
+    reason: "backdropClick" | "escapeKeyDown" | "button"
+  ) => {
+    if (reason === "backdropClick") return;
+    setOpen(false);
+  };
+
   return (
     <Container>
       <Title variant="body1">My boards</Title>
@@ -68,10 +82,20 @@ export const BoardsMenu: React.FC = () => {
         <Text variant="body1">
           Create a<br /> new board
         </Text>
-        <Button aria-label="create a new board">
+        <Button aria-label="create a new board" onClick={handleOpen}>
           <AddIcon style={{ width: "20px", height: "20px" }} />
         </Button>
       </BtnContainer>
+      {open && (
+        <Modal open={open} onClose={handleClose}>
+          <>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere
+            debitis aliquam, unde laborum, tenetur expedita iste quas error quo
+            dolorem rem tempore. Nam suscipit dicta dolor tempora reiciendis
+            quos animi?
+          </>
+        </Modal>
+      )}
     </Container>
   );
 };
