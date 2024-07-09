@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
+import { BoardForm } from "./BoardForm";
 import { BaseButton } from "ui/BaseButton";
 import { Modal } from "ui/Modal";
 
@@ -86,16 +87,10 @@ export const BoardsMenu: React.FC = () => {
           <AddIcon style={{ width: "20px", height: "20px" }} />
         </Button>
       </BtnContainer>
-      {open && (
-        <Modal open={open} onClose={handleClose}>
-          <>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere
-            debitis aliquam, unde laborum, tenetur expedita iste quas error quo
-            dolorem rem tempore. Nam suscipit dicta dolor tempora reiciendis
-            quos animi?
-          </>
-        </Modal>
-      )}
+
+      <Modal open={open} onClose={handleClose}>
+        <BoardForm title="New board" buttonText="Create" />
+      </Modal>
     </Container>
   );
 };

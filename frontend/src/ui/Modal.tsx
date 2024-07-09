@@ -19,13 +19,16 @@ const Container = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
-  padding: 24,
+  padding: 23,
   maxWidth: 335,
   width: "100%",
-  backgroundColor: theme.palette.background.modal,
+  backgroundColor: theme.palette.background.primaryBox,
   borderRadius: 8,
   transform: "translate(-50%, -50%)",
   outline: "none",
+  border: `1px solid ${
+    theme.palette.border?.modal ?? theme.palette.background.primaryBox
+  }`,
   [theme.breakpoints.up("md")]: {
     maxWidth: 350,
   },
@@ -50,11 +53,8 @@ export const Modal: React.FC<IProps> = ({
   return (
     <StyledModal onClose={(_, reason) => onClose(reason)} {...otherProps}>
       <Container>
-        <Button>
-          <CloseRoundedIcon
-            style={{ width: 18, height: 18 }}
-            onClick={() => onClose("button")}
-          />
+        <Button onClick={() => onClose("button")}>
+          <CloseRoundedIcon style={{ width: 18, height: 18 }} />
         </Button>
         {children}
       </Container>

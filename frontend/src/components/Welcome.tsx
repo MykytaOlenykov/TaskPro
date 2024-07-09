@@ -14,7 +14,7 @@ const UserIcon = styled("div")(({ theme }) => ({
 
   backgroundImage: `url(${userIcon})`,
   backgroundRepeat: "no-repeat",
-  backgroundSize: "100% auto",
+  backgroundSize: "contain",
   backgroundPosition: "center",
 
   [theme.breakpoints.up("md")]: {

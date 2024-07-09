@@ -4,12 +4,16 @@ declare module "@mui/material/styles" {
   interface TypeBorder {
     input?: string;
     popup?: string;
+    modal?: string;
   }
 
   interface TypeIcon {
+    primary?: string;
     avatarPlaceholder?: string;
     logo?: string;
     logOut?: string;
+    primaryAdd?: string;
+    secondaryAdd?: string;
   }
 
   interface Palette {
@@ -44,9 +48,10 @@ declare module "@mui/material/styles" {
     primaryLoader?: string;
     secondaryLoader?: string;
     header?: string;
-    modal?: string;
     logo?: string;
     backdrop?: string;
     sideBarLine?: string;
+    primaryAdd?: string;
+    secondaryAdd?: string;
   }
 }

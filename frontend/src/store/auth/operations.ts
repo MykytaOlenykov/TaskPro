@@ -1,5 +1,6 @@
 import { api } from "services";
 import { convertAsyncError, createAppAsyncThunk, token } from "utils";
+import { getBackgrounds, getIcons } from "store/static/operations";
 
 import type { IThemeMode } from "theme";
 import type { IUser } from "types";
@@ -30,7 +31,7 @@ export const register = createAppAsyncThunk<
 export const logIn = createAppAsyncThunk<
   NonNullable<IUser>,
   NonNullable<Pick<IUser, "email">> & { password: string }
->("auth/logIn", async (credentials, { rejectWithValue }) => {
+>("auth/logIn", async (credentials, { dispatch, rejectWithValue }) => {
   try {
     const { data } = await api.post<{
       user: NonNullable<IUser>;
@@ -38,6 +39,7 @@ export const logIn = createAppAsyncThunk<
     }>("users/login", credentials);
 
     token.save(data.accessToken);
+    await Promise.all([dispatch(getIcons()), dispatch(getBackgrounds())]);
 
     return data.user;
   } catch (error) {
@@ -59,9 +61,10 @@ export const logOut = createAppAsyncThunk<void, void>(
 
 export const getCurrentUser = createAppAsyncThunk<NonNullable<IUser>, void>(
   "auth/getCurrentUser",
-  async (_, { rejectWithValue }) => {
+  async (_, { dispatch, rejectWithValue }) => {
     try {
       const { data: user } = await api.get<NonNullable<IUser>>("users/current");
+      await Promise.all([dispatch(getIcons()), dispatch(getBackgrounds())]);
       return user;
     } catch (error) {
       return rejectWithValue(null);
