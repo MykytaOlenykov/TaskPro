@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { styled, Typography, useTheme, useMediaQuery } from "@mui/material";
+import React, { Suspense, useState } from "react";
+import { Outlet } from "react-router-dom";
+import { styled, useTheme, useMediaQuery, LinearProgress } from "@mui/material";
 
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
@@ -48,6 +49,17 @@ const FilterContainer = styled("div")(({ theme }) => ({
   },
 }));
 
+const Loader = styled(LinearProgress)(({ theme }) => ({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  backgroundColor: theme.palette.background.secondaryLoader,
+  ".MuiLinearProgress-bar": {
+    backgroundColor: theme.palette.background.primaryLoader,
+  },
+}));
+
 const Layout: React.FC = () => {
   const theme = useTheme();
   const isDekstop = useMediaQuery(theme.breakpoints.up("lg"));
@@ -69,21 +81,9 @@ const Layout: React.FC = () => {
         <FilterContainer>
           <Filter />
         </FilterContainer>
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
       </Main>
     </>
   );

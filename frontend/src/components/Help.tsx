@@ -38,7 +38,10 @@ const Text = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const AccentText = styled("span")(({ theme }) => ({
+const AccentText = styled(Text)(({ theme }) => ({
+  display: "inline-block",
+  marginBottom: 0,
+  padding: 0,
   color: theme.palette.text.primaryAccent,
 }));
 
@@ -64,8 +67,9 @@ export const Help: React.FC = () => {
     <Container>
       <Icon />
       <Text variant="body1">
-        If you need help with <AccentText>TaskPro</AccentText>, check out our
-        support resources or reach out to our customer support team.
+        If you need help with <AccentText variant="body2">TaskPro</AccentText>,
+        check out our support resources or reach out to our customer support
+        team.
       </Text>
       <Button>
         <HelpIcon />

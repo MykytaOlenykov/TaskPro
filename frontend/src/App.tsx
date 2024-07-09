@@ -14,6 +14,7 @@ import { PageFallback } from "ui/PageFallback";
 const WelcomePage = lazy(() => import("pages/WelcomePage"));
 const AuthPage = lazy(() => import("pages/AuthPage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
+const BasePage = lazy(() => import("pages/BasePage"));
 
 const Layout = lazy(() => import("components/Layout"));
 
@@ -58,7 +59,7 @@ export function App() {
             </PrivateRoute>
           }
         >
-          <Route index element={<p>index</p>} />
+          <Route index element={<BasePage />} />
           <Route path=":boardId" element={<p>boardId</p>} />
         </Route>
 
