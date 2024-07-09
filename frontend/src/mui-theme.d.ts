@@ -27,6 +27,7 @@ declare module "@mui/material/styles" {
     primaryAccent?: string;
     primaryHeader?: string;
     primarySideBar?: string;
+    primaryFilter?: string;
     popup?: string;
     light?: string;
     logo?: string;

@@ -3,12 +3,16 @@ import { styled, Typography, useTheme, useMediaQuery } from "@mui/material";
 
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
+import { Filter } from "./Filter";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({
+  position: "relative",
   flexGrow: 1,
-  padding: theme.spacing(3),
+  padding: "74px 20px 60px",
+  height: "calc(100vh - 60px)",
+  overflow: "hidden",
   transition: theme.transitions.create("margin", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -21,6 +25,27 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
     }),
     marginLeft: 260,
   }),
+  [theme.breakpoints.up("md")]: {
+    padding: "80px 32px 96px",
+    height: "calc(100vh - 68px)",
+  },
+  [theme.breakpoints.up("lg")]: {
+    padding: "48px 24px 36px",
+  },
+}));
+
+const FilterContainer = styled("div")(({ theme }) => ({
+  position: "absolute",
+  top: 14,
+  right: 20,
+  [theme.breakpoints.up("md")]: {
+    top: 20,
+    right: 32,
+  },
+  [theme.breakpoints.up("lg")]: {
+    top: 14,
+    right: 24,
+  },
 }));
 
 const Layout: React.FC = () => {
@@ -41,6 +66,9 @@ const Layout: React.FC = () => {
       <Header onOpenSideBar={handleOpenSideBar} />
       <SideBar open={open} onCloseSideBar={handleCloseSideBar} />
       <Main open={open && isDekstop}>
+        <FilterContainer>
+          <Filter />
+        </FilterContainer>
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
@@ -55,20 +83,6 @@ const Layout: React.FC = () => {
           vivamus at augue. At augue eget arcu dictum varius duis at consectetur
           lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
           faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
       </Main>
     </>
