@@ -60,7 +60,7 @@ const Loader = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-const Layout: React.FC = () => {
+export const Layout: React.FC = () => {
   const theme = useTheme();
   const isDekstop = useMediaQuery(theme.breakpoints.up("lg"));
   const [open, setOpen] = useState(isDekstop);
@@ -88,5 +88,3 @@ const Layout: React.FC = () => {
     </>
   );
 };
-
-export default Layout;

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { createBoard } from "./operations";
+import { createBoard, getBoards } from "./operations";
 
 import type { IBoard } from "types";
 
@@ -17,9 +17,13 @@ const boardSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(createBoard.fulfilled, (state, action) => {
-      state.items.push(action.payload);
-    });
+    builder
+      .addCase(getBoards.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(createBoard.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      });
   },
 });
 

@@ -17,6 +17,9 @@ const Button = styled(ButtonBase)(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     fontSize: 16,
   },
+  "&:hover svg": {
+    color: theme.palette.icon?.hoverLogOut,
+  },
 }));
 
 const Icon = styled(LoginRoundedIcon)(({ theme }) => ({

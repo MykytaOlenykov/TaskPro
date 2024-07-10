@@ -8,6 +8,7 @@ import { createBoard } from "store/board/operations";
 import { BoardForm } from "./BoardForm";
 import { BaseButton } from "ui/BaseButton";
 import { Modal } from "ui/Modal";
+import { BoardsList } from "./BoardsList";
 
 import type { IBoard } from "types";
 
@@ -88,24 +89,27 @@ export const BoardsMenu: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Title variant="body1">My boards</Title>
-      <BtnContainer>
-        <Text variant="body1">
-          Create a<br /> new board
-        </Text>
-        <Button aria-label="create a new board" onClick={handleOpen}>
-          <AddIcon style={{ width: "20px", height: "20px" }} />
-        </Button>
-      </BtnContainer>
+    <>
+      <Container>
+        <Title variant="body1">My boards</Title>
+        <BtnContainer>
+          <Text variant="body1">
+            Create a<br /> new board
+          </Text>
+          <Button aria-label="create a new board" onClick={handleOpen}>
+            <AddIcon style={{ width: "20px", height: "20px" }} />
+          </Button>
+        </BtnContainer>
 
-      <Modal open={open} onClose={handleClose}>
-        <BoardForm
-          title="New board"
-          buttonText="Create"
-          onSubmitForm={handleCreateBoard}
-        />
-      </Modal>
-    </Container>
+        <Modal open={open} onClose={handleClose}>
+          <BoardForm
+            title="New board"
+            buttonText="Create"
+            onSubmitForm={handleCreateBoard}
+          />
+        </Modal>
+      </Container>
+      <BoardsList />
+    </>
   );
 };

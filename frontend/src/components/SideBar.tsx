@@ -36,6 +36,8 @@ const Container = styled(Box)(({ theme }) => ({
   width: 225,
   minHeight: "100vh",
   overflowY: "auto",
+  scrollbarColor: `${theme.palette.background.default} ${theme.palette.background.primarySideBar}`,
+  scrollbarWidth: "thin",
   backgroundColor: theme.palette.background.primarySideBar,
   [theme.breakpoints.up("md")]: {
     padding: "24px 0",

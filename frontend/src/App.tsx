@@ -14,9 +14,8 @@ import { PageFallback } from "ui/PageFallback";
 const WelcomePage = lazy(() => import("pages/WelcomePage"));
 const AuthPage = lazy(() => import("pages/AuthPage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
-const BasePage = lazy(() => import("pages/BasePage"));
-
-const Layout = lazy(() => import("components/Layout"));
+const HomePage = lazy(() => import("pages/HomePage"));
+const IndexSubPage = lazy(() => import("pages/IndexSubPage"));
 
 export function App() {
   const dispatch = useAppDispatch();
@@ -55,11 +54,11 @@ export function App() {
           path="/home"
           element={
             <PrivateRoute>
-              <Layout />
+              <HomePage />
             </PrivateRoute>
           }
         >
-          <Route index element={<BasePage />} />
+          <Route index element={<IndexSubPage />} />
           <Route path=":boardId" element={<p>boardId</p>} />
         </Route>
 

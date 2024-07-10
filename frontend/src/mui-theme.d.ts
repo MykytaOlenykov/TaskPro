@@ -12,6 +12,7 @@ declare module "@mui/material/styles" {
     avatarPlaceholder?: string;
     logo?: string;
     logOut?: string;
+    hoverLogOut?: string;
     primaryAdd?: string;
     secondaryAdd?: string;
   }
@@ -31,6 +32,7 @@ declare module "@mui/material/styles" {
     primaryAccent?: string;
     primaryHeader?: string;
     primarySideBar?: string;
+    secondarySideBar?: string;
     primaryFilter?: string;
     popup?: string;
     light?: string;
@@ -53,5 +55,7 @@ declare module "@mui/material/styles" {
     sideBarLine?: string;
     primaryAdd?: string;
     secondaryAdd?: string;
+    primarySelectedBoard?: string;
+    secondarySelectedBoard?: string;
   }
 }
