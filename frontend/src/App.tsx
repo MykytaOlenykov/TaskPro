@@ -16,6 +16,7 @@ const AuthPage = lazy(() => import("pages/AuthPage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 const HomePage = lazy(() => import("pages/HomePage"));
 const IndexSubPage = lazy(() => import("pages/IndexSubPage"));
+const ScreensPage = lazy(() => import("pages/ScreensPage"));
 
 export function App() {
   const dispatch = useAppDispatch();
@@ -59,7 +60,7 @@ export function App() {
           }
         >
           <Route index element={<IndexSubPage />} />
-          <Route path=":boardId" element={<p>boardId</p>} />
+          <Route path=":boardId" element={<ScreensPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

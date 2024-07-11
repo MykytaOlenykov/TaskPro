@@ -24,7 +24,7 @@ export const DeleteModal: React.FC<IProps> = ({
           style={{ textAlign: "center" }}
           variant="body1"
           fontWeight={500}
-          fontSize={20}
+          fontSize={16}
           marginBottom="16px"
         >
           {text}
