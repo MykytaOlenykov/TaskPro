@@ -3,7 +3,7 @@ import { Box, Typography, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 import { useAppDispatch } from "hooks";
-import { createBoard } from "store/board/operations";
+import { createBoard } from "store/boards/operations";
 
 import { BoardForm } from "./BoardForm";
 import { BaseButton } from "ui/BaseButton";

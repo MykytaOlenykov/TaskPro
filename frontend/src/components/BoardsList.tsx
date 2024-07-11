@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { List, styled, ListItem, useTheme, useMediaQuery } from "@mui/material";
 
 import { useAppSelector } from "hooks";
-import { selectBoards } from "store/board/selectors";
+import { selectBoards } from "store/boards/selectors";
 import { BoardCard } from "./BoardCard";
 
 const StyledList = styled(List)(({ theme }) => ({

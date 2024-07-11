@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { styled, Typography } from "@mui/material";
 
 import { useAppSelector } from "hooks";
-import { selectBoards } from "store/board/selectors";
+import { selectBoards } from "store/boards/selectors";
 
 const Title = styled(Typography)(({ theme }) => ({
   maxWidth: "calc(100vw / 2 - 32px)",

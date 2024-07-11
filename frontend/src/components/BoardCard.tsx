@@ -8,7 +8,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectIcons } from "store/static/selectors";
-import { deleteBoard, editBoard } from "store/board/operations";
+import { deleteBoard, editBoard } from "store/boards/operations";
 
 import { Modal } from "ui/Modal";
 import { BoardForm } from "./BoardForm";
