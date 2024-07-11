@@ -39,3 +39,15 @@ export const editBoard = createAppAsyncThunk<IBoard, IBoard>(
     }
   }
 );
+
+export const deleteBoard = createAppAsyncThunk<string, string>(
+  "board/deleteBoard",
+  async (_id, { rejectWithValue }) => {
+    try {
+      await api.delete(`boards/${_id}`);
+      return _id;
+    } catch (error) {
+      return rejectWithValue(convertAsyncError(error));
+    }
+  }
+);

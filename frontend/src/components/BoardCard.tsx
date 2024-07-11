@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { isFulfilled } from "@reduxjs/toolkit";
 import { IconButton, styled, Typography, ListItemButton } from "@mui/material";
 
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
@@ -7,10 +8,11 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectIcons } from "store/static/selectors";
-import { editBoard } from "store/board/operations";
+import { deleteBoard, editBoard } from "store/board/operations";
 
 import { Modal } from "ui/Modal";
 import { BoardForm } from "./BoardForm";
+import { DeleteModal } from "./DeleteModal";
 
 import type { IBoard } from "types";
 
@@ -99,12 +101,13 @@ export const BoardCard: React.FC<IProps> = ({
   const iconUrl = icons.find(({ _id }) => _id === iconId)?.url;
 
   const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
-  const handleEditOpen = () => {
+  const handleOpenEdit = () => {
     setOpenEdit(true);
   };
 
-  const handleClose = (
+  const handleCloseEdit = (
     reason: "backdropClick" | "escapeKeyDown" | "button"
   ) => {
     if (reason === "backdropClick") return;
@@ -114,6 +117,22 @@ export const BoardCard: React.FC<IProps> = ({
   const handleEditBoard = (data: Omit<IBoard, "_id">) => {
     dispatch(editBoard({ ...data, _id }));
     setOpenEdit(false);
+  };
+
+  const handleOpenDelete = () => {
+    setOpenDelete(true);
+  };
+
+  const handleCloseDelete = () => {
+    setOpenDelete(false);
+  };
+
+  const handleDeleteBoard = async () => {
+    const result = await dispatch(deleteBoard(_id));
+    if (isFulfilled(result)) {
+      setOpenDelete(false);
+      navigate("/home");
+    }
   };
 
   return (
@@ -135,16 +154,16 @@ export const BoardCard: React.FC<IProps> = ({
               paddingLeft: "16px",
             }}
           >
-            <Button style={{ marginRight: 4 }} onClick={handleEditOpen}>
+            <Button style={{ marginRight: 4 }} onClick={handleOpenEdit}>
               <EditOutlinedIcon sx={{ width: 20, height: 20 }} />
             </Button>
-            <Button>
+            <Button onClick={handleOpenDelete}>
               <DeleteOutlineOutlinedIcon sx={{ width: 20, height: 20 }} />
             </Button>
           </div>
         )}
       </StyledListItemButton>
-      <Modal open={openEdit} onClose={handleClose}>
+      <Modal open={openEdit} onClose={handleCloseEdit}>
         <BoardForm
           boardName={name}
           boardIconId={iconId}
@@ -154,6 +173,12 @@ export const BoardCard: React.FC<IProps> = ({
           onSubmitForm={handleEditBoard}
         />
       </Modal>
+      <DeleteModal
+        text={`Are you sure you want to delete the board "${name}"?`}
+        open={openDelete}
+        onClose={handleCloseDelete}
+        onDelete={handleDeleteBoard}
+      />
     </>
   );
 };
