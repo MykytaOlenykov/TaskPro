@@ -7,6 +7,7 @@ import { SideBar } from "./SideBar";
 import { Filter } from "./Filter";
 import { BoardTitle } from "./BoardTitle";
 import { BoardBackground } from "./BoardBackground";
+import { BoardLoader } from "./BoardLoader";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
@@ -96,6 +97,7 @@ export const Layout: React.FC = () => {
       <Header onOpenSideBar={handleOpenSideBar} />
       <SideBar open={open} onCloseSideBar={handleCloseSideBar} />
       <Main open={open && isDesktop}>
+        <BoardLoader />
         <BoardBackground />
         <Container>
           <BoardTitle />

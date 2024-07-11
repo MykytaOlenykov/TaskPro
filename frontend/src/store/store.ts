@@ -5,6 +5,7 @@ import { staticReducer } from "./static/slice";
 import { boardsReducer } from "./boards/slice";
 import { asyncErrorMiddleware } from "./middlewares";
 import { columnsReducer } from "./columns/slice";
+import { tasksReducer } from "./tasks/slice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     static: staticReducer,
     boards: boardsReducer,
     columns: columnsReducer,
+    tasks: tasksReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(asyncErrorMiddleware()),

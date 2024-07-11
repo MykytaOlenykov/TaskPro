@@ -27,10 +27,7 @@ const getById = async (req, res) => {
     : [];
 
   res.json({
-    _id: board._id,
-    name: board.name,
-    background: board.background_id,
-    icon: board.icon_id,
+    board,
     columns,
     tasks,
   });

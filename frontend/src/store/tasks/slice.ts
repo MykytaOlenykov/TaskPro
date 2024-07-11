@@ -1,29 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { createColumn } from "./operations";
 import { deleteBoard, getBoard } from "store/boards/operations";
 
-import type { IColumn } from "types";
+import type { ITask } from "types";
 
 export interface IInitialState {
-  items: IColumn[];
+  items: ITask[];
 }
 
 const initialState: IInitialState = {
   items: [],
 };
 
-const columnsSlice = createSlice({
-  name: "columns",
+const tasksSlice = createSlice({
+  name: "tasks",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createColumn.fulfilled, (state, action) => {
-        state.items.push(action.payload);
-      })
       .addCase(getBoard.fulfilled, (state, action) => {
-        state.items = action.payload.columns;
+        state.items = action.payload.tasks;
       })
       .addCase(deleteBoard.fulfilled, (state) => {
         state.items = [];
@@ -31,4 +27,4 @@ const columnsSlice = createSlice({
   },
 });
 
-export const columnsReducer = columnsSlice.reducer;
+export const tasksReducer = tasksSlice.reducer;

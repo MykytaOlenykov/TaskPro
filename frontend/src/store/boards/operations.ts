@@ -1,7 +1,7 @@
 import { api } from "services";
 import { convertAsyncError, createAppAsyncThunk } from "utils";
 
-import type { IBoard } from "types";
+import type { IBoard, IColumn, ITask } from "types";
 
 export const getBoards = createAppAsyncThunk<IBoard[], void>(
   "boards/getBoards",
@@ -14,6 +14,18 @@ export const getBoards = createAppAsyncThunk<IBoard[], void>(
     }
   }
 );
+
+export const getBoard = createAppAsyncThunk<
+  { board: IBoard; columns: IColumn[]; tasks: ITask[] },
+  string
+>("boards/getBoard", async (_id, { rejectWithValue }) => {
+  try {
+    const { data } = await api.get(`boards/${_id}`);
+    return data;
+  } catch (error) {
+    return rejectWithValue(convertAsyncError(error));
+  }
+});
 
 export const createBoard = createAppAsyncThunk<IBoard, Omit<IBoard, "_id">>(
   "boards/createBoard",
