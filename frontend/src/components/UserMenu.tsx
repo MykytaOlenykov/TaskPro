@@ -3,6 +3,7 @@ import { Avatar, Typography, styled } from "@mui/material";
 
 import { useAppSelector } from "hooks";
 import { selectUserName } from "store/auth/selectors";
+
 import AvatarPlaceholder from "assets/images/avatar-placeholder.svg?react";
 import TestUserAvatar from "assets/images/userTest.jpg";
 
@@ -20,10 +21,14 @@ const UserAvatar = styled(Avatar)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
 }));
 
-const UserName = styled(Typography)(() => ({
+const UserName = styled(Typography)(({ theme }) => ({
+  maxWidth: 80,
   fontWeight: 500,
   fontSize: 14,
   letterSpacing: "-0.02em",
+  [theme.breakpoints.up("md")]: {
+    maxWidth: 120,
+  },
 }));
 
 const Placeholder = styled(AvatarPlaceholder)(({ theme }) => ({
@@ -39,7 +44,7 @@ export const UserMenu: React.FC = () => {
 
   return (
     <Container>
-      <UserName>{userName}</UserName>
+      <UserName noWrap>{userName}</UserName>
       <UserAvatar alt={userName ?? ""} src={TestUserAvatar}>
         <Placeholder />
       </UserAvatar>
