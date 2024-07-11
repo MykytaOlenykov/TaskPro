@@ -26,3 +26,16 @@ export const createBoard = createAppAsyncThunk<IBoard, Omit<IBoard, "_id">>(
     }
   }
 );
+
+export const editBoard = createAppAsyncThunk<IBoard, IBoard>(
+  "board/editBoard",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { _id, ...otherData } = data;
+      const { data: newData } = await api.put(`boards/${_id}`, otherData);
+      return newData;
+    } catch (error) {
+      return rejectWithValue(convertAsyncError(error));
+    }
+  }
+);

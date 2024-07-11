@@ -1,5 +1,5 @@
 import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Radio,
@@ -136,12 +136,18 @@ interface IForm {
 }
 
 interface IProps {
+  boardName?: string;
+  boardIconId?: string;
+  boardBackgroundId?: string | null;
   title: string;
   buttonText: string;
   onSubmitForm: (data: Omit<IBoard, "_id">) => void;
 }
 
 export const BoardForm: React.FC<IProps> = ({
+  boardName,
+  boardIconId,
+  boardBackgroundId,
   title,
   buttonText,
   onSubmitForm,
@@ -150,10 +156,16 @@ export const BoardForm: React.FC<IProps> = ({
   const backgrounds = useAppSelector(selectBackgrounds);
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IForm>({
+    defaultValues: {
+      name: boardName,
+      icon_id: boardIconId,
+      background_id: boardBackgroundId ?? "",
+    },
     resolver: yupResolver(boardSchema),
   });
 
@@ -176,17 +188,22 @@ export const BoardForm: React.FC<IProps> = ({
       )}
 
       <InputLabel style={{ marginTop: 24, marginBottom: 14 }}>Icons</InputLabel>
-      <IconsList>
-        {icons.map(({ _id, url }) => (
-          <RadioBtn
-            key={_id}
-            value={_id}
-            icon={<Icon url={url} />}
-            checkedIcon={<Icon url={url} checked />}
-            {...register("icon_id")}
-          />
-        ))}
-      </IconsList>
+      <Controller
+        control={control}
+        name="icon_id"
+        render={({ field: { value, onChange } }) => (
+          <IconsList value={value} onChange={onChange}>
+            {icons.map(({ _id, url }) => (
+              <RadioBtn
+                key={_id}
+                value={_id}
+                icon={<Icon url={url} />}
+                checkedIcon={<Icon url={url} checked />}
+              />
+            ))}
+          </IconsList>
+        )}
+      />
       {errors.icon_id && (
         <FormHelperText error>{errors.icon_id.message}</FormHelperText>
       )}
@@ -194,23 +211,27 @@ export const BoardForm: React.FC<IProps> = ({
       <InputLabel style={{ marginBottom: 14, marginTop: 24 }}>
         Background
       </InputLabel>
-      <BackgroundsList>
-        <RadioBtn
-          value=""
-          icon={<BackgroundPlaceholder />}
-          checkedIcon={<BackgroundPlaceholder checked />}
-          {...register("background_id")}
-        />
-        {backgrounds.map(({ _id, previewUrl }) => (
-          <RadioBtn
-            key={_id}
-            value={_id}
-            icon={<Background url={previewUrl} />}
-            checkedIcon={<Background url={previewUrl} checked />}
-            {...register("background_id")}
-          />
-        ))}
-      </BackgroundsList>
+      <Controller
+        control={control}
+        name="background_id"
+        render={({ field: { value, onChange } }) => (
+          <BackgroundsList value={value} onChange={onChange}>
+            <RadioBtn
+              value=""
+              icon={<BackgroundPlaceholder />}
+              checkedIcon={<BackgroundPlaceholder checked />}
+            />
+            {backgrounds.map(({ _id, previewUrl }) => (
+              <RadioBtn
+                key={_id}
+                value={_id}
+                icon={<Background url={previewUrl} />}
+                checkedIcon={<Background url={previewUrl} checked />}
+              />
+            ))}
+          </BackgroundsList>
+        )}
+      />
       {errors.background_id && (
         <FormHelperText error>{errors.background_id.message}</FormHelperText>
       )}

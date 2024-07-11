@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { createBoard, getBoards } from "./operations";
+import { createBoard, editBoard, getBoards } from "./operations";
 
 import type { IBoard } from "types";
 
@@ -23,6 +23,12 @@ const boardSlice = createSlice({
       })
       .addCase(createBoard.fulfilled, (state, action) => {
         state.items.push(action.payload);
+      })
+      .addCase(editBoard.fulfilled, (state, action) => {
+        const idx = state.items.findIndex(
+          ({ _id }) => _id === action.payload._id
+        );
+        idx !== -1 && state.items.splice(idx, 1, action.payload);
       });
   },
 });

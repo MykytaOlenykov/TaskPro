@@ -7,20 +7,13 @@ const updateById = async (req, res) => {
   const board = await Board.findOneAndUpdate({ owner_id, _id: id }, req.body, {
     new: true,
     runValidators: true,
-  })
-    .populate("background_id icon_id")
-    .select("-createdAt -updatedAt -owner_id");
+  }).select("-createdAt -updatedAt -owner_id");
 
   if (!board) {
     throw HttpError(404);
   }
 
-  res.json({
-    _id: board._id,
-    name: board.name,
-    background: board.background_id,
-    icon: board.icon_id,
-  });
+  res.json(board);
 };
 
 module.exports = updateById;
