@@ -44,6 +44,7 @@ const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
 
 const Icon = styled("span")<{ url: string; selected: boolean }>(
   ({ url, selected, theme }) => ({
+    flexShrink: 0,
     display: "block",
     marginRight: 4,
     width: 18,
@@ -142,7 +143,7 @@ export const BoardCard: React.FC<IProps> = ({
         onClick={() => !selected && navigate(`/home/${_id}`)}
       >
         {iconUrl && <Icon url={iconUrl} selected={selected} />}
-        <BoardName selected={selected} variant="body2">
+        <BoardName selected={selected} variant="body2" noWrap>
           {name}
         </BoardName>
 
