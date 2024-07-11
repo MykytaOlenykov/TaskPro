@@ -5,6 +5,7 @@ import { styled, useTheme, useMediaQuery, LinearProgress } from "@mui/material";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
 import { Filter } from "./Filter";
+import { BoardTitle } from "./BoardTitle";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
@@ -35,17 +36,24 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   },
 }));
 
-const FilterContainer = styled("div")(({ theme }) => ({
+const Container = styled("div")(({ theme }) => ({
   position: "absolute",
   top: 14,
-  right: 20,
+  left: 0,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: "0 20px",
+  width: "100%",
   [theme.breakpoints.up("md")]: {
     top: 20,
-    right: 32,
+    left: 0,
+    padding: "0 32px",
   },
   [theme.breakpoints.up("lg")]: {
-    top: 14,
-    right: 24,
+    top: 10,
+    left: 0,
+    padding: "0 24px",
   },
 }));
 
@@ -78,9 +86,10 @@ export const Layout: React.FC = () => {
       <Header onOpenSideBar={handleOpenSideBar} />
       <SideBar open={open} onCloseSideBar={handleCloseSideBar} />
       <Main open={open && isDesktop}>
-        <FilterContainer>
+        <Container>
+          <BoardTitle />
           <Filter />
-        </FilterContainer>
+        </Container>
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>

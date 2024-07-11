@@ -5,6 +5,7 @@ import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 const Button = styled(ButtonBase)(({ theme }) => ({
   alignItems: "center",
   gap: 4,
+  marginLeft: "auto",
   fontFamily: "inherit",
   fontWeight: 500,
   fontSize: 14,
