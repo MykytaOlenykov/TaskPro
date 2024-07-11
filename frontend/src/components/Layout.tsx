@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { styled, useTheme, useMediaQuery, LinearProgress } from "@mui/material";
 
@@ -33,7 +33,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
     height: "calc(100vh - 68px)",
   },
   [theme.breakpoints.up("lg")]: {
-    padding: "48px 0 8px",
+    padding: "60px 0 8px",
   },
 }));
 
@@ -50,7 +50,7 @@ const Container = styled("div")(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
     top: 0,
     left: 0,
-    padding: "20px 32px",
+    padding: "14px 32px",
   },
   [theme.breakpoints.up("lg")]: {
     top: 0,
@@ -82,6 +82,14 @@ export const Layout: React.FC = () => {
   const handleCloseSideBar = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (isDesktop) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [isDesktop]);
 
   return (
     <>
