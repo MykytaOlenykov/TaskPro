@@ -59,13 +59,13 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
 
 export const SideBar: React.FC<IProps> = ({ open, onCloseSideBar }) => {
   const theme = useTheme();
-  const isDekstop = useMediaQuery(theme.breakpoints.up("lg"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
     <StyledDrawer
       open={open}
       onClose={onCloseSideBar}
-      variant={isDekstop ? "persistent" : "temporary"}
+      variant={isDesktop ? "persistent" : "temporary"}
     >
       <Container>
         <StyledBox

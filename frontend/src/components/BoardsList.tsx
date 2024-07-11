@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   List,
@@ -7,6 +7,8 @@ import {
   Typography,
   ListItem,
   ListItemButton,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -23,7 +25,6 @@ const StyledList = styled(List)(({ theme }) => ({
   gap: 4,
   margin: 0,
   padding: 0,
-  //   maxHeight: "calc(61px*3 + 4px*2)",
   overflowY: "auto",
   scrollbarColor: `${theme.palette.background.default} ${theme.palette.background.primarySideBar}`,
   scrollbarWidth: "thin",
@@ -47,6 +48,9 @@ const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
     height: "100%",
     backgroundColor: theme.palette.background.secondarySelectedBoard,
     borderRadius: "4px 0 0 4px",
+  },
+  [theme.breakpoints.up("md")]: {
+    padding: "20px 24px",
   },
 }));
 
@@ -91,8 +95,31 @@ export const BoardsList: React.FC = () => {
   const { boardId } = useParams();
   const navigate = useNavigate();
 
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.up("md"));
+
   const boards = useAppSelector(selectBoards);
   const icons = useAppSelector(selectIcons);
+
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  const minHeight = 61 * 3 + 4 * 2;
+
+  const mobileMaxHeight = windowHeight - 600;
+  const tabletMaxHeight = windowHeight - 652;
+  const maxHeight = isTablet ? tabletMaxHeight : mobileMaxHeight;
+
+  useEffect(() => {
+    const updateMaxHeight = () => {
+      setWindowHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", updateMaxHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateMaxHeight);
+    };
+  }, []);
 
   return (
     <div
@@ -100,7 +127,12 @@ export const BoardsList: React.FC = () => {
         padding: "40px 0",
       }}
     >
-      <StyledList>
+      <StyledList
+        style={{
+          maxHeight: maxHeight < minHeight ? minHeight : maxHeight,
+          minHeight,
+        }}
+      >
         {boards.map(({ _id, icon_id, name }) => {
           const selected = boardId === _id;
 

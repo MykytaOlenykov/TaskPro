@@ -62,8 +62,8 @@ const Loader = styled(LinearProgress)(({ theme }) => ({
 
 export const Layout: React.FC = () => {
   const theme = useTheme();
-  const isDekstop = useMediaQuery(theme.breakpoints.up("lg"));
-  const [open, setOpen] = useState(isDekstop);
+  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+  const [open, setOpen] = useState(isDesktop);
 
   const handleOpenSideBar = () => {
     setOpen(true);
@@ -77,7 +77,7 @@ export const Layout: React.FC = () => {
     <>
       <Header onOpenSideBar={handleOpenSideBar} />
       <SideBar open={open} onCloseSideBar={handleCloseSideBar} />
-      <Main open={open && isDekstop}>
+      <Main open={open && isDesktop}>
         <FilterContainer>
           <Filter />
         </FilterContainer>
