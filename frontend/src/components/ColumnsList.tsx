@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { List, ListItem, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
+import { useAppDispatch } from "hooks";
+import { createColumn } from "store/columns/operations";
+
 import { BaseButton } from "ui/BaseButton";
+import { Modal } from "ui/Modal";
+import { ColumnForm } from "./ColumnForm";
+
+import type { IColumn } from "types";
 
 const StyledList = styled(List)(({ theme }) => ({
   display: "flex",
@@ -39,16 +47,47 @@ const AddIconContainer = styled("span")(({ theme }) => ({
 }));
 
 export const ColumnsList: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { boardId } = useParams();
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (
+    reason: "backdropClick" | "escapeKeyDown" | "button"
+  ) => {
+    if (reason === "backdropClick") return;
+    setOpen(false);
+  };
+
+  const handleCreateColumn = (data: Pick<IColumn, "name">) => {
+    if (!boardId) return;
+    dispatch(createColumn({ ...data, board_id: boardId }));
+    setOpen(false);
+  };
+
   return (
-    <StyledList>
-      <StyledListItem disablePadding>
-        <Button>
-          <AddIconContainer>
-            <AddIcon style={{ width: 16, height: 16 }} />
-          </AddIconContainer>
-          Add another column
-        </Button>
-      </StyledListItem>
-    </StyledList>
+    <>
+      <StyledList>
+        <StyledListItem disablePadding>
+          <Button onClick={handleOpen}>
+            <AddIconContainer>
+              <AddIcon style={{ width: 16, height: 16 }} />
+            </AddIconContainer>
+            Add another column
+          </Button>
+        </StyledListItem>
+      </StyledList>
+      <Modal open={open} onClose={handleClose}>
+        <ColumnForm
+          title="Add column"
+          buttonText="Add"
+          onSubmitForm={handleCreateColumn}
+        />
+      </Modal>
+    </>
   );
 };

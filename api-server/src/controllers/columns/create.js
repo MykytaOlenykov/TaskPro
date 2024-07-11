@@ -6,7 +6,7 @@ const create = async (req, res) => {
   res.status(201).json({
     _id: newColumn._id,
     name: newColumn.name,
-    board: newColumn.board_id,
+    board_id: newColumn.board_id,
   });
 };
 

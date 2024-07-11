@@ -12,8 +12,8 @@ const initialState: IInitialState = {
   items: [],
 };
 
-const boardSlice = createSlice({
-  name: "board",
+const boardsSlice = createSlice({
+  name: "boards",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -36,4 +36,4 @@ const boardSlice = createSlice({
   },
 });
 
-export const boardReducer = boardSlice.reducer;
+export const boardsReducer = boardsSlice.reducer;

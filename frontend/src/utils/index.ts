@@ -2,7 +2,12 @@ import { createAppAsyncThunk } from "./createAppAsyncThunk";
 import { token } from "./token";
 import { convertAsyncError } from "./convertAsyncError";
 import { isAsyncError } from "./isAsyncError";
-import { registerSchema, logInSchema, boardSchema } from "./validationSchemes";
+import {
+  registerSchema,
+  logInSchema,
+  boardSchema,
+  columnSchema,
+} from "./validationSchemes";
 
 export {
   createAppAsyncThunk,
@@ -10,6 +15,7 @@ export {
   registerSchema,
   logInSchema,
   boardSchema,
+  columnSchema,
   convertAsyncError,
   isAsyncError,
 };

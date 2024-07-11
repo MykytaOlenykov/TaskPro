@@ -8,7 +8,7 @@ const columnSchema = new Schema(
   {
     name: {
       type: String,
-      maxlength: 255,
+      maxlength: 100,
       required: true,
     },
     board_id: {
@@ -36,7 +36,7 @@ columnSchema.post("save", handleMongooseError);
 
 const Column = model("column", columnSchema);
 
-const nameSchema = Joi.string().trim().max(255).required();
+const nameSchema = Joi.string().trim().max(100).required();
 const boardSchema = Joi.string().custom(isValidObjectId).required();
 
 const createColumn = Joi.object({

@@ -1,14 +1,7 @@
 import React from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Radio,
-  RadioGroup,
-  styled,
-  Typography,
-  FormHelperText,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { Radio, RadioGroup, styled, FormHelperText } from "@mui/material";
 
 import { useAppSelector } from "hooks";
 import { boardSchema } from "utils";
@@ -16,21 +9,14 @@ import { selectBackgrounds, selectIcons } from "store/static/selectors";
 
 import { BaseInput } from "ui/BaseInput";
 import { InputLabel } from "ui/InputLabel";
-import { BaseButton } from "ui/BaseButton";
+import { ButtonWithIcon } from "ui/ButtonWithIcon";
+import { FormTitle } from "ui/FormTitle";
 
 import type { IBoard } from "types";
 
 import BackgroundPlaceholderIcon from "assets/images/background-placeholder.svg?react";
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
-
-const Title = styled(Typography)(({ theme }) => ({
-  marginBottom: 24,
-  fontWeight: 500,
-  fontSize: 18,
-  letterSpacing: "-0.02em",
-  color: theme.palette.text.primary,
-}));
 
 const RadioBtn = styled(Radio)(({ theme }) => ({
   padding: 0,
@@ -68,7 +54,6 @@ const BackgroundsList = styled(RadioGroup)({
   display: "grid",
   gridTemplateColumns: "repeat(8, 28px)",
   gap: 4,
-  marginBottom: 40,
 });
 
 const Background = styled("span")<{ url: string; checked?: boolean }>(
@@ -118,17 +103,6 @@ const BackgroundPlaceholder: React.FC<{
   </BackgroundPlaceholderContainer>
 );
 
-const AddIconContainer = styled("span")(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  width: 28,
-  height: 28,
-  color: theme.palette.icon?.primaryAdd,
-  backgroundColor: theme.palette.background.primaryAdd,
-  borderRadius: 6,
-}));
-
 interface IForm {
   name: string;
   icon_id: string;
@@ -175,7 +149,7 @@ export const BoardForm: React.FC<IProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-      <Title variant="body1">{title}</Title>
+      <FormTitle variant="body1">{title}</FormTitle>
 
       <BaseInput
         type="text"
@@ -236,15 +210,9 @@ export const BoardForm: React.FC<IProps> = ({
         <FormHelperText error>{errors.background_id.message}</FormHelperText>
       )}
 
-      <BaseButton
-        type="submit"
-        style={{ gap: 8, paddingTop: 10, paddingBottom: 11 }}
-      >
-        <AddIconContainer>
-          <AddIcon style={{ width: 16, height: 16 }} />
-        </AddIconContainer>
+      <ButtonWithIcon style={{ marginTop: 40 }} type="submit">
         {buttonText}
-      </BaseButton>
+      </ButtonWithIcon>
     </form>
   );
 };

@@ -4,7 +4,7 @@ import { convertAsyncError, createAppAsyncThunk } from "utils";
 import type { IBoard } from "types";
 
 export const getBoards = createAppAsyncThunk<IBoard[], void>(
-  "board/getBoards",
+  "boards/getBoards",
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await api.get("boards");
@@ -16,7 +16,7 @@ export const getBoards = createAppAsyncThunk<IBoard[], void>(
 );
 
 export const createBoard = createAppAsyncThunk<IBoard, Omit<IBoard, "_id">>(
-  "board/createBoard",
+  "boards/createBoard",
   async (data, { rejectWithValue }) => {
     try {
       const { data: newData } = await api.post("boards", data);
@@ -28,7 +28,7 @@ export const createBoard = createAppAsyncThunk<IBoard, Omit<IBoard, "_id">>(
 );
 
 export const editBoard = createAppAsyncThunk<IBoard, IBoard>(
-  "board/editBoard",
+  "boards/editBoard",
   async (data, { rejectWithValue }) => {
     try {
       const { _id, ...otherData } = data;
@@ -41,7 +41,7 @@ export const editBoard = createAppAsyncThunk<IBoard, IBoard>(
 );
 
 export const deleteBoard = createAppAsyncThunk<string, string>(
-  "board/deleteBoard",
+  "boards/deleteBoard",
   async (_id, { rejectWithValue }) => {
     try {
       await api.delete(`boards/${_id}`);
