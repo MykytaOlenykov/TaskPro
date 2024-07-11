@@ -1,10 +1,9 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+
+import { ColumnsList } from "components/ColumnsList";
 
 const ScreensPage: React.FC = () => {
-  const { boardId } = useParams();
-
-  return <p>{boardId}</p>;
+  return <ColumnsList />;
 };
 
 export default ScreensPage;

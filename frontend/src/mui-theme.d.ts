@@ -14,7 +14,6 @@ declare module "@mui/material/styles" {
     logOut?: string;
     hoverLogOut?: string;
     primaryAdd?: string;
-    secondaryAdd?: string;
   }
 
   interface Palette {
@@ -44,6 +43,8 @@ declare module "@mui/material/styles" {
     primaryInput?: string;
     primaryButton?: string;
     primaryButtonHover?: string;
+    secondaryButton?: string;
+    secondaryButtonHover?: string;
     primarySideBar?: string;
     secondarySideBar?: string;
     sideBarButton?: string;

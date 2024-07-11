@@ -41,7 +41,7 @@ const Container = styled("div")(({ theme }) => ({
   top: 14,
   left: 0,
   display: "flex",
-  alignItems: "center",
+  alignItems: "start",
   justifyContent: "space-between",
   padding: "0 20px",
   width: "100%",
