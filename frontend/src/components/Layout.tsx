@@ -6,13 +6,14 @@ import { Header } from "./Header";
 import { SideBar } from "./SideBar";
 import { Filter } from "./Filter";
 import { BoardTitle } from "./BoardTitle";
+import { BoardBackground } from "./BoardBackground";
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({
   position: "relative",
   flexGrow: 1,
-  padding: "74px 20px 60px",
+  padding: "74px 0 24px",
   height: "calc(100vh - 60px)",
   overflow: "hidden",
   transition: theme.transitions.create("margin", {
@@ -28,32 +29,33 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
     marginLeft: 260,
   }),
   [theme.breakpoints.up("md")]: {
-    padding: "80px 32px 96px",
+    padding: "80px 0 32px",
     height: "calc(100vh - 68px)",
   },
   [theme.breakpoints.up("lg")]: {
-    padding: "48px 24px 36px",
+    padding: "48px 0 8px",
   },
 }));
 
 const Container = styled("div")(({ theme }) => ({
   position: "absolute",
-  top: 14,
+  top: 0,
   left: 0,
   display: "flex",
   alignItems: "start",
   justifyContent: "space-between",
-  padding: "0 20px",
+  padding: "14px 20px",
   width: "100%",
+  backgroundColor: theme.palette.background.mainHeader,
   [theme.breakpoints.up("md")]: {
-    top: 20,
+    top: 0,
     left: 0,
-    padding: "0 32px",
+    padding: "20px 32px",
   },
   [theme.breakpoints.up("lg")]: {
-    top: 10,
+    top: 0,
     left: 0,
-    padding: "0 24px",
+    padding: "10px 24px",
   },
 }));
 
@@ -86,6 +88,7 @@ export const Layout: React.FC = () => {
       <Header onOpenSideBar={handleOpenSideBar} />
       <SideBar open={open} onCloseSideBar={handleCloseSideBar} />
       <Main open={open && isDesktop}>
+        <BoardBackground />
         <Container>
           <BoardTitle />
           <Filter />

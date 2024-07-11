@@ -58,5 +58,6 @@ declare module "@mui/material/styles" {
     secondaryAdd?: string;
     primarySelectedBoard?: string;
     secondarySelectedBoard?: string;
+    mainHeader?: string;
   }
 }

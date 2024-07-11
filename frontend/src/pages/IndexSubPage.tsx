@@ -11,8 +11,9 @@ const Container = styled(Box)(() => ({
   top: "50%",
   left: "50%",
   width: "100%",
-  maxWidth: 486,
+  maxWidth: 486 + 40,
   transform: "translate(-50%, -100%)",
+  padding: "0 20px",
 }));
 
 const Text = styled(Typography)(({ theme }) => ({

@@ -14,16 +14,32 @@ import type { IColumn } from "types";
 
 const StyledList = styled(List)(({ theme }) => ({
   display: "flex",
+  alignItems: "start",
   gap: 34,
   margin: 0,
-  padding: 0,
+  padding: "0 20px 36px",
+  height: "100%",
   overflowX: "auto",
   scrollbarColor: `${theme.palette.background.default} ${theme.palette.background.primarySideBar}`,
   scrollbarWidth: "thin",
+  [theme.breakpoints.up("md")]: {
+    padding: "0 32px 64px",
+  },
+  [theme.breakpoints.up("lg")]: {
+    padding: "0 24px 28px",
+  },
 }));
 
-const StyledListItem = styled(ListItem)(() => ({
-  maxWidth: 335,
+const StyledListItem = styled(ListItem)(({ theme }) => ({
+  flexShrink: 0,
+  flexGrow: 1,
+  maxWidth: "calc(100vw - 40px)",
+  [theme.breakpoints.up("sm")]: {
+    maxWidth: 335,
+  },
+  [theme.breakpoints.up("md")]: {
+    maxWidth: 334,
+  },
 }));
 
 const Button = styled(BaseButton)(({ theme }) => ({
