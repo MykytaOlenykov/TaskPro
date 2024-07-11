@@ -109,7 +109,7 @@ const lightTheme = createTheme({
       sideBarLine: "rgba(22, 22, 22, 0.1)",
       primarySelectedBoard: "#F6F6F7",
       secondarySelectedBoard: "#BEDBB0",
-      mainHeader: "rgba(255, 255, 255, 0.5)",
+      mainHeader: "rgba(255, 255, 255, 0.4)",
     },
     border: {
       input: "#BEDBB0",
@@ -221,7 +221,7 @@ const violetTheme = createTheme({
       secondaryAdd: "#5255BC",
       primarySelectedBoard: "rgba(255, 255, 255, 0.2)",
       secondarySelectedBoard: "#FFFFFF",
-      mainHeader: "rgba(255, 255, 255, 0.5)",
+      mainHeader: "rgba(255, 255, 255, 0.4)",
     },
     border: {
       input: "#5255BC",

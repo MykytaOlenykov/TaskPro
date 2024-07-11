@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import { List, ListItem, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-import { useAppDispatch } from "hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { createColumn } from "store/columns/operations";
+import { selectColumns } from "store/columns/selectors";
 
 import { BaseButton } from "ui/BaseButton";
 import { Modal } from "ui/Modal";
 import { ColumnForm } from "./ColumnForm";
+import { ColumnCard } from "./ColumnCard";
 
 import type { IColumn } from "types";
 
@@ -63,8 +65,10 @@ const AddIconContainer = styled("span")(({ theme }) => ({
 }));
 
 export const ColumnsList: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { boardId } = useParams();
+
+  const dispatch = useAppDispatch();
+  const columns = useAppSelector(selectColumns);
 
   const [open, setOpen] = useState(false);
 
@@ -88,6 +92,11 @@ export const ColumnsList: React.FC = () => {
   return (
     <>
       <StyledList>
+        {columns.map(({ _id, name }) => (
+          <StyledListItem key={_id} disablePadding>
+            <ColumnCard columnId={_id} columnName={name} />
+          </StyledListItem>
+        ))}
         <StyledListItem disablePadding>
           <Button onClick={handleOpen}>
             <AddIconContainer>

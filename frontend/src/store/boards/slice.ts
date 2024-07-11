@@ -7,6 +7,7 @@ import {
   getBoard,
   getBoards,
 } from "./operations";
+import { logOut } from "store/auth/operations";
 
 import type { IBoard } from "types";
 
@@ -52,6 +53,10 @@ const boardsSlice = createSlice({
       })
       .addCase(deleteBoard.fulfilled, (state, action) => {
         state.items = state.items.filter(({ _id }) => _id !== action.payload);
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.items = [];
+        state.loading = false;
       });
   },
 });

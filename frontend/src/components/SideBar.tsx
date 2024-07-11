@@ -81,7 +81,7 @@ export const SideBar: React.FC<IProps> = ({ open, onCloseSideBar }) => {
             <ChevronLeftIcon />
           </CloseButton>
         </StyledBox>
-        <BoardsMenu />
+        <BoardsMenu onCloseSideBar={onCloseSideBar} />
         <StyledBox style={{ marginTop: "auto", marginBottom: "24px" }}>
           <Help />
         </StyledBox>

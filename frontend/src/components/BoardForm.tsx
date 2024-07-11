@@ -137,7 +137,7 @@ export const BoardForm: React.FC<IProps> = ({
   } = useForm<IForm>({
     defaultValues: {
       name: boardName,
-      icon_id: boardIconId,
+      icon_id: boardIconId ?? "",
       background_id: boardBackgroundId ?? "",
     },
     resolver: yupResolver(boardSchema),

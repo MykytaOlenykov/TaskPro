@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { deleteBoard, getBoard } from "store/boards/operations";
+import { logOut } from "store/auth/operations";
 
 import type { ITask } from "types";
 
@@ -21,7 +22,13 @@ const tasksSlice = createSlice({
       .addCase(getBoard.fulfilled, (state, action) => {
         state.items = action.payload.tasks;
       })
+      .addCase(getBoard.pending, (state) => {
+        state.items = [];
+      })
       .addCase(deleteBoard.fulfilled, (state) => {
+        state.items = [];
+      })
+      .addCase(logOut.fulfilled, (state) => {
         state.items = [];
       });
   },

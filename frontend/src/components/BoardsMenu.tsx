@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Box, Typography, styled } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { isFulfilled } from "@reduxjs/toolkit";
+import {
+  Box,
+  Typography,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 import { useAppDispatch } from "hooks";
@@ -68,8 +76,16 @@ const Button = styled(BaseButton)(({ theme }) => ({
   backgroundColor: theme.palette.background.sideBarButton,
 }));
 
-export const BoardsMenu: React.FC = () => {
+interface IProps {
+  onCloseSideBar: () => void;
+}
+
+export const BoardsMenu: React.FC<IProps> = ({ onCloseSideBar }) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -83,9 +99,13 @@ export const BoardsMenu: React.FC = () => {
     setOpen(false);
   };
 
-  const handleCreateBoard = (data: Omit<IBoard, "_id">) => {
-    dispatch(createBoard(data));
+  const handleCreateBoard = async (data: Omit<IBoard, "_id">) => {
     setOpen(false);
+    const result = await dispatch(createBoard(data));
+    if (isFulfilled(result)) {
+      navigate(`/home/${result.payload._id}`);
+      !isDesktop && onCloseSideBar();
+    }
   };
 
   return (
@@ -109,7 +129,7 @@ export const BoardsMenu: React.FC = () => {
           />
         </Modal>
       </Container>
-      <BoardsList />
+      <BoardsList onCloseSideBar={onCloseSideBar} />
     </>
   );
 };

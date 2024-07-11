@@ -17,7 +17,11 @@ const StyledList = styled(List)(({ theme }) => ({
   scrollbarWidth: "thin",
 }));
 
-export const BoardsList: React.FC = () => {
+interface IProps {
+  onCloseSideBar: () => void;
+}
+
+export const BoardsList: React.FC<IProps> = ({ onCloseSideBar }) => {
   const { boardId } = useParams();
 
   const theme = useTheme();
@@ -68,6 +72,7 @@ export const BoardsList: React.FC = () => {
                 iconId={icon_id}
                 backgroundId={background_id}
                 selected={selected}
+                onCloseSideBar={onCloseSideBar}
               />
             </ListItem>
           );

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { styled, useTheme, useMediaQuery, LinearProgress } from "@mui/material";
 
@@ -80,9 +80,9 @@ export const Layout: React.FC = () => {
     setOpen(true);
   };
 
-  const handleCloseSideBar = () => {
+  const handleCloseSideBar = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
 
   useEffect(() => {
     if (isDesktop) {

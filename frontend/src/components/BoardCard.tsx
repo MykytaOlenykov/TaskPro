@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isFulfilled } from "@reduxjs/toolkit";
-import { IconButton, styled, Typography, ListItemButton } from "@mui/material";
+import {
+  IconButton,
+  styled,
+  Typography,
+  ListItemButton,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -86,6 +93,7 @@ interface IProps {
   selected: boolean;
   iconId: string;
   backgroundId: string | null;
+  onCloseSideBar: () => void;
 }
 
 export const BoardCard: React.FC<IProps> = ({
@@ -94,15 +102,24 @@ export const BoardCard: React.FC<IProps> = ({
   iconId,
   backgroundId,
   selected,
+  onCloseSideBar,
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
 
   const icons = useAppSelector(selectIcons);
   const iconUrl = icons.find(({ _id }) => _id === iconId)?.url;
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+
+  const handleChangeBoard = () => {
+    if (selected) return;
+    navigate(`/home/${_id}`);
+    !isDesktop && onCloseSideBar();
+  };
 
   const handleOpenEdit = () => {
     setOpenEdit(true);
@@ -118,6 +135,7 @@ export const BoardCard: React.FC<IProps> = ({
   const handleEditBoard = (data: Omit<IBoard, "_id">) => {
     dispatch(editBoard({ ...data, _id }));
     setOpenEdit(false);
+    !isDesktop && onCloseSideBar();
   };
 
   const handleOpenDelete = () => {
@@ -133,15 +151,13 @@ export const BoardCard: React.FC<IProps> = ({
     if (isFulfilled(result)) {
       setOpenDelete(false);
       navigate("/home");
+      !isDesktop && onCloseSideBar();
     }
   };
 
   return (
     <>
-      <StyledListItemButton
-        selected={selected}
-        onClick={() => !selected && navigate(`/home/${_id}`)}
-      >
+      <StyledListItemButton selected={selected} onClick={handleChangeBoard}>
         {iconUrl && <Icon url={iconUrl} selected={selected} />}
         <BoardName selected={selected} variant="body2" noWrap>
           {name}
