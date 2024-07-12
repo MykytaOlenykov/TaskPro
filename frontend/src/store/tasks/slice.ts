@@ -4,14 +4,17 @@ import { deleteBoard, getBoard } from "store/boards/operations";
 import { deleteColumn } from "store/columns/operations";
 import { logOut } from "store/auth/operations";
 
-import type { ITask } from "types";
+import type { ITask, ITaskPriority } from "types";
+import { getTaskPriorities } from "./operations";
 
 export interface IInitialState {
   items: ITask[];
+  priorities: ITaskPriority[];
 }
 
 const initialState: IInitialState = {
   items: [],
+  priorities: [],
 };
 
 const tasksSlice = createSlice({
@@ -20,6 +23,16 @@ const tasksSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getTaskPriorities.fulfilled, (state, action) => {
+        state.priorities = [
+          ...action.payload,
+          {
+            _id: "",
+            name: "Without priority",
+            color: "rgba(255, 255, 255, 0.3);",
+          },
+        ];
+      })
       .addCase(getBoard.fulfilled, (state, action) => {
         state.items = action.payload.tasks;
       })
@@ -36,6 +49,7 @@ const tasksSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state) => {
         state.items = [];
+        state.priorities = [];
       });
   },
 });

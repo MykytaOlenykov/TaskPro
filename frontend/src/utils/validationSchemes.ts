@@ -1,5 +1,7 @@
 import * as yup from "yup";
 
+// Auth
+
 const name = yup
   .string()
   .trim()
@@ -38,6 +40,8 @@ const logInSchema = yup.object({
     .required("Password is required."),
 });
 
+// Board
+
 const titleSchema = yup
   .string()
   .trim()
@@ -50,8 +54,51 @@ const boardSchema = yup.object({
   background_id: yup.string().nullable(),
 });
 
+// Column
+
 const columnSchema = yup.object({
   name: titleSchema,
 });
 
-export { registerSchema, logInSchema, boardSchema, columnSchema };
+// Task
+
+const taskSchema = yup.object({
+  name: titleSchema,
+  comment: yup
+    .string()
+    .trim()
+    .max(1000, "Comment must be at most 1000 characters long."),
+  deadline: yup
+    .date()
+    .nullable()
+    .test("is-valid-date", "", (value) => {
+      if (!value) return false;
+      if (Number.isNaN(value.getTime())) return false;
+
+      const currentDatetime = new Date();
+      const currentUTCDate = new Date(
+        Date.UTC(
+          currentDatetime.getUTCFullYear(),
+          currentDatetime.getUTCMonth(),
+          currentDatetime.getUTCDate()
+        )
+      );
+
+      const valueUTC = new Date(
+        Date.UTC(
+          value.getUTCFullYear(),
+          value.getUTCMonth(),
+          value.getUTCDate()
+        )
+      );
+
+      console.log(currentUTCDate, new Date());
+      console.log(valueUTC, value);
+
+      return valueUTC < currentUTCDate;
+    })
+    .required("Deadline is required."),
+  priority_id: yup.string(),
+});
+
+export { registerSchema, logInSchema, boardSchema, columnSchema, taskSchema };

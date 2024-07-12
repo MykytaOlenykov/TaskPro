@@ -3,6 +3,6 @@ export interface ITask {
   name: string;
   comment: string | null;
   deadline: string;
-  priority_id: string;
+  priority_id: string | null;
   column_id: string;
 }

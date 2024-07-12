@@ -7,6 +7,7 @@ import {
   logInSchema,
   boardSchema,
   columnSchema,
+  taskSchema,
 } from "./validationSchemes";
 
 export {
@@ -16,6 +17,7 @@ export {
   logInSchema,
   boardSchema,
   columnSchema,
+  taskSchema,
   convertAsyncError,
   isAsyncError,
 };

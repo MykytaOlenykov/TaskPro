@@ -8,10 +8,11 @@ import { deleteColumn, editColumn } from "store/columns/operations";
 
 import { DeleteModal } from "./DeleteModal";
 import { ColumnForm } from "./ColumnForm";
+import { TaskForm } from "./TaskForm";
 import { Modal } from "ui/Modal";
 import { ButtonWithIcon } from "ui/ButtonWithIcon";
 
-import type { IColumn } from "types";
+import type { IColumn, ITask } from "types";
 
 interface IProps {
   columnId: string;
@@ -54,35 +55,51 @@ const Button = styled(IconButton)(({ theme }) => ({
 export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
   const dispatch = useAppDispatch();
 
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
+  const [openEditColumn, setOpenEditColumn] = useState(false);
+  const [openDeleteColumn, setOpenDeleteColumn] = useState(false);
+  const [openCreateTask, setOpenCreateTask] = useState(false);
 
-  const handleOpenEdit = () => {
-    setOpenEdit(true);
+  const handleOpenEditColumn = () => {
+    setOpenEditColumn(true);
   };
 
-  const handleCloseEdit = (
+  const handleCloseEditColumn = (
     reason: "backdropClick" | "escapeKeyDown" | "button"
   ) => {
     if (reason === "backdropClick") return;
-    setOpenEdit(false);
+    setOpenEditColumn(false);
   };
 
   const handleEditColumn = (data: Pick<IColumn, "name">) => {
     dispatch(editColumn({ ...data, _id: columnId }));
-    setOpenEdit(false);
+    setOpenEditColumn(false);
   };
 
-  const handleOpenDelete = () => {
-    setOpenDelete(true);
+  const handleOpenDeleteColumn = () => {
+    setOpenDeleteColumn(true);
   };
 
-  const handleCloseDelete = () => {
-    setOpenDelete(false);
+  const handleCloseDeleteColumn = () => {
+    setOpenDeleteColumn(false);
   };
 
   const handleDeleteColumn = () => {
     dispatch(deleteColumn(columnId));
+  };
+
+  const handleOpenCreateTask = () => {
+    setOpenCreateTask(true);
+  };
+
+  const handleCloseCreateTask = (
+    reason: "backdropClick" | "escapeKeyDown" | "button"
+  ) => {
+    if (reason === "backdropClick") return;
+    setOpenCreateTask(false);
+  };
+
+  const handleCreateTask = (data: Omit<ITask, "_id" | "column_id">) => {
+    console.log(data);
   };
 
   return (
@@ -97,15 +114,15 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
             gap: 8,
           }}
         >
-          <Button type="button" onClick={handleOpenEdit}>
+          <Button type="button" onClick={handleOpenEditColumn}>
             <EditOutlinedIcon sx={{ width: 20, height: 20 }} />
           </Button>
-          <Button type="button" onClick={handleOpenDelete}>
+          <Button type="button" onClick={handleOpenDeleteColumn}>
             <DeleteOutlineOutlinedIcon sx={{ width: 20, height: 20 }} />
           </Button>
         </div>
       </ColumnTitleContainer>
-      <Modal open={openEdit} onClose={handleCloseEdit}>
+      <Modal open={openEditColumn} onClose={handleCloseEditColumn}>
         <ColumnForm
           columnName={columnName}
           title="Edit column"
@@ -115,12 +132,21 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
       </Modal>
       <DeleteModal
         text={`Are you sure you want to delete the column "${columnName}"? Its tasks will also be deleted.`}
-        open={openDelete}
-        onClose={handleCloseDelete}
+        open={openDeleteColumn}
+        onClose={handleCloseDeleteColumn}
         onDelete={handleDeleteColumn}
       />
 
-      <ButtonWithIcon type="button">Add another card</ButtonWithIcon>
+      <ButtonWithIcon type="button" onClick={handleOpenCreateTask}>
+        Add another card
+      </ButtonWithIcon>
+      <Modal open={openCreateTask} onClose={handleCloseCreateTask}>
+        <TaskForm
+          buttonText="Add"
+          title="Add card"
+          onSubmitForm={handleCreateTask}
+        />
+      </Modal>
     </Container>
   );
 };

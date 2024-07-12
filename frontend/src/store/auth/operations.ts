@@ -1,6 +1,7 @@
 import { api } from "services";
 import { convertAsyncError, createAppAsyncThunk, token } from "utils";
 import { getBackgrounds, getIcons } from "store/static/operations";
+import { getTaskPriorities } from "store/tasks/operations";
 
 import type { IThemeMode } from "theme";
 import type { IUser } from "types";
@@ -39,7 +40,11 @@ export const logIn = createAppAsyncThunk<
     }>("users/login", credentials);
 
     token.save(data.accessToken);
-    await Promise.all([dispatch(getIcons()), dispatch(getBackgrounds())]);
+    await Promise.all([
+      dispatch(getIcons()),
+      dispatch(getBackgrounds()),
+      dispatch(getTaskPriorities()),
+    ]);
 
     return data.user;
   } catch (error) {
@@ -64,7 +69,11 @@ export const getCurrentUser = createAppAsyncThunk<NonNullable<IUser>, void>(
   async (_, { dispatch, rejectWithValue }) => {
     try {
       const { data: user } = await api.get<NonNullable<IUser>>("users/current");
-      await Promise.all([dispatch(getIcons()), dispatch(getBackgrounds())]);
+      await Promise.all([
+        dispatch(getIcons()),
+        dispatch(getBackgrounds()),
+        dispatch(getTaskPriorities()),
+      ]);
       return user;
     } catch (error) {
       return rejectWithValue(null);

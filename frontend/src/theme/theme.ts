@@ -88,6 +88,7 @@ const lightTheme = createTheme({
       popup: "#161616",
       light: "rgba(22, 22, 22, 0.5)",
       logo: "#161616",
+      label: " rgba(22, 22, 22, 0.5)",
     },
     background: {
       default: "#F6F6F7",
@@ -147,6 +148,7 @@ const darkTheme = createTheme({
       popup: "rgba(255, 255, 255, 0.5)",
       light: "rgba(255, 255, 255, 0.5)",
       logo: "#FFFFFF",
+      label: " rgba(255, 255, 255, 0.5)",
     },
     background: {
       default: "#1F1F1F",
@@ -207,6 +209,7 @@ const violetTheme = createTheme({
       popup: "#161616",
       light: "rgba(255, 255, 255, 0.5)",
       logo: "#FFFFFF",
+      label: " rgba(22, 22, 22, 0.5)",
     },
     background: {
       default: "#ECEDFD",

@@ -37,6 +37,7 @@ declare module "@mui/material/styles" {
     popup?: string;
     light?: string;
     logo?: string;
+    label?: string;
   }
 
   interface TypeBackground {
