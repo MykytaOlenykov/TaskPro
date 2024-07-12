@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { createColumn } from "./operations";
+import { createColumn, deleteColumn } from "./operations";
 import { deleteBoard, getBoard } from "store/boards/operations";
 import { logOut } from "store/auth/operations";
 
@@ -22,6 +22,9 @@ const columnsSlice = createSlice({
     builder
       .addCase(createColumn.fulfilled, (state, action) => {
         state.items.push(action.payload);
+      })
+      .addCase(deleteColumn.fulfilled, (state, action) => {
+        state.items = state.items.filter(({ _id }) => _id !== action.payload);
       })
       .addCase(getBoard.fulfilled, (state, action) => {
         state.items = action.payload.columns;

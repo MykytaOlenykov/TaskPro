@@ -14,3 +14,15 @@ export const createColumn = createAppAsyncThunk<IColumn, Omit<IColumn, "_id">>(
     }
   }
 );
+
+export const deleteColumn = createAppAsyncThunk<string, string>(
+  "columns/deleteColumn",
+  async (_id, { rejectWithValue }) => {
+    try {
+      await api.delete(`columns/${_id}`);
+      return _id;
+    } catch (error) {
+      return rejectWithValue(convertAsyncError(error));
+    }
+  }
+);

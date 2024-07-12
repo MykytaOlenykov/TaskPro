@@ -3,6 +3,11 @@ import { IconButton, styled, Typography } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
+import { useAppDispatch } from "hooks";
+import { deleteColumn } from "store/columns/operations";
+
+import { DeleteModal } from "./DeleteModal";
+
 interface IProps {
   columnId: string;
   columnName: string;
@@ -42,6 +47,8 @@ const Button = styled(IconButton)(({ theme }) => ({
 }));
 
 export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
+  const dispatch = useAppDispatch();
+
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 
@@ -66,7 +73,9 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
     setOpenDelete(false);
   };
 
-  const handleDeleteColumn = async () => {};
+  const handleDeleteColumn = async () => {
+    dispatch(deleteColumn(columnId));
+  };
 
   return (
     <Container>
@@ -88,6 +97,12 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
           </Button>
         </div>
       </ColumnTitleContainer>
+      <DeleteModal
+        text={`Are you sure you want to delete the column "${columnName}"? Its tasks will also be deleted.`}
+        open={openDelete}
+        onClose={handleCloseDelete}
+        onDelete={handleDeleteColumn}
+      />
     </Container>
   );
 };

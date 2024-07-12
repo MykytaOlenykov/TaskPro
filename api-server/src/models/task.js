@@ -8,7 +8,7 @@ const taskPrioritySchema = new Schema(
   {
     name: {
       type: String,
-      maxlength: 255,
+      maxlength: 100,
       required: true,
     },
   },
@@ -25,7 +25,7 @@ const taskSchema = new Schema(
   {
     name: {
       type: String,
-      maxlength: 255,
+      maxlength: 100,
       required: true,
     },
     comment: {
@@ -75,7 +75,7 @@ taskSchema.post("save", handleMongooseError);
 
 const Task = model("task", taskSchema);
 
-const nameSchema = Joi.string().trim().max(255).required();
+const nameSchema = Joi.string().trim().max(100).required();
 const commentSchema = Joi.string().trim().max(1000);
 const deadlineSchema = Joi.string()
   .pattern(deadlineReg)
