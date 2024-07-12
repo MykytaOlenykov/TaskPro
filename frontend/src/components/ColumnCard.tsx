@@ -9,6 +9,7 @@ import { deleteColumn, editColumn } from "store/columns/operations";
 import { DeleteModal } from "./DeleteModal";
 import { ColumnForm } from "./ColumnForm";
 import { Modal } from "ui/Modal";
+import { ButtonWithIcon } from "ui/ButtonWithIcon";
 
 import type { IColumn } from "types";
 
@@ -118,6 +119,8 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
         onClose={handleCloseDelete}
         onDelete={handleDeleteColumn}
       />
+
+      <ButtonWithIcon>Add another card</ButtonWithIcon>
     </Container>
   );
 };
