@@ -15,6 +15,19 @@ export const createColumn = createAppAsyncThunk<IColumn, Omit<IColumn, "_id">>(
   }
 );
 
+export const editColumn = createAppAsyncThunk<
+  IColumn,
+  Omit<IColumn, "board_id">
+>("columns/editColumn", async (data, { rejectWithValue }) => {
+  try {
+    const { _id, ...otherData } = data;
+    const { data: newData } = await api.put(`columns/${_id}`, otherData);
+    return newData;
+  } catch (error) {
+    return rejectWithValue(convertAsyncError(error));
+  }
+});
+
 export const deleteColumn = createAppAsyncThunk<string, string>(
   "columns/deleteColumn",
   async (_id, { rejectWithValue }) => {

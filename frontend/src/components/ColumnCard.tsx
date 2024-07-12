@@ -4,9 +4,13 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 import { useAppDispatch } from "hooks";
-import { deleteColumn } from "store/columns/operations";
+import { deleteColumn, editColumn } from "store/columns/operations";
 
 import { DeleteModal } from "./DeleteModal";
+import { ColumnForm } from "./ColumnForm";
+import { Modal } from "ui/Modal";
+
+import type { IColumn } from "types";
 
 interface IProps {
   columnId: string;
@@ -63,7 +67,10 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
     setOpenEdit(false);
   };
 
-  const handleEditColumn = () => {};
+  const handleEditColumn = (data: Pick<IColumn, "name">) => {
+    dispatch(editColumn({ ...data, _id: columnId }));
+    setOpenEdit(false);
+  };
 
   const handleOpenDelete = () => {
     setOpenDelete(true);
@@ -73,7 +80,7 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
     setOpenDelete(false);
   };
 
-  const handleDeleteColumn = async () => {
+  const handleDeleteColumn = () => {
     dispatch(deleteColumn(columnId));
   };
 
@@ -97,6 +104,14 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
           </Button>
         </div>
       </ColumnTitleContainer>
+      <Modal open={openEdit} onClose={handleCloseEdit}>
+        <ColumnForm
+          columnName={columnName}
+          title="Edit column"
+          buttonText="Edit"
+          onSubmitForm={handleEditColumn}
+        />
+      </Modal>
       <DeleteModal
         text={`Are you sure you want to delete the column "${columnName}"? Its tasks will also be deleted.`}
         open={openDelete}

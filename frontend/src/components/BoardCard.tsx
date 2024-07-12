@@ -149,7 +149,6 @@ export const BoardCard: React.FC<IProps> = ({
   const handleDeleteBoard = async () => {
     const result = await dispatch(deleteBoard(_id));
     if (isFulfilled(result)) {
-      setOpenDelete(false);
       navigate("/home");
       !isDesktop && onCloseSideBar();
     }
