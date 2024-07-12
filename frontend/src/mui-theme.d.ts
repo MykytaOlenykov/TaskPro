@@ -14,6 +14,7 @@ declare module "@mui/material/styles" {
     logOut?: string;
     hoverLogOut?: string;
     primaryAdd?: string;
+    task?: string;
   }
 
   interface Palette {
@@ -61,5 +62,6 @@ declare module "@mui/material/styles" {
     mainHeader?: string;
     scrollBar?: string;
     scrollThumb?: string;
+    task?: string;
   }
 }

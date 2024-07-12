@@ -112,6 +112,7 @@ const lightTheme = createTheme({
       mainHeader: "rgba(255, 255, 255, 0.4)",
       scrollThumb: "#E8E8E8",
       scrollBar: "#FFFFFF",
+      task: "#FFFFFF",
     },
     border: {
       input: "#BEDBB0",
@@ -124,6 +125,7 @@ const lightTheme = createTheme({
       logOut: "#BEDBB0",
       hoverLogOut: "#9DC888",
       primaryAdd: "#FFFFFF",
+      task: "rgba(22, 22, 22, 0.5)",
     },
   },
 });
@@ -169,6 +171,7 @@ const darkTheme = createTheme({
       mainHeader: "rgba(21, 21, 21, 0.5)",
       scrollThumb: "rgba(255, 255, 255, 0.1)",
       scrollBar: "#161616",
+      task: "#121212",
     },
     border: {
       input: "#BEDBB0",
@@ -182,6 +185,7 @@ const darkTheme = createTheme({
       logOut: "#BEDBB0",
       hoverLogOut: "#9DC888",
       primaryAdd: "#FFFFFF",
+      task: "rgba(255, 255, 255, 0.5)",
     },
   },
 });
@@ -228,6 +232,7 @@ const violetTheme = createTheme({
       mainHeader: "rgba(255, 255, 255, 0.4)",
       scrollBar: "#FFFFFF",
       scrollThumb: "#B8BCFD",
+      task: "#FFFFFF",
     },
     border: {
       input: "#5255BC",
@@ -240,6 +245,7 @@ const violetTheme = createTheme({
       logOut: "#FFFFFF",
       hoverLogOut: "#B8BCFD",
       primaryAdd: "#161616",
+      task: "rgba(22, 22, 22, 0.5)",
     },
   },
 });

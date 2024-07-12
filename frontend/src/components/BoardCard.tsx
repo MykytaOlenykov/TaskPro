@@ -169,9 +169,10 @@ export const BoardCard: React.FC<IProps> = ({
               display: "flex",
               alignItems: "center",
               paddingLeft: "16px",
+              gap: 8,
             }}
           >
-            <Button style={{ marginRight: 4 }} onClick={handleOpenEdit}>
+            <Button onClick={handleOpenEdit}>
               <EditOutlinedIcon sx={{ width: 20, height: 20 }} />
             </Button>
             <Button onClick={handleOpenDelete}>
