@@ -110,6 +110,8 @@ const lightTheme = createTheme({
       primarySelectedBoard: "#F6F6F7",
       secondarySelectedBoard: "#BEDBB0",
       mainHeader: "rgba(255, 255, 255, 0.4)",
+      scrollThumb: "#E8E8E8",
+      scrollBar: "#FFFFFF",
     },
     border: {
       input: "#BEDBB0",
@@ -165,6 +167,8 @@ const darkTheme = createTheme({
       primarySelectedBoard: "#1F1F1F",
       secondarySelectedBoard: "#BEDBB0",
       mainHeader: "rgba(21, 21, 21, 0.5)",
+      scrollThumb: "rgba(255, 255, 255, 0.1)",
+      scrollBar: "#161616",
     },
     border: {
       input: "#BEDBB0",
@@ -222,6 +226,8 @@ const violetTheme = createTheme({
       primarySelectedBoard: "rgba(255, 255, 255, 0.2)",
       secondarySelectedBoard: "#FFFFFF",
       mainHeader: "rgba(255, 255, 255, 0.4)",
+      scrollBar: "#FFFFFF",
+      scrollThumb: "#B8BCFD",
     },
     border: {
       input: "#5255BC",

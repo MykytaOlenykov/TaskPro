@@ -22,8 +22,7 @@ const StyledList = styled(List)(({ theme }) => ({
   padding: "0 20px 36px",
   height: "100%",
   overflowX: "auto",
-  scrollbarColor: `${theme.palette.background.default} ${theme.palette.background.primarySideBar}`,
-  scrollbarWidth: "thin",
+  scrollbarColor: `${theme.palette.background.scrollThumb} ${theme.palette.background.scrollBar}`,
   [theme.breakpoints.up("md")]: {
     padding: "0 32px 64px",
   },

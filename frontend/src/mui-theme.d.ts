@@ -59,5 +59,7 @@ declare module "@mui/material/styles" {
     primarySelectedBoard?: string;
     secondarySelectedBoard?: string;
     mainHeader?: string;
+    scrollBar?: string;
+    scrollThumb?: string;
   }
 }
