@@ -77,7 +77,7 @@ export const SideBar: React.FC<IProps> = ({ open, onCloseSideBar }) => {
           }}
         >
           <AppLogo />
-          <CloseButton onClick={onCloseSideBar}>
+          <CloseButton type="button" onClick={onCloseSideBar}>
             <ChevronLeftIcon />
           </CloseButton>
         </StyledBox>

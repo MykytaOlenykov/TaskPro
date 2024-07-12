@@ -26,7 +26,7 @@ const ThemeMenu = styled(Menu)(({ theme }) => ({
   marginTop: 48,
   ".MuiPaper-root": {
     backgroundImage: "none",
-    backgroundColor: theme.palette.background.modal,
+    backgroundColor: theme.palette.background.primaryBox,
     border: `1px solid ${theme.palette.border?.popup}`,
     borderRadius: 8,
     boxShadow: "0 4px 16px 0 rgba(17, 17, 17, 0.1)",
@@ -87,7 +87,7 @@ export const ThemeToggle: React.FC = () => {
 
   return (
     <>
-      <ButtonBase sx={{ borderRadius: "8px" }}>
+      <ButtonBase type="button" sx={{ borderRadius: "8px" }}>
         <Text onClick={handleOpenThemeMenu} variant="body2">
           Theme
           <ExpandMoreRoundedIcon

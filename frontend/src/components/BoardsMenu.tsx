@@ -116,7 +116,11 @@ export const BoardsMenu: React.FC<IProps> = ({ onCloseSideBar }) => {
           <Text variant="body1">
             Create a<br /> new board
           </Text>
-          <Button aria-label="create a new board" onClick={handleOpen}>
+          <Button
+            type="button"
+            aria-label="create a new board"
+            onClick={handleOpen}
+          >
             <AddIcon style={{ width: "20px", height: "20px" }} />
           </Button>
         </BtnContainer>

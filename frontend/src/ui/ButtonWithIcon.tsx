@@ -22,7 +22,6 @@ export const ButtonWithIcon: React.FC<ButtonProps> = ({
 }) => {
   return (
     <BaseButton
-      type="submit"
       style={{ gap: 8, paddingTop: 10, paddingBottom: 11, ...style }}
       {...otherProps}
     >

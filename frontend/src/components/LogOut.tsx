@@ -34,7 +34,7 @@ export const LogOut: React.FC = () => {
   const handleLogOut = () => dispatch(logOut());
 
   return (
-    <Button onClick={handleLogOut}>
+    <Button type="button" onClick={handleLogOut}>
       <Icon />
       Log out
     </Button>

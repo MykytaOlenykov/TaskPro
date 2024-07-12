@@ -97,7 +97,7 @@ export const ColumnsList: React.FC = () => {
           </StyledListItem>
         ))}
         <StyledListItem disablePadding>
-          <Button onClick={handleOpen}>
+          <Button type="button" onClick={handleOpen}>
             <AddIconContainer>
               <AddIcon style={{ width: 16, height: 16 }} />
             </AddIconContainer>

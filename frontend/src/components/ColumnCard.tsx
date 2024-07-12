@@ -97,10 +97,10 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
             gap: 8,
           }}
         >
-          <Button onClick={handleOpenEdit}>
+          <Button type="button" onClick={handleOpenEdit}>
             <EditOutlinedIcon sx={{ width: 20, height: 20 }} />
           </Button>
-          <Button onClick={handleOpenDelete}>
+          <Button type="button" onClick={handleOpenDelete}>
             <DeleteOutlineOutlinedIcon sx={{ width: 20, height: 20 }} />
           </Button>
         </div>
@@ -120,7 +120,7 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
         onDelete={handleDeleteColumn}
       />
 
-      <ButtonWithIcon>Add another card</ButtonWithIcon>
+      <ButtonWithIcon type="button">Add another card</ButtonWithIcon>
     </Container>
   );
 };

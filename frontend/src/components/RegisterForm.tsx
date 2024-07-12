@@ -89,6 +89,7 @@ export const RegisterForm: React.FC = () => {
         endAdornment={
           <InputAdornment position="end">
             <IconButton
+              type="button"
               style={{ marginRight: 0 }}
               aria-label="toggle password visibility"
               onClick={handleClickShowPassword}

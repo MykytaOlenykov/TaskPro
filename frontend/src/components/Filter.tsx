@@ -23,7 +23,7 @@ const Icon = styled(FilterAltOutlinedIcon)(() => ({
 
 export const Filter: React.FC = () => {
   return (
-    <Button>
+    <Button type="button">
       <Icon />
       Filters
     </Button>

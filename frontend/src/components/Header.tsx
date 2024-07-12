@@ -43,6 +43,7 @@ export const Header: React.FC<IProps> = ({ onOpenSideBar }) => {
       <StyledAppBar>
         <StyledToolbar>
           <IconButton
+            type="button"
             size="large"
             edge="start"
             color="inherit"

@@ -29,7 +29,9 @@ export const DeleteModal: React.FC<IProps> = ({
         >
           {text}
         </Typography>
-        <BaseButton onClick={onDelete}>Yes</BaseButton>
+        <BaseButton type="button" onClick={onDelete}>
+          Yes
+        </BaseButton>
       </>
     </Modal>
   );

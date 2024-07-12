@@ -53,7 +53,7 @@ export const Modal: React.FC<IProps> = ({
   return (
     <StyledModal onClose={(_, reason) => onClose(reason)} {...otherProps}>
       <Container>
-        <Button onClick={() => onClose("button")}>
+        <Button type="button" onClick={() => onClose("button")}>
           <CloseRoundedIcon style={{ width: 18, height: 18 }} />
         </Button>
         {children}

@@ -171,10 +171,10 @@ export const BoardCard: React.FC<IProps> = ({
               gap: 8,
             }}
           >
-            <Button onClick={handleOpenEdit}>
+            <Button type="button" onClick={handleOpenEdit}>
               <EditOutlinedIcon sx={{ width: 20, height: 20 }} />
             </Button>
-            <Button onClick={handleOpenDelete}>
+            <Button type="button" onClick={handleOpenDelete}>
               <DeleteOutlineOutlinedIcon sx={{ width: 20, height: 20 }} />
             </Button>
           </div>

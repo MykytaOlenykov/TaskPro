@@ -71,7 +71,7 @@ export const Help: React.FC = () => {
         check out our support resources or reach out to our customer support
         team.
       </Text>
-      <Button>
+      <Button type="button">
         <HelpIcon />
         Need help?
       </Button>
