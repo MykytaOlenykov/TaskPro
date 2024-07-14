@@ -24,14 +24,7 @@ const tasksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getTaskPriorities.fulfilled, (state, action) => {
-        state.priorities = [
-          ...action.payload,
-          {
-            _id: "",
-            name: "Without priority",
-            color: "rgba(255, 255, 255, 0.3);",
-          },
-        ];
+        state.priorities = action.payload;
       })
       .addCase(getBoard.fulfilled, (state, action) => {
         state.items = action.payload.tasks;

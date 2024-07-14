@@ -55,7 +55,7 @@ const RadioBtn = styled(Radio)(({ theme }) => ({
   },
 }));
 
-const CheckedRadioBtnIcon = styled(CheckedRadioBtnSVG)<{ color: string }>(
+const CheckedRadioBtnIcon = styled(CheckedRadioBtnSVG)<{ color?: string }>(
   ({ color }) => ({
     width: 16,
     height: 16,
@@ -63,7 +63,7 @@ const CheckedRadioBtnIcon = styled(CheckedRadioBtnSVG)<{ color: string }>(
   })
 );
 
-const RadioBtnIcon = styled("div")<{ bgColor: string }>(({ bgColor }) => ({
+const RadioBtnIcon = styled("div")<{ bgColor?: string }>(({ bgColor }) => ({
   width: 16,
   height: 16,
   backgroundColor: bgColor,
@@ -147,14 +147,35 @@ export const TaskForm: React.FC<IProps> = ({
         name="priority_id"
         render={({ field: { value, onChange } }) => (
           <StyledRadioGroup value={value} onChange={onChange}>
-            {taskPriorities.map(({ _id, color }) => (
-              <RadioBtn
-                key={_id}
-                value={_id}
-                icon={<RadioBtnIcon bgColor={color} />}
-                checkedIcon={<CheckedRadioBtnIcon color={color} />}
-              />
-            ))}
+            {[...taskPriorities]
+              .sort((a, b) => b.quantity - a.quantity)
+              .map(({ _id, color }) => (
+                <RadioBtn
+                  key={_id}
+                  value={_id}
+                  icon={<RadioBtnIcon bgColor={color} />}
+                  checkedIcon={<CheckedRadioBtnIcon color={color} />}
+                />
+              ))}
+            <RadioBtn
+              value={""}
+              icon={
+                <RadioBtnIcon
+                  sx={(theme) => ({
+                    backgroundColor: theme.palette.text.primary,
+                    opacity: 0.3,
+                  })}
+                />
+              }
+              checkedIcon={
+                <CheckedRadioBtnIcon
+                  sx={(theme) => ({
+                    color: theme.palette.text.primary,
+                    opacity: 0.3,
+                  })}
+                />
+              }
+            />
           </StyledRadioGroup>
         )}
       />
