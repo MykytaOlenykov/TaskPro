@@ -5,22 +5,28 @@ import { useAppSelector } from "hooks";
 import { selectTasks } from "store/tasks/selectors";
 import { TaskCard } from "./TaskCard";
 
-const StyledList = styled(List)({
+const StyledList = styled(List)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: 8,
   padding: 0,
-});
+  overflowY: "auto",
+  scrollbarColor: `${theme.palette.background.scrollThumb} ${theme.palette.background.scrollBar}`,
+}));
 
 interface IProps {
   columnId: string;
+  taskListMaxHeight: number;
 }
 
-export const TasksList: React.FC<IProps> = ({ columnId }) => {
+export const TasksList: React.FC<IProps> = ({
+  columnId,
+  taskListMaxHeight,
+}) => {
   const tasks = useAppSelector(selectTasks);
 
   return (
-    <StyledList>
+    <StyledList style={{ maxHeight: taskListMaxHeight }}>
       {tasks
         .filter(({ column_id }) => column_id === columnId)
         .map(({ _id, name, comment, priority_id, deadline }) => (

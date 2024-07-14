@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { IconButton, styled, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  IconButton,
+  styled,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
@@ -56,11 +62,37 @@ const Button = styled(IconButton)(({ theme }) => ({
 }));
 
 export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.up("md"));
+  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+
   const dispatch = useAppDispatch();
 
   const [openEditColumn, setOpenEditColumn] = useState(false);
   const [openDeleteColumn, setOpenDeleteColumn] = useState(false);
   const [openCreateTask, setOpenCreateTask] = useState(false);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  const mobileMaxHeight = windowHeight - 340;
+  const tabletMaxHeight = windowHeight - 390;
+  const desktopMaxHeight = windowHeight - 310;
+  const taskListMaxHeight = isDesktop
+    ? desktopMaxHeight
+    : isTablet
+    ? tabletMaxHeight
+    : mobileMaxHeight;
+
+  useEffect(() => {
+    const updateMaxHeight = () => {
+      setWindowHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", updateMaxHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateMaxHeight);
+    };
+  }, []);
 
   const handleOpenEditColumn = () => {
     setOpenEditColumn(true);
@@ -141,7 +173,7 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
         onDelete={handleDeleteColumn}
       />
 
-      <TasksList columnId={columnId} />
+      <TasksList columnId={columnId} taskListMaxHeight={taskListMaxHeight} />
 
       <ButtonWithIcon type="button" onClick={handleOpenCreateTask}>
         Add another card
