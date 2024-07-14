@@ -128,7 +128,7 @@ const StyledPickersLayoutRoot = styled(PickersLayoutRoot)(({ theme }) => ({
     "&.Mui-selected": {
       color: theme.palette.text.selectedDatepicker,
       backgroundColor: theme.palette.text.primaryAccent,
-      "&:hover": {
+      "&:hover, &:focus": {
         color: theme.palette.text.primary,
         backgroundColor: theme.palette.text.primaryAccent,
       },
