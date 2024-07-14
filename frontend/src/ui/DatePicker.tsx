@@ -129,7 +129,7 @@ const StyledPickersLayoutRoot = styled(PickersLayoutRoot)(({ theme }) => ({
       color: theme.palette.text.selectedDatepicker,
       backgroundColor: theme.palette.text.primaryAccent,
       "&:hover, &:focus": {
-        color: theme.palette.text.primary,
+        color: theme.palette.text.selectedDatepicker,
         backgroundColor: theme.palette.text.primaryAccent,
       },
     },
