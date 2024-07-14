@@ -85,7 +85,7 @@ taskSchema.post("save", handleMongooseError);
 const Task = model("task", taskSchema);
 
 const nameSchema = Joi.string().trim().max(100).required();
-const commentSchema = Joi.string().trim().max(1000);
+const commentSchema = Joi.string().trim().max(1000).allow(null);
 const deadlineSchema = Joi.string()
   .pattern(deadlineReg)
   .custom((value, helpers) => {
@@ -115,12 +115,14 @@ const deadlineSchema = Joi.string()
     return value;
   })
   .required();
-const priorityIdSchema = Joi.string().custom((value, helpers) => {
-  if (!value) {
-    return value;
-  }
-  return isValidObjectId(value, helpers);
-});
+const priorityIdSchema = Joi.string()
+  .custom((value, helpers) => {
+    if (!value) {
+      return value;
+    }
+    return isValidObjectId(value, helpers);
+  })
+  .allow(null);
 const columnIdSchema = Joi.string().custom(isValidObjectId).required();
 
 const createTask = Joi.object({

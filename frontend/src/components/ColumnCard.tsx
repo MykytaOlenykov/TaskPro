@@ -5,6 +5,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 
 import { useAppDispatch } from "hooks";
 import { deleteColumn, editColumn } from "store/columns/operations";
+import { createTask } from "store/tasks/operations";
 
 import { DeleteModal } from "./DeleteModal";
 import { ColumnForm } from "./ColumnForm";
@@ -100,7 +101,8 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
   };
 
   const handleCreateTask = (data: Omit<ITask, "_id" | "column_id">) => {
-    console.log(data);
+    setOpenCreateTask(false);
+    dispatch(createTask({ ...data, column_id: columnId }));
   };
 
   return (
