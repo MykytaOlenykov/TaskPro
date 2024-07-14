@@ -40,9 +40,8 @@ const Icon = styled("span")<{ url: string; checked?: boolean }>(
     display: "block",
     width: 18,
     height: 18,
-    backgroundColor: checked
-      ? theme.palette.text.primary
-      : theme.palette.icon?.primary,
+    backgroundColor: theme.palette.text.primary,
+    opacity: checked ? 1 : 0.5,
     maskImage: `url(${VITE_API_URL + url})`,
     maskRepeat: "no-repeat",
     maskPosition: "center",

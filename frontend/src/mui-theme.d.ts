@@ -5,17 +5,14 @@ declare module "@mui/material/styles" {
     input?: string;
     popup?: string;
     modal?: string;
-    datepicker?: string;
   }
 
   interface TypeIcon {
-    primary?: string;
     avatarPlaceholder?: string;
     logo?: string;
     logOut?: string;
     hoverLogOut?: string;
     primaryAdd?: string;
-    task?: string;
   }
 
   interface Palette {

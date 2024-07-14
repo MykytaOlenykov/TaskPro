@@ -46,7 +46,8 @@ const ColumnTitle = styled(Typography)(({ theme }) => ({
 
 const Button = styled(IconButton)(({ theme }) => ({
   padding: 0,
-  color: theme.palette.icon?.task,
+  color: theme.palette.text.primary,
+  opacity: 0.5,
   "&:hover": {
     color: theme.palette.text.primaryAccent,
   },

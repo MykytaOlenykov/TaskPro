@@ -159,7 +159,8 @@ const CustomCalendarHeaderRoot = styled("div")(({ theme }) => ({
     bottom: 13.5,
     width: 197,
     height: 1,
-    backgroundColor: theme.palette.border?.datepicker,
+    backgroundColor: theme.palette.text.primary,
+    opacity: 0.2,
   },
 }));
 

@@ -122,16 +122,13 @@ const lightTheme = createTheme({
     border: {
       input: "#BEDBB0",
       popup: "#BEDBB0",
-      datepicker: "rgba(22, 22, 22, 0.2)",
     },
     icon: {
-      primary: "rgba(22, 22, 22, 0.5)",
       avatarPlaceholder: "#FFFFFF",
       logo: "#FFFFFF",
       logOut: "#BEDBB0",
       hoverLogOut: "#9DC888",
       primaryAdd: "#FFFFFF",
-      task: "rgba(22, 22, 22, 0.5)",
     },
   },
 });
@@ -188,16 +185,13 @@ const darkTheme = createTheme({
       input: "#BEDBB0",
       popup: "#BEDBB0",
       modal: "rgba(190, 219, 176, 0.5)",
-      datepicker: "rgba(255, 255, 255, 0.2)",
     },
     icon: {
-      primary: "rgba(255, 255, 255, 0.5)",
       avatarPlaceholder: "#151515",
       logo: "#FFFFFF",
       logOut: "#BEDBB0",
       hoverLogOut: "#9DC888",
       primaryAdd: "#FFFFFF",
-      task: "rgba(255, 255, 255, 0.5)",
     },
   },
 });
@@ -254,16 +248,13 @@ const violetTheme = createTheme({
     border: {
       input: "#5255BC",
       popup: "#ECEDFD",
-      datepicker: "rgba(22, 22, 22, 0.2)",
     },
     icon: {
-      primary: "rgba(22, 22, 22, 0.5)",
       avatarPlaceholder: "#FFFFFF",
       logo: "#5255BC",
       logOut: "#FFFFFF",
       hoverLogOut: "#B8BCFD",
       primaryAdd: "#161616",
-      task: "rgba(22, 22, 22, 0.5)",
     },
   },
 });
