@@ -26,3 +26,16 @@ export const createTask = createAppAsyncThunk<ITask, Omit<ITask, "_id">>(
     }
   }
 );
+
+export const editTask = createAppAsyncThunk<ITask, Omit<ITask, "column_id">>(
+  "tasks/editTask",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { _id, ...otherData } = data;
+      const { data: newData } = await api.put<ITask>(`tasks/${_id}`, otherData);
+      return newData;
+    } catch (error) {
+      return rejectWithValue(convertAsyncError(error));
+    }
+  }
+);

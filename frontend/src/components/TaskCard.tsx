@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { format } from "date-fns";
 import { IconButton, styled, Typography } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
-import { useAppSelector } from "hooks";
+import { useAppDispatch, useAppSelector } from "hooks";
 import { selectTaskPriorities } from "store/tasks/selectors";
+import { editTask } from "store/tasks/operations";
+
+import { TaskForm } from "./TaskForm";
+import { Modal } from "ui/Modal";
+
+import type { ITask } from "types";
 
 const Card = styled("div")<{ statusColor?: string }>(
   ({ theme, statusColor }) => ({
@@ -107,6 +113,7 @@ const Button = styled(IconButton)(({ theme }) => ({
 }));
 
 interface IProps {
+  taskId: string;
   taskName: string;
   taskComment: string | null;
   taskPriorityId: string | null;
@@ -114,15 +121,46 @@ interface IProps {
 }
 
 export const TaskCard: React.FC<IProps> = ({
+  taskId,
   taskName,
   taskComment,
   taskPriorityId,
   taskDeadline,
 }) => {
+  const dispatch = useAppDispatch();
   const taskPriorities = useAppSelector(selectTaskPriorities);
   const taskPriority = taskPriorities.find(({ _id }) => _id === taskPriorityId);
   const parsedTaskDeadline = new Date(taskDeadline + "T00:00:00");
   const formattedTaskDeadline = format(parsedTaskDeadline, "dd/MM/yyyy");
+
+  const [openEditTask, setOpenEditTask] = useState(false);
+  const [openDeleteTask, setOpenDeleteTask] = useState(false);
+
+  const handleOpenEditTask = () => {
+    setOpenEditTask(true);
+  };
+
+  const handleCloseEditTask = (
+    reason: "backdropClick" | "escapeKeyDown" | "button"
+  ) => {
+    if (reason === "backdropClick") return;
+    setOpenEditTask(false);
+  };
+
+  const handleEditTask = (data: Omit<ITask, "_id" | "column_id">) => {
+    setOpenEditTask(false);
+    dispatch(editTask({ ...data, _id: taskId }));
+  };
+
+  const handleOpenDeleteTask = () => {
+    setOpenDeleteTask(true);
+  };
+
+  const handleCloseDeleteTask = () => {
+    setOpenDeleteTask(false);
+  };
+
+  const handleDeleteTask = () => {};
 
   return (
     <Card statusColor={taskPriority?.color}>
@@ -154,14 +192,26 @@ export const TaskCard: React.FC<IProps> = ({
             gap: 8,
           }}
         >
-          <Button type="button">
+          <Button type="button" onClick={handleOpenEditTask}>
             <EditOutlinedIcon sx={{ width: 20, height: 20 }} />
           </Button>
-          <Button type="button">
+          <Button type="button" onClick={handleOpenDeleteTask}>
             <DeleteOutlineOutlinedIcon sx={{ width: 20, height: 20 }} />
           </Button>
         </div>
       </CardBar>
+
+      <Modal open={openEditTask} onClose={handleCloseEditTask}>
+        <TaskForm
+          taskName={taskName}
+          taskComment={taskComment}
+          taskPriorityId={taskPriorityId}
+          taskDeadline={taskDeadline}
+          buttonText="Edit"
+          title="Edit card"
+          onSubmitForm={handleEditTask}
+        />
+      </Modal>
     </Card>
   );
 };

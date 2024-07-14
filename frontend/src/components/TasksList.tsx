@@ -26,6 +26,7 @@ export const TasksList: React.FC<IProps> = ({ columnId }) => {
         .map(({ _id, name, comment, priority_id, deadline }) => (
           <ListItem key={_id} disablePadding>
             <TaskCard
+              taskId={_id}
               taskName={name}
               taskComment={comment}
               taskPriorityId={priority_id}

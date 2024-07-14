@@ -77,12 +77,20 @@ interface IForm {
 }
 
 interface IProps {
+  taskName?: string;
+  taskComment?: string | null;
+  taskPriorityId?: string | null;
+  taskDeadline?: string;
   title: string;
   buttonText: string;
   onSubmitForm: (data: Omit<ITask, "_id" | "column_id">) => void;
 }
 
 export const TaskForm: React.FC<IProps> = ({
+  taskName,
+  taskComment,
+  taskDeadline,
+  taskPriorityId,
   title,
   buttonText,
   onSubmitForm,
@@ -94,10 +102,10 @@ export const TaskForm: React.FC<IProps> = ({
     formState: { errors },
   } = useForm<IForm>({
     defaultValues: {
-      name: "",
-      comment: "",
-      priority_id: "",
-      deadline: new Date(),
+      name: taskName ?? "",
+      comment: taskComment ?? "",
+      priority_id: taskPriorityId ?? "",
+      deadline: taskDeadline ? new Date(taskDeadline) : new Date(),
     },
     resolver: yupResolver(taskSchema),
   });
