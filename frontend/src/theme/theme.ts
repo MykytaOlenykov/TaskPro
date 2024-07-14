@@ -88,7 +88,10 @@ const lightTheme = createTheme({
       popup: "#161616",
       light: "rgba(22, 22, 22, 0.5)",
       logo: "#161616",
-      label: " rgba(22, 22, 22, 0.5)",
+      label: "rgba(22, 22, 22, 0.5)",
+      primaryDatepicker: "rgba(22, 22, 22, 0.5)",
+      secondaryDatepicker: "rgba(22, 22, 22, 0.2)",
+      selectedDatepicker: "#161616",
     },
     background: {
       default: "#F6F6F7",
@@ -114,10 +117,12 @@ const lightTheme = createTheme({
       scrollThumb: "#E8E8E8",
       scrollBar: "#FFFFFF",
       task: "#FFFFFF",
+      popup: "#FFFFFF",
     },
     border: {
       input: "#BEDBB0",
       popup: "#BEDBB0",
+      datepicker: "rgba(22, 22, 22, 0.2)",
     },
     icon: {
       primary: "rgba(22, 22, 22, 0.5)",
@@ -148,7 +153,10 @@ const darkTheme = createTheme({
       popup: "rgba(255, 255, 255, 0.5)",
       light: "rgba(255, 255, 255, 0.5)",
       logo: "#FFFFFF",
-      label: " rgba(255, 255, 255, 0.5)",
+      label: "rgba(255, 255, 255, 0.5)",
+      primaryDatepicker: "rgba(255, 255, 255, 0.5)",
+      secondaryDatepicker: "rgba(255, 255, 255, 0.2)",
+      selectedDatepicker: "#1F1F1F",
     },
     background: {
       default: "#1F1F1F",
@@ -174,11 +182,13 @@ const darkTheme = createTheme({
       scrollThumb: "rgba(255, 255, 255, 0.1)",
       scrollBar: "#161616",
       task: "#121212",
+      popup: "#1F1F1F",
     },
     border: {
       input: "#BEDBB0",
       popup: "#BEDBB0",
       modal: "rgba(190, 219, 176, 0.5)",
+      datepicker: "rgba(255, 255, 255, 0.2)",
     },
     icon: {
       primary: "rgba(255, 255, 255, 0.5)",
@@ -209,7 +219,10 @@ const violetTheme = createTheme({
       popup: "#161616",
       light: "rgba(255, 255, 255, 0.5)",
       logo: "#FFFFFF",
-      label: " rgba(22, 22, 22, 0.5)",
+      label: "rgba(22, 22, 22, 0.5)",
+      primaryDatepicker: "rgba(22, 22, 22, 0.5)",
+      secondaryDatepicker: "rgba(22, 22, 22, 0.2)",
+      selectedDatepicker: "#FCFCFC",
     },
     background: {
       default: "#ECEDFD",
@@ -236,10 +249,12 @@ const violetTheme = createTheme({
       scrollBar: "#FFFFFF",
       scrollThumb: "#B8BCFD",
       task: "#FFFFFF",
+      popup: "#FFFFFF",
     },
     border: {
       input: "#5255BC",
       popup: "#ECEDFD",
+      datepicker: "rgba(22, 22, 22, 0.2)",
     },
     icon: {
       primary: "rgba(22, 22, 22, 0.5)",

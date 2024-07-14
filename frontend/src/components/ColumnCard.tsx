@@ -105,7 +105,7 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
   return (
     <Container>
       <ColumnTitleContainer>
-        <ColumnTitle>{columnName}</ColumnTitle>
+        <ColumnTitle noWrap>{columnName}</ColumnTitle>
         <div
           style={{
             display: "flex",

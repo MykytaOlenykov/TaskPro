@@ -71,7 +71,7 @@ const taskSchema = yup.object({
   deadline: yup
     .date()
     .nullable()
-    .test("is-valid-date", "", (value) => {
+    .test("is-valid-date", "Previous dates cannot be used.", (value) => {
       if (!value) return false;
       if (Number.isNaN(value.getTime())) return false;
 
@@ -95,7 +95,7 @@ const taskSchema = yup.object({
       console.log(currentUTCDate, new Date());
       console.log(valueUTC, value);
 
-      return valueUTC < currentUTCDate;
+      return valueUTC >= currentUTCDate;
     })
     .required("Deadline is required."),
   priority_id: yup.string(),

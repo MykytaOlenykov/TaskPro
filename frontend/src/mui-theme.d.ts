@@ -5,6 +5,7 @@ declare module "@mui/material/styles" {
     input?: string;
     popup?: string;
     modal?: string;
+    datepicker?: string;
   }
 
   interface TypeIcon {
@@ -38,6 +39,9 @@ declare module "@mui/material/styles" {
     light?: string;
     logo?: string;
     label?: string;
+    primaryDatepicker?: string;
+    secondaryDatepicker?: string;
+    selectedDatepicker?: string;
   }
 
   interface TypeBackground {
@@ -64,5 +68,6 @@ declare module "@mui/material/styles" {
     scrollBar?: string;
     scrollThumb?: string;
     task?: string;
+    popup?: string;
   }
 }

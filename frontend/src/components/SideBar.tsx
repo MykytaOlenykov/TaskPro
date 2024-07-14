@@ -7,7 +7,7 @@ import {
   useTheme,
   styled,
 } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 
 import { AppLogo } from "./AppLogo";
 import { BoardsMenu } from "./BoardsMenu";
@@ -78,7 +78,7 @@ export const SideBar: React.FC<IProps> = ({ open, onCloseSideBar }) => {
         >
           <AppLogo />
           <CloseButton type="button" onClick={onCloseSideBar}>
-            <ChevronLeftIcon />
+            <ArrowBackIosNewRoundedIcon sx={{ width: 20, height: 20 }} />
           </CloseButton>
         </StyledBox>
         <BoardsMenu onCloseSideBar={onCloseSideBar} />

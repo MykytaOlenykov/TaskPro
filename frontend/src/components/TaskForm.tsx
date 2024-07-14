@@ -17,6 +17,7 @@ import { taskSchema } from "utils";
 import { BaseInput } from "ui/BaseInput";
 import { ButtonWithIcon } from "ui/ButtonWithIcon";
 import { FormTitle } from "ui/FormTitle";
+import { DatePicker } from "ui/DatePicker";
 
 import type { ITask } from "types";
 
@@ -162,6 +163,21 @@ export const TaskForm: React.FC<IProps> = ({
       )}
 
       <StyledInputLabel style={{ marginTop: 14 }}>Deadline</StyledInputLabel>
+      <Controller
+        control={control}
+        name="deadline"
+        render={({ field: { onChange, value } }) => (
+          <DatePicker
+            value={value}
+            onChange={onChange}
+            error={!!errors.deadline}
+            minDate={new Date()}
+          />
+        )}
+      />
+      {errors.deadline && (
+        <FormHelperText error>{errors.deadline.message}</FormHelperText>
+      )}
 
       <ButtonWithIcon style={{ marginTop: 40 }} type="submit">
         {buttonText}
