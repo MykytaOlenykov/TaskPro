@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { isBefore, startOfDay } from "date-fns";
 
 // Auth
 
@@ -75,27 +76,7 @@ const taskSchema = yup.object({
       if (!value) return false;
       if (Number.isNaN(value.getTime())) return false;
 
-      const currentDatetime = new Date();
-      const currentUTCDate = new Date(
-        Date.UTC(
-          currentDatetime.getUTCFullYear(),
-          currentDatetime.getUTCMonth(),
-          currentDatetime.getUTCDate()
-        )
-      );
-
-      const valueUTC = new Date(
-        Date.UTC(
-          value.getUTCFullYear(),
-          value.getUTCMonth(),
-          value.getUTCDate()
-        )
-      );
-
-      console.log(currentUTCDate, new Date());
-      console.log(valueUTC, value);
-
-      return valueUTC >= currentUTCDate;
+      return !isBefore(startOfDay(value), startOfDay(new Date()));
     })
     .required("Deadline is required."),
   priority_id: yup.string(),
