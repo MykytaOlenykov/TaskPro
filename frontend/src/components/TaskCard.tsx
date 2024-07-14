@@ -6,9 +6,10 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectTaskPriorities } from "store/tasks/selectors";
-import { editTask } from "store/tasks/operations";
+import { deleteTask, editTask } from "store/tasks/operations";
 
 import { TaskForm } from "./TaskForm";
+import { DeleteModal } from "./DeleteModal";
 import { Modal } from "ui/Modal";
 
 import type { ITask } from "types";
@@ -160,7 +161,9 @@ export const TaskCard: React.FC<IProps> = ({
     setOpenDeleteTask(false);
   };
 
-  const handleDeleteTask = () => {};
+  const handleDeleteTask = () => {
+    dispatch(deleteTask(taskId));
+  };
 
   return (
     <Card statusColor={taskPriority?.color}>
@@ -212,6 +215,12 @@ export const TaskCard: React.FC<IProps> = ({
           onSubmitForm={handleEditTask}
         />
       </Modal>
+      <DeleteModal
+        text={`Are you sure you want to delete the task?`}
+        open={openDeleteTask}
+        onClose={handleCloseDeleteTask}
+        onDelete={handleDeleteTask}
+      />
     </Card>
   );
 };

@@ -191,7 +191,7 @@ export const BoardCard: React.FC<IProps> = ({
         />
       </Modal>
       <DeleteModal
-        text={`Are you sure you want to delete the board "${name}"? Its columns and tasks will also be deleted.`}
+        text={`Are you sure you want to delete the board? Its columns and tasks will also be deleted.`}
         open={openDelete}
         onClose={handleCloseDelete}
         onDelete={handleDeleteBoard}

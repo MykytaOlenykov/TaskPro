@@ -39,3 +39,15 @@ export const editTask = createAppAsyncThunk<ITask, Omit<ITask, "column_id">>(
     }
   }
 );
+
+export const deleteTask = createAppAsyncThunk<string, string>(
+  "tasks/deleteTask",
+  async (_id, { rejectWithValue }) => {
+    try {
+      await api.delete(`tasks/${_id}`);
+      return _id;
+    } catch (error) {
+      return rejectWithValue(convertAsyncError(error));
+    }
+  }
+);

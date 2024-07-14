@@ -135,7 +135,7 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
         />
       </Modal>
       <DeleteModal
-        text={`Are you sure you want to delete the column "${columnName}"? Its tasks will also be deleted.`}
+        text={`Are you sure you want to delete the column? Its tasks will also be deleted.`}
         open={openDeleteColumn}
         onClose={handleCloseDeleteColumn}
         onDelete={handleDeleteColumn}

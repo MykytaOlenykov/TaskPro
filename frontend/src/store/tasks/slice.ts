@@ -2,7 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { deleteBoard, getBoard } from "store/boards/operations";
 import { deleteColumn } from "store/columns/operations";
-import { createTask, editTask, getTaskPriorities } from "./operations";
+import {
+  createTask,
+  deleteTask,
+  editTask,
+  getTaskPriorities,
+} from "./operations";
 import { logOut } from "store/auth/operations";
 
 import type { ITask, ITaskPriority } from "types";
@@ -45,6 +50,9 @@ const tasksSlice = createSlice({
           ({ _id }) => _id === action.payload._id
         );
         idx !== -1 && state.items.splice(idx, 1, action.payload);
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        state.items = state.items.filter(({ _id }) => _id !== action.payload);
       })
       .addCase(getTaskPriorities.fulfilled, (state, action) => {
         state.priorities = action.payload;
