@@ -1,4 +1,5 @@
 import React from "react";
+import { format } from "date-fns";
 import { IconButton, styled, Typography } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -120,6 +121,8 @@ export const TaskCard: React.FC<IProps> = ({
 }) => {
   const taskPriorities = useAppSelector(selectTaskPriorities);
   const taskPriority = taskPriorities.find(({ _id }) => _id === taskPriorityId);
+  const parsedTaskDeadline = new Date(taskDeadline + "T00:00:00");
+  const formattedTaskDeadline = format(parsedTaskDeadline, "dd/MM/yyyy");
 
   return (
     <Card statusColor={taskPriority?.color}>
@@ -141,7 +144,7 @@ export const TaskCard: React.FC<IProps> = ({
         </div>
         <div style={{ marginRight: "auto" }}>
           <SubTitle variant="body1">Deadline</SubTitle>
-          <SubText>{taskDeadline}</SubText>
+          <SubText>{formattedTaskDeadline}</SubText>
         </div>
         <div
           style={{
