@@ -2,6 +2,7 @@ import { createAppAsyncThunk } from "./createAppAsyncThunk";
 import { token } from "./token";
 import { convertAsyncError } from "./convertAsyncError";
 import { isAsyncError } from "./isAsyncError";
+import { convertToUtcDateString } from "./convertToUtcDateString";
 import {
   registerSchema,
   logInSchema,
@@ -18,6 +19,7 @@ export {
   boardSchema,
   columnSchema,
   taskSchema,
+  convertToUtcDateString,
   convertAsyncError,
   isAsyncError,
 };

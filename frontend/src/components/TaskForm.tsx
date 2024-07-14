@@ -1,5 +1,4 @@
 import React from "react";
-import { format } from "date-fns";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -12,7 +11,7 @@ import {
 
 import { selectTaskPriorities } from "store/tasks/selectors";
 import { useAppSelector } from "hooks";
-import { taskSchema } from "utils";
+import { convertToUtcDateString, taskSchema } from "utils";
 
 import { BaseInput } from "ui/BaseInput";
 import { ButtonWithIcon } from "ui/ButtonWithIcon";
@@ -108,7 +107,7 @@ export const TaskForm: React.FC<IProps> = ({
   const onSubmit: SubmitHandler<IForm> = (data) => {
     onSubmitForm({
       comment: data.comment || null,
-      deadline: format(data.deadline, "yyyy-MM-dd"),
+      deadline: convertToUtcDateString(data.deadline),
       name: data.name,
       priority_id: data.priority_id || null,
     });
