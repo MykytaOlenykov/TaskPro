@@ -11,6 +11,15 @@ const taskPrioritySchema = new Schema(
       maxlength: 100,
       required: true,
     },
+    color: {
+      type: String,
+      maxlength: 100,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
   },
   { versionKey: false }
 );

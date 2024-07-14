@@ -1,11 +1,17 @@
 [
   {
-    "name": "Low"
+    "name": "Low",
+    "color": "#8FA1D0",
+    "quantity": 3
   },
   {
-    "name": "Medium"
+    "name": "Medium",
+    "color": "#E09CB5",
+    "quantity": 2
   },
   {
-    "name": "High"
+    "name": "High",
+    "color": "#BEDBB0",
+    "quantity": 1
   }
 ]
