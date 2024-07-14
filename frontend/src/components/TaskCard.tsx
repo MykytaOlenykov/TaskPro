@@ -9,7 +9,7 @@ import { selectTaskPriorities } from "store/tasks/selectors";
 import { deleteTask, editTask } from "store/tasks/operations";
 
 import { TaskForm } from "./TaskForm";
-import { DeleteModal } from "./DeleteModal";
+import { DeleteModal } from "ui/DeleteModal";
 import { Modal } from "ui/Modal";
 
 import type { ITask } from "types";

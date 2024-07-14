@@ -7,10 +7,10 @@ import { useAppDispatch } from "hooks";
 import { deleteColumn, editColumn } from "store/columns/operations";
 import { createTask } from "store/tasks/operations";
 
-import { DeleteModal } from "./DeleteModal";
 import { ColumnForm } from "./ColumnForm";
 import { TaskForm } from "./TaskForm";
 import { TasksList } from "./TasksList";
+import { DeleteModal } from "ui/DeleteModal";
 import { Modal } from "ui/Modal";
 import { ButtonWithIcon } from "ui/ButtonWithIcon";
 

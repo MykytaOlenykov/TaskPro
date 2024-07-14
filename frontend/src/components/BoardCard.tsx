@@ -17,9 +17,9 @@ import { useAppDispatch, useAppSelector } from "hooks";
 import { selectIcons } from "store/static/selectors";
 import { deleteBoard, editBoard } from "store/boards/operations";
 
-import { Modal } from "ui/Modal";
 import { BoardForm } from "./BoardForm";
-import { DeleteModal } from "./DeleteModal";
+import { Modal } from "ui/Modal";
+import { DeleteModal } from "ui/DeleteModal";
 
 import type { IBoard } from "types";
 
