@@ -10,6 +10,7 @@ import { createTask } from "store/tasks/operations";
 import { DeleteModal } from "./DeleteModal";
 import { ColumnForm } from "./ColumnForm";
 import { TaskForm } from "./TaskForm";
+import { TasksList } from "./TasksList";
 import { Modal } from "ui/Modal";
 import { ButtonWithIcon } from "ui/ButtonWithIcon";
 
@@ -139,6 +140,8 @@ export const ColumnCard: React.FC<IProps> = ({ columnId, columnName }) => {
         onClose={handleCloseDeleteColumn}
         onDelete={handleDeleteColumn}
       />
+
+      <TasksList columnId={columnId} />
 
       <ButtonWithIcon type="button" onClick={handleOpenCreateTask}>
         Add another card
