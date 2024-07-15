@@ -122,7 +122,7 @@ const StyledPickersLayoutRoot = styled(PickersLayoutRoot)(({ theme }) => ({
     textAlign: "center",
     color: theme.palette.text.primary,
     "&:hover": {
-      color: theme.palette.text.primary,
+      color: theme.palette.text.selectedDatepicker,
       backgroundColor: theme.palette.text.primaryAccent,
     },
     "&.Mui-selected": {
@@ -132,8 +132,12 @@ const StyledPickersLayoutRoot = styled(PickersLayoutRoot)(({ theme }) => ({
         color: theme.palette.text.selectedDatepicker,
         backgroundColor: theme.palette.text.primaryAccent,
       },
+      "&.Mui-disabled": {
+        color: theme.palette.text.selectedDatepicker,
+        backgroundColor: theme.palette.text.primaryAccent,
+      },
     },
-    "&.Mui-disabled": {
+    "&.Mui-disabled, &.Mui-disabled:not(.Mui-selected)": {
       color: theme.palette.text.secondaryDatepicker,
     },
   },
