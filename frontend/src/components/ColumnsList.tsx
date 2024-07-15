@@ -46,9 +46,9 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
 const Button = styled(BaseButton)(({ theme }) => ({
   gap: 8,
   color: theme.palette.text.primary,
-  backgroundColor: theme.palette.background.secondaryButton,
+  backgroundColor: theme.palette.background.primary,
   "&:hover": {
-    backgroundColor: theme.palette.background.secondaryButtonHover,
+    backgroundColor: theme.palette.background.primary,
   },
 }));
 
@@ -58,7 +58,7 @@ const AddIconContainer = styled("span")(({ theme }) => ({
   alignItems: "center",
   width: 28,
   height: 28,
-  color: theme.palette.background.secondaryButton,
+  color: theme.palette.background.primary,
   backgroundColor: theme.palette.background.secondaryAdd,
   borderRadius: 6,
 }));

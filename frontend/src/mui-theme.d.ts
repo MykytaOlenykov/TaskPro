@@ -37,12 +37,11 @@ declare module "@mui/material/styles" {
   }
 
   interface TypeBackground {
+    primary?: string;
     primaryBox?: string;
     primaryInput?: string;
     primaryButton?: string;
     primaryButtonHover?: string;
-    secondaryButton?: string;
-    secondaryButtonHover?: string;
     primarySideBar?: string;
     secondarySideBar?: string;
     sideBarButton?: string;
@@ -59,7 +58,6 @@ declare module "@mui/material/styles" {
     mainHeader?: string;
     scrollBar?: string;
     scrollThumb?: string;
-    task?: string;
     popup?: string;
   }
 }

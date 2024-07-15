@@ -19,7 +19,7 @@ const Card = styled("div")<{ statusColor?: string }>(
     position: "relative",
     padding: "14px 20px 14px 24px",
     width: "100%",
-    backgroundColor: theme.palette.background.task,
+    backgroundColor: theme.palette.background.primary,
     borderRadius: 8,
     overflow: "hidden",
     "&::after": {

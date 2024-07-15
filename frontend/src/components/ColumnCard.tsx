@@ -39,7 +39,7 @@ const ColumnTitleContainer = styled("div")(({ theme }) => ({
   alignItems: "center",
   padding: "16px 20px",
   minHeight: 56,
-  backgroundColor: theme.palette.background.task,
+  backgroundColor: theme.palette.background.primary,
   borderRadius: 8,
 }));
 
