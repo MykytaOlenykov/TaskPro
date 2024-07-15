@@ -11,7 +11,8 @@ const Button = styled(ButtonBase)(({ theme }) => ({
   fontSize: 14,
   lineHeight: 1.428,
   letterSpacing: "-0.02em",
-  color: theme.palette.text.primaryFilter,
+  color: theme.palette.text.primary,
+  opacity: 0.8,
   borderRadius: 8,
 }));
 

@@ -91,7 +91,8 @@ const StyledPickersLayoutRoot = styled(PickersLayoutRoot)(({ theme }) => ({
     lineHeight: 1.5,
     letterSpacing: "-0.02em",
     textAlign: "center",
-    color: theme.palette.text.primaryDatepicker,
+    color: theme.palette.text.primary,
+    opacity: 0.5,
   },
 
   ".MuiDayCalendar-monthContainer": {
@@ -138,14 +139,17 @@ const StyledPickersLayoutRoot = styled(PickersLayoutRoot)(({ theme }) => ({
       },
     },
     "&.Mui-disabled, &.Mui-disabled:not(.Mui-selected)": {
-      color: theme.palette.text.secondaryDatepicker,
+      color: theme.palette.text.primary,
+      opacity: 0.2,
     },
   },
 
   ".MuiPickersDay-dayOutsideMonth": {
-    color: theme.palette.text.secondaryDatepicker,
+    color: theme.palette.text.primary,
+    opacity: 0.2,
     "&:hover": {
-      color: theme.palette.text.secondaryDatepicker,
+      color: theme.palette.text.primary,
+      opacity: 0.2,
     },
   },
 }));

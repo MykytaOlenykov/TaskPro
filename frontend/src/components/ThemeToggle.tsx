@@ -18,8 +18,9 @@ const Text = styled(Typography)(({ theme }) => ({
   lineHeight: 1.5,
 
   letterSpacing: "-0.02em",
-  color: theme.palette.text.primaryHeader,
+  color: theme.palette.text.primary,
   cursor: "pointer",
+  opacity: 0.8,
 }));
 
 const ThemeMenu = styled(Menu)(({ theme }) => ({

@@ -28,16 +28,11 @@ declare module "@mui/material/styles" {
   interface TypeText {
     primaryButton?: string;
     primaryAccent?: string;
-    primaryHeader?: string;
     primarySideBar?: string;
     secondarySideBar?: string;
-    primaryFilter?: string;
     popup?: string;
     light?: string;
     logo?: string;
-    label?: string;
-    primaryDatepicker?: string;
-    secondaryDatepicker?: string;
     selectedDatepicker?: string;
   }
 

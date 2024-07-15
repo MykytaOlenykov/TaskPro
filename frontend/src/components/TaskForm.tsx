@@ -34,7 +34,8 @@ const StyledInputLabel = styled(InputLabel)(({ theme }) => ({
   fontWeight: 400,
   fontSize: 12,
   letterSpacing: "-0.02em",
-  color: theme.palette.text.label,
+  color: theme.palette.text.primary,
+  opacity: 0.5,
 }));
 
 const StyledRadioGroup = styled(RadioGroup)({
