@@ -37,6 +37,7 @@ export const TasksList: React.FC<IProps> = ({
               taskComment={comment}
               taskPriorityId={priority_id}
               taskDeadline={deadline}
+              columnId={columnId}
             />
           </ListItem>
         ))}

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
-import { IconButton, styled, Typography } from "@mui/material";
+import { IconButton, Menu, MenuItem, styled, Typography } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 
 import { useAppDispatch, useAppSelector } from "hooks";
 import { selectTaskPriorities } from "store/tasks/selectors";
-import { deleteTask, editTask } from "store/tasks/operations";
+import { changeTaskColumn, deleteTask, editTask } from "store/tasks/operations";
+import { selectColumns } from "store/columns/selectors";
 
 import { TaskForm } from "./TaskForm";
 import { DeleteModal } from "ui/DeleteModal";
@@ -113,12 +115,53 @@ const Button = styled(IconButton)(({ theme }) => ({
   },
 }));
 
+const ColumnMenu = styled(Menu)(({ theme }) => ({
+  marginTop: 24,
+  ".MuiPaper-root": {
+    backgroundImage: "none",
+    backgroundColor: theme.palette.background.popup,
+    borderRadius: 8,
+    boxShadow: "0 4px 16px 0 rgba(17, 17, 17, 0.1)",
+  },
+  ".MuiList-root": {
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+    padding: 18,
+    minWidth: 135,
+    maxWidth: 180,
+  },
+}));
+
+const ColumnItem = styled(MenuItem)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: 0,
+  color: theme.palette.text.popup,
+  "&:hover": {
+    color: theme.palette.text.primaryAccent,
+    background: "none !important",
+  },
+  "&.Mui-selected": {
+    color: theme.palette.text.primaryAccent,
+    background: "none !important",
+  },
+}));
+
+const ColumnName = styled(Typography)(() => ({
+  fontSize: 14,
+  letterSpacing: "-0.02em",
+  color: "inherit",
+}));
+
 interface IProps {
   taskId: string;
   taskName: string;
   taskComment: string | null;
   taskPriorityId: string | null;
   taskDeadline: string;
+  columnId: string;
 }
 
 export const TaskCard: React.FC<IProps> = ({
@@ -127,8 +170,10 @@ export const TaskCard: React.FC<IProps> = ({
   taskComment,
   taskPriorityId,
   taskDeadline,
+  columnId,
 }) => {
   const dispatch = useAppDispatch();
+  const columns = useAppSelector(selectColumns);
   const taskPriorities = useAppSelector(selectTaskPriorities);
   const taskPriority = taskPriorities.find(({ _id }) => _id === taskPriorityId);
   const parsedTaskDeadline = new Date(taskDeadline + "T00:00:00");
@@ -136,6 +181,8 @@ export const TaskCard: React.FC<IProps> = ({
 
   const [openEditTask, setOpenEditTask] = useState(false);
   const [openDeleteTask, setOpenDeleteTask] = useState(false);
+  const [anchorElColumnMenu, setAnchorElColumnMenu] =
+    useState<null | HTMLElement>(null);
 
   const handleOpenEditTask = () => {
     setOpenEditTask(true);
@@ -163,6 +210,19 @@ export const TaskCard: React.FC<IProps> = ({
 
   const handleDeleteTask = () => {
     dispatch(deleteTask(taskId));
+  };
+
+  const handleOpenColumnMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElColumnMenu(event.currentTarget);
+  };
+
+  const handleCloseColumnMenu = () => {
+    setAnchorElColumnMenu(null);
+  };
+
+  const handleChangeColumn = (columnId: string) => {
+    handleCloseColumnMenu();
+    dispatch(changeTaskColumn({ _id: taskId, column_id: columnId }));
   };
 
   return (
@@ -195,6 +255,44 @@ export const TaskCard: React.FC<IProps> = ({
             gap: 8,
           }}
         >
+          <Button type="button" onClick={handleOpenColumnMenu}>
+            <ArrowCircleRightOutlinedIcon sx={{ width: 20, height: 20 }} />
+          </Button>
+          <ColumnMenu
+            id="column-menu"
+            anchorEl={anchorElColumnMenu}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+            open={Boolean(anchorElColumnMenu)}
+            onClose={handleCloseColumnMenu}
+          >
+            {columns
+              .filter(({ _id }) => _id !== columnId)
+              .map(({ _id, name }) => (
+                <ColumnItem
+                  key={_id}
+                  onClick={() => handleChangeColumn(_id)}
+                  disableRipple
+                  disableTouchRipple
+                  disableGutters
+                >
+                  <ColumnName textAlign="center" variant="body1" noWrap>
+                    {name}
+                  </ColumnName>
+                  <ArrowCircleRightOutlinedIcon
+                    sx={{ width: 20, height: 20 }}
+                  />
+                </ColumnItem>
+              ))}
+          </ColumnMenu>
+
           <Button type="button" onClick={handleOpenEditTask}>
             <EditOutlinedIcon sx={{ width: 20, height: 20 }} />
           </Button>

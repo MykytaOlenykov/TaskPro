@@ -88,8 +88,12 @@ export const ThemeToggle: React.FC = () => {
 
   return (
     <>
-      <ButtonBase type="button" sx={{ borderRadius: "8px" }}>
-        <Text onClick={handleOpenThemeMenu} variant="body2">
+      <ButtonBase
+        type="button"
+        sx={{ borderRadius: "8px" }}
+        onClick={handleOpenThemeMenu}
+      >
+        <Text variant="body2">
           Theme
           <ExpandMoreRoundedIcon
             color="inherit"
@@ -98,7 +102,7 @@ export const ThemeToggle: React.FC = () => {
         </Text>
       </ButtonBase>
       <ThemeMenu
-        id="menu-appbar"
+        id="theme-menu"
         anchorEl={anchorElTheme}
         anchorOrigin={{
           vertical: "top",

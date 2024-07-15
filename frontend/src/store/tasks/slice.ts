@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { deleteBoard, getBoard } from "store/boards/operations";
 import { deleteColumn } from "store/columns/operations";
 import {
+  changeTaskColumn,
   createTask,
   deleteTask,
   editTask,
@@ -46,6 +47,12 @@ const tasksSlice = createSlice({
         state.items.push(action.payload);
       })
       .addCase(editTask.fulfilled, (state, action) => {
+        const idx = state.items.findIndex(
+          ({ _id }) => _id === action.payload._id
+        );
+        idx !== -1 && state.items.splice(idx, 1, action.payload);
+      })
+      .addCase(changeTaskColumn.fulfilled, (state, action) => {
         const idx = state.items.findIndex(
           ({ _id }) => _id === action.payload._id
         );

@@ -15,6 +15,19 @@ export const getTaskPriorities = createAppAsyncThunk<ITaskPriority[], void>(
   }
 );
 
+export const changeTaskColumn = createAppAsyncThunk<
+  ITask,
+  Pick<ITask, "_id" | "column_id">
+>("tasks/changeTaskColumn", async (data, { rejectWithValue }) => {
+  try {
+    const { _id, ...otherData } = data;
+    const { data: newData } = await api.patch(`tasks/${_id}`, otherData);
+    return newData;
+  } catch (error) {
+    return rejectWithValue(convertAsyncError(error));
+  }
+});
+
 export const createTask = createAppAsyncThunk<ITask, Omit<ITask, "_id">>(
   "tasks/createTask",
   async (data, { rejectWithValue }) => {
