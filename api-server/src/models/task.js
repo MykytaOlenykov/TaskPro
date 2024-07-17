@@ -14,7 +14,7 @@ const taskPrioritySchema = new Schema(
     color: {
       type: String,
       maxlength: 100,
-      required: true,
+      default: null,
     },
     quantity: {
       type: Number,
@@ -58,6 +58,7 @@ const taskSchema = new Schema(
         },
         message: "task_priority with the specified ID does not exist",
       },
+      required: true,
     },
     column_id: {
       type: Schema.Types.ObjectId,
@@ -122,7 +123,8 @@ const priorityIdSchema = Joi.string()
     }
     return isValidObjectId(value, helpers);
   })
-  .allow(null);
+  .allow(null)
+  .required();
 const columnIdSchema = Joi.string().custom(isValidObjectId).required();
 
 const createTask = Joi.object({

@@ -1,5 +1,10 @@
 [
   {
+    "name": "Without priority",
+    "color": null,
+    "quantity": 4
+  },
+  {
     "name": "Low",
     "color": "#8FA1D0",
     "quantity": 3
