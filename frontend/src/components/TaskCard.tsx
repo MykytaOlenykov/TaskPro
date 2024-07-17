@@ -240,7 +240,7 @@ export const TaskCard: React.FC<IProps> = ({
           <SubTitle variant="body1">Priority</SubTitle>
           <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
             <PriorityStatus statusColor={taskPriority?.color} />
-            <SubText>{taskPriority?.name ?? "Without"}</SubText>
+            <SubText>{taskPriority?.name?.split(" ")[0]}</SubText>
           </div>
         </div>
         <div style={{ marginRight: "auto" }}>

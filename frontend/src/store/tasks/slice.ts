@@ -29,7 +29,7 @@ const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    changeFilter(state, action: PayloadAction<"without" | string | null>) {
+    changeFilter(state, action: PayloadAction<string | null>) {
       state.filter = action.payload;
     },
   },

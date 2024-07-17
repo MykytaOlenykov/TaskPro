@@ -79,7 +79,7 @@ const taskSchema = yup.object({
       return !isBefore(startOfDay(value), startOfDay(new Date()));
     })
     .required("Deadline is required."),
-  priority_id: yup.string(),
+  priority_id: yup.string().required("Priority is required."),
 });
 
 export { registerSchema, logInSchema, boardSchema, columnSchema, taskSchema };

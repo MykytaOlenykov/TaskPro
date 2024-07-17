@@ -11,9 +11,5 @@ export const selectFilteredTasks = createSelector(
   (tasks, filter) =>
     filter === null
       ? tasks
-      : tasks.filter(
-          ({ priority_id }) =>
-            (priority_id === null && filter === "without") ||
-            priority_id === filter
-        )
+      : tasks.filter(({ priority_id }) => priority_id === filter)
 );

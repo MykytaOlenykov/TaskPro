@@ -56,25 +56,29 @@ const RadioBtn = styled(Radio)(({ theme }) => ({
 }));
 
 const CheckedRadioBtnIcon = styled(CheckedRadioBtnSVG)<{ color?: string }>(
-  ({ color }) => ({
+  ({ color, theme }) => ({
     width: 16,
     height: 16,
-    color,
+    color: color ?? theme.palette.text.primary,
+    opacity: color ? 1 : 0.3,
   })
 );
 
-const RadioBtnIcon = styled("div")<{ bgColor?: string }>(({ bgColor }) => ({
-  width: 16,
-  height: 16,
-  backgroundColor: bgColor,
-  borderRadius: "100%",
-}));
+const RadioBtnIcon = styled("div")<{ bgColor?: string }>(
+  ({ bgColor, theme }) => ({
+    width: 16,
+    height: 16,
+    backgroundColor: bgColor ?? theme.palette.text.primary,
+    borderRadius: "100%",
+    opacity: bgColor ? 1 : 0.3,
+  })
+);
 
 interface IForm {
   name: string;
   comment?: string;
   deadline: Date;
-  priority_id?: string;
+  priority_id: string;
 }
 
 interface IProps {
@@ -165,25 +169,6 @@ export const TaskForm: React.FC<IProps> = ({
                   checkedIcon={<CheckedRadioBtnIcon color={color} />}
                 />
               ))}
-            <RadioBtn
-              value={""}
-              icon={
-                <RadioBtnIcon
-                  sx={(theme) => ({
-                    backgroundColor: theme.palette.text.primary,
-                    opacity: 0.3,
-                  })}
-                />
-              }
-              checkedIcon={
-                <CheckedRadioBtnIcon
-                  sx={(theme) => ({
-                    color: theme.palette.text.primary,
-                    opacity: 0.3,
-                  })}
-                />
-              }
-            />
           </StyledRadioGroup>
         )}
       />

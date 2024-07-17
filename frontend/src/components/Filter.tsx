@@ -115,7 +115,7 @@ const CheckedFilterIcon = styled(CheckedFilterSvg)<{ color?: string }>(
   ({ color, theme }) => ({
     width: 16,
     height: 16,
-    color: color ? color : theme.palette.text.primary,
+    color: color ?? theme.palette.text.primary,
     opacity: color ? 1 : 0.3,
   })
 );
@@ -124,7 +124,7 @@ const FilterIcon = styled("div")<{ bgColor?: string }>(
   ({ bgColor, theme }) => ({
     width: 16,
     height: 16,
-    backgroundColor: bgColor ? bgColor : theme.palette.text.primary,
+    backgroundColor: bgColor ?? theme.palette.text.primary,
     borderRadius: "100%",
     opacity: bgColor ? 1 : 0.3,
   })
@@ -191,16 +191,6 @@ export const Filter: React.FC = () => {
         </li>
         <li>
           <FilterList>
-            <FilterListItem onClick={() => handleChangeFilter("without")}>
-              {"without" === tasksFilter ? (
-                <CheckedFilterIcon />
-              ) : (
-                <FilterIcon />
-              )}
-              <FilterLabel selected={"without" === tasksFilter}>
-                Without priority
-              </FilterLabel>
-            </FilterListItem>
             {[...taskPriorities]
               .sort((a, b) => b.quantity - a.quantity)
               .map(({ _id, name, color }) => (
