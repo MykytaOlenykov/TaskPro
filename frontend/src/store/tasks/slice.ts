@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { deleteBoard, getBoard } from "store/boards/operations";
 import { deleteColumn } from "store/columns/operations";
@@ -16,17 +16,23 @@ import type { ITask, ITaskPriority } from "types";
 export interface IInitialState {
   items: ITask[];
   priorities: ITaskPriority[];
+  filter: "without" | string | null;
 }
 
 const initialState: IInitialState = {
   items: [],
   priorities: [],
+  filter: null,
 };
 
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    changeFilter(state, action: PayloadAction<"without" | string | null>) {
+      state.filter = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getBoard.fulfilled, (state, action) => {
@@ -70,5 +76,7 @@ const tasksSlice = createSlice({
       });
   },
 });
+
+export const { changeFilter } = tasksSlice.actions;
 
 export const tasksReducer = tasksSlice.reducer;
