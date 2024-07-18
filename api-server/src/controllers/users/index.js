@@ -7,6 +7,7 @@ const refresh = require("./refresh");
 const getCurrent = require("./getCurrent");
 const changeTheme = require("./changeTheme");
 const update = require("./update");
+const updateAvatar = require("./updateAvatar");
 
 module.exports = {
   register: ctrlWrapper(register),
@@ -16,4 +17,5 @@ module.exports = {
   getCurrent: ctrlWrapper(getCurrent),
   changeTheme: ctrlWrapper(changeTheme),
   update: ctrlWrapper(update),
+  updateAvatar: ctrlWrapper(updateAvatar),
 };

@@ -35,6 +35,10 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
+    avatarUrl: {
+      type: String,
+      default: null,
+    },
   },
   { versionKey: false, timestamps: true }
 );

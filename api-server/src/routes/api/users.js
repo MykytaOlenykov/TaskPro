@@ -4,6 +4,7 @@ const {
   validateBody,
   authenticate,
   verifyRefreshToken,
+  upload,
 } = require("../../middlewares");
 const { validationSchemes } = require("../../models/user");
 const ctrl = require("../../controllers/users");
@@ -36,6 +37,13 @@ router.patch(
   authenticate,
   validateBody(validationSchemes.theme),
   ctrl.changeTheme
+);
+
+router.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatar"),
+  ctrl.updateAvatar
 );
 
 module.exports = router;
