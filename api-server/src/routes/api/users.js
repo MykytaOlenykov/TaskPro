@@ -4,7 +4,7 @@ const {
   validateBody,
   authenticate,
   verifyRefreshToken,
-  upload,
+  imageUpload,
 } = require("../../middlewares");
 const { validationSchemes } = require("../../models/user");
 const ctrl = require("../../controllers/users");
@@ -42,7 +42,7 @@ router.patch(
 router.patch(
   "/avatars",
   authenticate,
-  upload.single("avatar"),
+  imageUpload.single("avatar"),
   ctrl.updateAvatar
 );
 

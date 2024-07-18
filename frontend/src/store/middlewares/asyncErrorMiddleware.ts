@@ -7,6 +7,7 @@ import { isAsyncError } from "utils";
 export const asyncErrorMiddleware: any =
   (): Middleware<object, RootState> => () => (next) => (action) => {
     if (!isRejected(action)) return next(action);
+
     if (!isAsyncError(action.payload)) return next(action);
 
     toast.error(action.payload.message);

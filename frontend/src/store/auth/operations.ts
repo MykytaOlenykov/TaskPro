@@ -89,7 +89,7 @@ export const editUserProfile = createAppAsyncThunk<
     const { data: user } = await api.put<NonNullable<IUser>>("users", data);
     return user;
   } catch (error) {
-    return rejectWithValue(null);
+    return rejectWithValue(convertAsyncError(error));
   }
 });
 
@@ -102,7 +102,7 @@ export const changeTheme = createAppAsyncThunk<IThemeMode, IThemeMode>(
       });
       return data.theme;
     } catch (error) {
-      return rejectWithValue(null);
+      return rejectWithValue(convertAsyncError(error));
     }
   }
 );
@@ -116,7 +116,7 @@ export const changeUserAvatar = createAppAsyncThunk<string, FormData>(
       } = await api.patch<{ avatarUrl: string }>("users/avatars", data);
       return avatarUrl;
     } catch (error) {
-      return rejectWithValue(null);
+      return rejectWithValue(convertAsyncError(error));
     }
   }
 );

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { Button, styled } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -57,17 +58,34 @@ const Avatar = styled("img")({
   objectPosition: "center",
 });
 
+const isFileTypeValid = (fileType: string) => {
+  const validTypes = ["image/jpeg", "image/png", "image/jpg"];
+  return validTypes.includes(fileType);
+};
+
 export const UserAvatar: React.FC = () => {
   const dispatch = useAppDispatch();
   const userNameAvatarUrl = useAppSelector(selectUserAvatarUrl);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setLoading(true);
     const files = event.target.files;
     if (files && files.length > 0) {
-      const formData = new FormData();
-      formData.append("avatar", files[0]);
-      dispatch(changeUserAvatar(formData));
+      const selectedFile = files[0];
+
+      if (selectedFile && isFileTypeValid(selectedFile.type)) {
+        const formData = new FormData();
+        formData.append("avatar", selectedFile);
+        await dispatch(changeUserAvatar(formData));
+      } else {
+        toast.error("Invalid file type. Allowed types: JPEG, PNG, JPG.");
+      }
     }
+    setLoading(false);
   };
 
   return (
@@ -108,7 +126,12 @@ export const UserAvatar: React.FC = () => {
         tabIndex={-1}
       >
         <AddIcon style={{ width: "16px", height: "16px" }} />
-        <VisuallyHiddenInput type="file" onChange={handleFileChange} />
+        <VisuallyHiddenInput
+          disabled={loading}
+          accept=".jpg,.jpeg,.png"
+          type="file"
+          onChange={handleFileChange}
+        />
       </Button>
     </Container>
   );
