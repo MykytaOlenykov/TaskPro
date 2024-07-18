@@ -11,6 +11,7 @@ import { editUserProfile } from "store/auth/operations";
 import { FormTitle } from "ui/FormTitle";
 import { BaseInput } from "ui/BaseInput";
 import { LoadingButton } from "ui/LoadingButton";
+import { UserAvatar } from "./UserAvatar";
 
 interface IFormData {
   name: string;
@@ -18,7 +19,6 @@ interface IFormData {
 
 export const UserForm: React.FC = () => {
   const dispatch = useAppDispatch();
-
   const userName = useAppSelector(selectUserName);
 
   const {
@@ -41,22 +41,28 @@ export const UserForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+    <>
       <FormTitle variant="body1">Edit profile</FormTitle>
+      <UserAvatar />
+      <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+        <BaseInput
+          type="text"
+          placeholder="Name"
+          error={!!errors.name}
+          {...register("name")}
+        />
+        {errors.name && (
+          <FormHelperText error>{errors.name.message}</FormHelperText>
+        )}
 
-      <BaseInput
-        type="text"
-        placeholder="Name"
-        error={!!errors.name}
-        {...register("name")}
-      />
-      {errors.name && (
-        <FormHelperText error>{errors.name.message}</FormHelperText>
-      )}
-
-      <LoadingButton style={{ marginTop: 24 }} type="submit" loading={loading}>
-        Send
-      </LoadingButton>
-    </form>
+        <LoadingButton
+          style={{ marginTop: 24 }}
+          type="submit"
+          loading={loading}
+        >
+          Send
+        </LoadingButton>
+      </form>
+    </>
   );
 };

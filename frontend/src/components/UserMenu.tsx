@@ -8,7 +8,6 @@ import { Modal } from "ui/Modal";
 import { UserForm } from "./UserForm";
 
 import AvatarPlaceholder from "assets/images/avatar-placeholder.svg?react";
-import TestUserAvatar from "assets/images/userTest.jpg";
 
 const Container = styled(ButtonBase)(() => ({
   display: "flex",
@@ -59,7 +58,7 @@ export const UserMenu: React.FC = () => {
     <>
       <Container type="button" onClick={() => setOpen(true)}>
         <UserName noWrap>{userName}</UserName>
-        <UserAvatar alt={userName ?? ""} src={TestUserAvatar}>
+        <UserAvatar alt={userName ?? ""} src={undefined}>
           <Placeholder />
         </UserAvatar>
       </Container>
