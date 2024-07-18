@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Avatar, ButtonBase, Typography, styled } from "@mui/material";
 
 import { useAppSelector } from "hooks";
-import { selectUserName } from "store/auth/selectors";
+import { selectUserAvatarUrl, selectUserName } from "store/auth/selectors";
 
 import { Modal } from "ui/Modal";
 import { UserForm } from "./UserForm";
 
 import AvatarPlaceholder from "assets/images/avatar-placeholder.svg?react";
+
+const VITE_API_STATIC_URL = import.meta.env.VITE_API_STATIC_URL;
 
 const Container = styled(ButtonBase)(() => ({
   display: "flex",
@@ -45,6 +47,8 @@ const Placeholder = styled(AvatarPlaceholder)(({ theme }) => ({
 
 export const UserMenu: React.FC = () => {
   const userName = useAppSelector(selectUserName);
+  const userNameAvatarUrl = useAppSelector(selectUserAvatarUrl);
+
   const [open, setOpen] = useState(false);
 
   const hanldeClose = (
@@ -58,7 +62,14 @@ export const UserMenu: React.FC = () => {
     <>
       <Container type="button" onClick={() => setOpen(true)}>
         <UserName noWrap>{userName}</UserName>
-        <UserAvatar alt={userName ?? ""} src={undefined}>
+        <UserAvatar
+          alt={userName ?? ""}
+          src={
+            userNameAvatarUrl
+              ? VITE_API_STATIC_URL + userNameAvatarUrl
+              : undefined
+          }
+        >
           <Placeholder />
         </UserAvatar>
       </Container>

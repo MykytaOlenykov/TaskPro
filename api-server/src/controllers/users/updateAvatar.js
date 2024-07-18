@@ -4,7 +4,7 @@ const path = require("path");
 const { User } = require("../../models/user");
 
 const staticDir = path.join(__dirname, "..", "..", "static");
-const avatarsDir = path.join(staticDir, "static", "avatars");
+const avatarsDir = path.join(staticDir, "avatars");
 
 const updateAvatar = async (req, res) => {
   const { _id, avatarUrl: oldAvatarUrl } = req.user;

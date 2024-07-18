@@ -16,7 +16,7 @@ import type { IBoard } from "types";
 
 import BackgroundPlaceholderIcon from "assets/images/background-placeholder.svg?react";
 
-const VITE_API_URL = import.meta.env.VITE_API_URL;
+const VITE_API_STATIC_URL = import.meta.env.VITE_API_STATIC_URL;
 
 const RadioBtn = styled(Radio)(({ theme }) => ({
   padding: 0,
@@ -42,7 +42,7 @@ const Icon = styled("span")<{ url: string; checked?: boolean }>(
     height: 18,
     backgroundColor: theme.palette.text.primary,
     opacity: checked ? 1 : 0.5,
-    maskImage: `url(${VITE_API_URL + url})`,
+    maskImage: `url(${VITE_API_STATIC_URL + url})`,
     maskRepeat: "no-repeat",
     maskPosition: "center",
     maskSize: "contain",
@@ -63,7 +63,7 @@ const Background = styled("span")<{ url: string; checked?: boolean }>(
     borderRadius: 6,
     overflow: "hidden",
     backgroundColor: theme.palette.background.default,
-    backgroundImage: `url(${VITE_API_URL + url})`,
+    backgroundImage: `url(${VITE_API_STATIC_URL + url})`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     backgroundSize: "cover",

@@ -93,7 +93,7 @@ export const editUserProfile = createAppAsyncThunk<
   }
 });
 
-export const changeTheme = createAppAsyncThunk<IThemeMode, string>(
+export const changeTheme = createAppAsyncThunk<IThemeMode, IThemeMode>(
   "auth/changeTheme",
   async (theme, { rejectWithValue }) => {
     try {
@@ -101,6 +101,20 @@ export const changeTheme = createAppAsyncThunk<IThemeMode, string>(
         theme,
       });
       return data.theme;
+    } catch (error) {
+      return rejectWithValue(null);
+    }
+  }
+);
+
+export const changeUserAvatar = createAppAsyncThunk<string, FormData>(
+  "auth/changeUserAvatar",
+  async (data, { rejectWithValue }) => {
+    try {
+      const {
+        data: { avatarUrl },
+      } = await api.patch<{ avatarUrl: string }>("users/avatars", data);
+      return avatarUrl;
     } catch (error) {
       return rejectWithValue(null);
     }

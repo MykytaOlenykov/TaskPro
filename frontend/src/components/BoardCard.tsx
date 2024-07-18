@@ -23,7 +23,7 @@ import { DeleteModal } from "ui/DeleteModal";
 
 import type { IBoard } from "types";
 
-const VITE_API_URL = import.meta.env.VITE_API_URL;
+const VITE_API_STATIC_URL = import.meta.env.VITE_API_STATIC_URL;
 
 const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
   position: "relative",
@@ -59,7 +59,7 @@ const Icon = styled("span")<{ url: string; selected: boolean }>(
     backgroundColor: selected
       ? theme.palette.text.primarySideBar
       : theme.palette.text.secondarySideBar,
-    maskImage: `url(${VITE_API_URL + url})`,
+    maskImage: `url(${VITE_API_STATIC_URL + url})`,
     maskRepeat: "no-repeat",
     maskPosition: "center",
     maskSize: "contain",

@@ -7,6 +7,7 @@ import {
   changeTheme,
   logOut,
   editUserProfile,
+  changeUserAvatar,
 } from "./operations";
 
 import type { IUser } from "types";
@@ -22,6 +23,7 @@ const initialState: IInitialState = {
     name: null,
     email: null,
     theme: "dark",
+    avatarUrl: null,
   },
   loggedIn: false,
   refreshing: true,
@@ -57,6 +59,9 @@ const authSlice = createSlice({
       })
       .addCase(editUserProfile.fulfilled, (state, action) => {
         state.user.name = action.payload.name;
+      })
+      .addCase(changeUserAvatar.fulfilled, (state, action) => {
+        state.user.avatarUrl = action.payload;
       })
       .addCase(logOut.fulfilled, (state) => {
         state.user = initialState.user;

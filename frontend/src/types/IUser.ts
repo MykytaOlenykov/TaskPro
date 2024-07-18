@@ -4,4 +4,5 @@ export interface IUser {
   name: string | null;
   email: string | null;
   theme: IThemeMode;
+  avatarUrl: string | null;
 }

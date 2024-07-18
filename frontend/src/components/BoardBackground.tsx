@@ -6,7 +6,7 @@ import { useAppSelector } from "hooks";
 import { selectBackgrounds } from "store/static/selectors";
 import { selectBoards } from "store/boards/selectors";
 
-const VITE_API_URL = import.meta.env.VITE_API_URL;
+const VITE_API_STATIC_URL = import.meta.env.VITE_API_STATIC_URL;
 
 const Container = styled("div")<{ url: string }>(({ url }) => ({
   position: "fixed",
@@ -15,7 +15,7 @@ const Container = styled("div")<{ url: string }>(({ url }) => ({
   zIndex: -1,
   width: "100%",
   height: "100%",
-  backgroundImage: `url(${VITE_API_URL + url})`,
+  backgroundImage: `url(${VITE_API_STATIC_URL + url})`,
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",
