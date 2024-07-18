@@ -10,7 +10,11 @@ const ctrl = require("../../controllers/users");
 
 const router = Router();
 
-router.post("/register", validateBody(validationSchemes.user), ctrl.register);
+router.post(
+  "/register",
+  validateBody(validationSchemes.register),
+  ctrl.register
+);
 
 router.post("/login", validateBody(validationSchemes.login), ctrl.login);
 
@@ -19,6 +23,13 @@ router.post("/logout", authenticate, ctrl.logout);
 router.get("/current", authenticate, ctrl.getCurrent);
 
 router.post("/refresh", verifyRefreshToken, ctrl.refresh);
+
+router.put(
+  "/",
+  authenticate,
+  validateBody(validationSchemes.user),
+  ctrl.update
+);
 
 router.patch(
   "/",

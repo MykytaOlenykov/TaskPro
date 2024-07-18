@@ -11,7 +11,7 @@ import { FormTitle } from "ui/FormTitle";
 
 import type { IColumn } from "types";
 
-interface IForm {
+interface IFormData {
   name: string;
 }
 
@@ -32,14 +32,14 @@ export const ColumnForm: React.FC<IProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IForm>({
+  } = useForm<IFormData>({
     defaultValues: {
       name: columnName,
     },
     resolver: yupResolver(columnSchema),
   });
 
-  const onSubmit: SubmitHandler<IForm> = (data) => {
+  const onSubmit: SubmitHandler<IFormData> = (data) => {
     onSubmitForm(data);
   };
 

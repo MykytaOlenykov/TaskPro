@@ -49,6 +49,10 @@ const passwordSchema = Joi.string().trim().min(8).max(255).required();
 
 const user = Joi.object({
   name: nameSchema,
+});
+
+const register = Joi.object({
+  name: nameSchema,
   email: emailSchema,
   password: passwordSchema,
 });
@@ -64,6 +68,7 @@ const theme = Joi.object({
 
 const validationSchemes = {
   user,
+  register,
   login,
   theme,
 };

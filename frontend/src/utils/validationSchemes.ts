@@ -41,6 +41,10 @@ const logInSchema = yup.object({
     .required("Password is required."),
 });
 
+const userSchema = yup.object({
+  name,
+});
+
 // Board
 
 const titleSchema = yup
@@ -82,4 +86,11 @@ const taskSchema = yup.object({
   priority_id: yup.string().required("Priority is required."),
 });
 
-export { registerSchema, logInSchema, boardSchema, columnSchema, taskSchema };
+export {
+  userSchema,
+  registerSchema,
+  logInSchema,
+  boardSchema,
+  columnSchema,
+  taskSchema,
+};

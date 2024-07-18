@@ -102,7 +102,7 @@ const BackgroundPlaceholder: React.FC<{
   </BackgroundPlaceholderContainer>
 );
 
-interface IForm {
+interface IFormData {
   name: string;
   icon_id: string;
   background_id?: string | null;
@@ -133,7 +133,7 @@ export const BoardForm: React.FC<IProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IForm>({
+  } = useForm<IFormData>({
     defaultValues: {
       name: boardName,
       icon_id: boardIconId ?? "",
@@ -142,7 +142,7 @@ export const BoardForm: React.FC<IProps> = ({
     resolver: yupResolver(boardSchema),
   });
 
-  const onSubmit: SubmitHandler<IForm> = (data) => {
+  const onSubmit: SubmitHandler<IFormData> = (data) => {
     onSubmitForm({ ...data, background_id: data.background_id || null });
   };
 

@@ -74,7 +74,7 @@ const RadioBtnIcon = styled("div")<{ bgColor?: string }>(
   })
 );
 
-interface IForm {
+interface IFormData {
   name: string;
   comment?: string;
   deadline: Date;
@@ -105,7 +105,7 @@ export const TaskForm: React.FC<IProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IForm>({
+  } = useForm<IFormData>({
     defaultValues: {
       name: taskName ?? "",
       comment: taskComment ?? "",
@@ -117,7 +117,7 @@ export const TaskForm: React.FC<IProps> = ({
 
   const taskPriorities = useAppSelector(selectTaskPriorities);
 
-  const onSubmit: SubmitHandler<IForm> = (data) => {
+  const onSubmit: SubmitHandler<IFormData> = (data) => {
     onSubmitForm({
       comment: data.comment || null,
       deadline: convertToUtcDateString(data.deadline),

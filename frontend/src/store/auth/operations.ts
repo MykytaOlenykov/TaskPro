@@ -81,6 +81,18 @@ export const getCurrentUser = createAppAsyncThunk<NonNullable<IUser>, void>(
   }
 );
 
+export const editUserProfile = createAppAsyncThunk<
+  NonNullable<Pick<IUser, "name">>,
+  NonNullable<Pick<IUser, "name">>
+>("auth/editUserProfile", async (data, { rejectWithValue }) => {
+  try {
+    const { data: user } = await api.put<NonNullable<IUser>>("users", data);
+    return user;
+  } catch (error) {
+    return rejectWithValue(null);
+  }
+});
+
 export const changeTheme = createAppAsyncThunk<IThemeMode, string>(
   "auth/changeTheme",
   async (theme, { rejectWithValue }) => {

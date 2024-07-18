@@ -6,6 +6,7 @@ import {
   register,
   changeTheme,
   logOut,
+  editUserProfile,
 } from "./operations";
 
 import type { IUser } from "types";
@@ -53,6 +54,9 @@ const authSlice = createSlice({
       })
       .addCase(changeTheme.fulfilled, (state, action) => {
         state.user.theme = action.payload;
+      })
+      .addCase(editUserProfile.fulfilled, (state, action) => {
+        state.user.name = action.payload.name;
       })
       .addCase(logOut.fulfilled, (state) => {
         state.user = initialState.user;

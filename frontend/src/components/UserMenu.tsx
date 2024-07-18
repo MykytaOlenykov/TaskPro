@@ -1,17 +1,22 @@
-import React from "react";
-import { Avatar, Typography, styled } from "@mui/material";
+import React, { useState } from "react";
+import { Avatar, ButtonBase, Typography, styled } from "@mui/material";
 
 import { useAppSelector } from "hooks";
 import { selectUserName } from "store/auth/selectors";
 
+import { Modal } from "ui/Modal";
+import { UserForm } from "./UserForm";
+
 import AvatarPlaceholder from "assets/images/avatar-placeholder.svg?react";
 import TestUserAvatar from "assets/images/userTest.jpg";
 
-const Container = styled("div")(() => ({
+const Container = styled(ButtonBase)(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   gap: 8,
+  fontFamily: "inherit",
+  borderRadius: 8,
 }));
 
 const UserAvatar = styled(Avatar)(({ theme }) => ({
@@ -41,13 +46,26 @@ const Placeholder = styled(AvatarPlaceholder)(({ theme }) => ({
 
 export const UserMenu: React.FC = () => {
   const userName = useAppSelector(selectUserName);
+  const [open, setOpen] = useState(false);
+
+  const hanldeClose = (
+    reason: "backdropClick" | "escapeKeyDown" | "button"
+  ) => {
+    if (reason === "backdropClick") return;
+    setOpen(false);
+  };
 
   return (
-    <Container>
-      <UserName noWrap>{userName}</UserName>
-      <UserAvatar alt={userName ?? ""} src={TestUserAvatar}>
-        <Placeholder />
-      </UserAvatar>
-    </Container>
+    <>
+      <Container type="button" onClick={() => setOpen(true)}>
+        <UserName noWrap>{userName}</UserName>
+        <UserAvatar alt={userName ?? ""} src={TestUserAvatar}>
+          <Placeholder />
+        </UserAvatar>
+      </Container>
+      <Modal open={open} onClose={hanldeClose}>
+        <UserForm />
+      </Modal>
+    </>
   );
 };

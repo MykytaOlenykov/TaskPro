@@ -195,6 +195,7 @@ const CustomCalendarHeader: React.FC<PickersCalendarHeaderProps<Date>> = (
   return (
     <CustomCalendarHeaderRoot>
       <IconButton
+        type="button"
         style={{ padding: 0 }}
         onClick={selectPreviousMonth}
         title="Previous month"
@@ -203,6 +204,7 @@ const CustomCalendarHeader: React.FC<PickersCalendarHeaderProps<Date>> = (
       </IconButton>
       <DateLabel variant="body2">{format(currentMonth, "MMMM yyyy")}</DateLabel>
       <IconButton
+        type="button"
         style={{ padding: 0 }}
         onClick={selectNextMonth}
         title="Next month"

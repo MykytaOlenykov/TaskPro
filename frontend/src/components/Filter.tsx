@@ -185,7 +185,7 @@ export const Filter: React.FC = () => {
           }}
         >
           <FilterSubTitle>Label color</FilterSubTitle>
-          <ShowAllButton onClick={() => handleChangeFilter(null)}>
+          <ShowAllButton type="button" onClick={() => handleChangeFilter(null)}>
             Show all
           </ShowAllButton>
         </li>

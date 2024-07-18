@@ -9,11 +9,13 @@ import {
   boardSchema,
   columnSchema,
   taskSchema,
+  userSchema,
 } from "./validationSchemes";
 
 export {
   createAppAsyncThunk,
   token,
+  userSchema,
   registerSchema,
   logInSchema,
   boardSchema,

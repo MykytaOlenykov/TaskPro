@@ -6,6 +6,7 @@ const logout = require("./logout");
 const refresh = require("./refresh");
 const getCurrent = require("./getCurrent");
 const changeTheme = require("./changeTheme");
+const update = require("./update");
 
 module.exports = {
   register: ctrlWrapper(register),
@@ -14,4 +15,5 @@ module.exports = {
   refresh: ctrlWrapper(refresh),
   getCurrent: ctrlWrapper(getCurrent),
   changeTheme: ctrlWrapper(changeTheme),
+  update: ctrlWrapper(update),
 };
