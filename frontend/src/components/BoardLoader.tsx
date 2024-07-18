@@ -1,7 +1,7 @@
 import { LinearProgress, styled } from "@mui/material";
 
 import { useAppSelector } from "hooks";
-import { selectLoading } from "store/boards/selectors";
+import { selectLoadingBoard } from "store/boards/selectors";
 
 const Loader = styled(LinearProgress)(({ theme }) => ({
   position: "absolute",
@@ -15,7 +15,7 @@ const Loader = styled(LinearProgress)(({ theme }) => ({
 }));
 
 export const BoardLoader = () => {
-  const loading = useAppSelector(selectLoading);
+  const loading = useAppSelector(selectLoadingBoard);
 
   return loading ? <Loader /> : null;
 };

@@ -13,12 +13,14 @@ import type { IBoard } from "types";
 
 export interface IInitialState {
   items: IBoard[];
-  loading: boolean;
+  loadingBoard: boolean;
+  boardNotFound: boolean;
 }
 
 const initialState: IInitialState = {
   items: [],
-  loading: false,
+  loadingBoard: false,
+  boardNotFound: false,
 };
 
 const boardsSlice = createSlice({
@@ -34,13 +36,15 @@ const boardsSlice = createSlice({
         const { board } = action.payload;
         const idx = state.items.findIndex(({ _id }) => _id === board._id);
         idx !== -1 && state.items.splice(idx, 1, board);
-        state.loading = false;
+        state.loadingBoard = false;
       })
       .addCase(getBoard.pending, (state) => {
-        state.loading = true;
+        state.loadingBoard = true;
+        state.boardNotFound = false;
       })
       .addCase(getBoard.rejected, (state) => {
-        state.loading = false;
+        state.loadingBoard = false;
+        state.boardNotFound = true;
       })
       .addCase(createBoard.fulfilled, (state, action) => {
         state.items.push(action.payload);
@@ -56,7 +60,7 @@ const boardsSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state) => {
         state.items = [];
-        state.loading = false;
+        state.loadingBoard = false;
       });
   },
 });

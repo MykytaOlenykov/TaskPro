@@ -10,7 +10,7 @@ import { LoginForm } from "components/LoginForm";
 import { RestrictedRoute } from "components/RestrictedRoute";
 import { PrivateRoute } from "components/PrivateRoute";
 import { PageFallback } from "ui/PageFallback";
-import { NotFound } from "ui/NotFound";
+import { NotFoundSubPage } from "ui/NotFoundSubPage";
 
 const WelcomePage = lazy(() => import("pages/WelcomePage"));
 const AuthPage = lazy(() => import("pages/AuthPage"));
@@ -18,33 +18,6 @@ const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 const HomePage = lazy(() => import("pages/HomePage"));
 const IndexSubPage = lazy(() => import("pages/IndexSubPage"));
 const ScreensPage = lazy(() => import("pages/ScreensPage"));
-
-const NotFoundFallback = () => {
-  return (
-    <div
-      style={{
-        position: "relative",
-        zIndex: -1,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      <div
-        style={{
-          margin: "0 auto",
-          maxWidth: 500,
-          flexGrow: 1,
-          transform: "translateY(-60px)",
-        }}
-      >
-        <NotFound />
-      </div>
-    </div>
-  );
-};
 
 export function App() {
   const dispatch = useAppDispatch();
@@ -89,7 +62,7 @@ export function App() {
         >
           <Route index element={<IndexSubPage />} />
           <Route path=":boardId" element={<ScreensPage />} />
-          <Route path="*" element={<NotFoundFallback />} />
+          <Route path="*" element={<NotFoundSubPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />
