@@ -1,26 +1,26 @@
 [
   {
-    "url": "/static/icons/container.svg"
+    "url": "/icons/container.svg"
   },
   {
-    "url": "/static/icons/lightning.svg"
+    "url": "/icons/lightning.svg"
   },
   {
-    "url": "/static/icons/colors.svg"
+    "url": "/icons/colors.svg"
   },
   {
-    "url": "/static/icons/puzzle-piece.svg"
+    "url": "/icons/puzzle-piece.svg"
   },
   {
-    "url": "/static/icons/star.svg"
+    "url": "/icons/star.svg"
   },
   {
-    "url": "/static/icons/hexagon.svg"
+    "url": "/icons/hexagon.svg"
   },
   {
-    "url": "/static/icons/project.svg"
+    "url": "/icons/project.svg"
   },
   {
-    "url": "/static/icons/loading.svg"
+    "url": "/icons/loading.svg"
   }
 ]

@@ -3,21 +3,21 @@ const path = require("path");
 
 const { User } = require("../../models/user");
 
-const rootDir = path.join(__dirname, "..", "..");
-const avatarsDir = path.join(rootDir, "static", "avatars");
+const staticDir = path.join(__dirname, "..", "..", "static");
+const avatarsDir = path.join(staticDir, "static", "avatars");
 
 const updateAvatar = async (req, res) => {
   const { _id, avatarUrl: oldAvatarUrl } = req.user;
   const { filename, path: tmpUpload } = req.file;
 
   if (oldAvatarUrl) {
-    await fs.unlink(path.join(rootDir, oldAvatarUrl)).catch(() => {});
+    await fs.unlink(path.join(staticDir, oldAvatarUrl)).catch(() => {});
   }
 
   const resultUpload = path.join(avatarsDir, filename);
 
   await fs.rename(tmpUpload, resultUpload);
-  const avatarUrl = path.join("static", "avatars", filename);
+  const avatarUrl = path.join(path.sep, "avatars", filename);
 
   await User.findByIdAndUpdate(_id, { avatarUrl });
 
