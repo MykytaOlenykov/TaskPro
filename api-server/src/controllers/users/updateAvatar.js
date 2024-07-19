@@ -1,3 +1,5 @@
+const sharp = require("sharp");
+
 const fs = require("fs/promises");
 const path = require("path");
 
@@ -16,7 +18,16 @@ const updateAvatar = async (req, res) => {
 
   const resultUpload = path.join(avatarsDir, filename);
 
-  await fs.rename(tmpUpload, resultUpload);
+  const format = path.extname(filename).toLowerCase().slice(1);
+  await sharp(tmpUpload)
+    .resize(240, 240, {
+      fit: sharp.fit.cover,
+      position: sharp.strategy.entropy,
+    })
+    .toFormat(format, { quality: 80 })
+    .toFile(resultUpload);
+
+  await fs.unlink(tmpUpload);
 
   const avatarUrl = path.join(path.sep, "avatars", filename);
 
