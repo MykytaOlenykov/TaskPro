@@ -1,4 +1,4 @@
 export interface IAsyncError {
-  statusCode: number;
+  statusCode: number | "ERR_CANCELED";
   message: string;
 }

@@ -13,6 +13,10 @@ const errorMessages = {
 
 export const convertAsyncError = (error: unknown): IAsyncError => {
   if (isAxiosError(error)) {
+    if (error.code === "ERR_CANCELED") {
+      return { statusCode: "ERR_CANCELED", message: "" };
+    }
+
     const statusCode = (error.response?.status ??
       500) as keyof typeof errorMessages;
 

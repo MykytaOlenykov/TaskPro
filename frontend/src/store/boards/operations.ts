@@ -17,10 +17,10 @@ export const getBoards = createAppAsyncThunk<IBoard[], void>(
 
 export const getBoard = createAppAsyncThunk<
   { board: IBoard; columns: IColumn[]; tasks: ITask[] },
-  string
->("boards/getBoard", async (_id, { rejectWithValue }) => {
+  { _id: string; signal: AbortSignal }
+>("boards/getBoard", async ({ _id, signal }, { rejectWithValue }) => {
   try {
-    const { data } = await api.get(`boards/${_id}`);
+    const { data } = await api.get(`boards/${_id}`, { signal });
     return data;
   } catch (error) {
     return rejectWithValue(convertAsyncError(error));

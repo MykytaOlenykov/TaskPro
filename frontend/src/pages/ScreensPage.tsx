@@ -18,7 +18,15 @@ const ScreensPage: React.FC = () => {
   const boardNotFound = useAppSelector(selectBoardNotFound);
 
   useEffect(() => {
-    boardId && dispatch(getBoard(boardId));
+    const controller = new AbortController();
+
+    if (boardId) {
+      dispatch(getBoard({ _id: boardId, signal: controller.signal }));
+    }
+
+    return () => {
+      controller.abort();
+    };
   }, [boardId, dispatch]);
 
   if (boardNotFound) {
