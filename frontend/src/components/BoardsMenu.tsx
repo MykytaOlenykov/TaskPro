@@ -21,6 +21,7 @@ import { BoardsList } from "./BoardsList";
 import type { IBoard } from "types";
 
 const Container = styled(Box)(({ theme }) => ({
+  marginBottom: 40,
   padding: "0 14px",
   [theme.breakpoints.up("md")]: {
     padding: "0 20px",

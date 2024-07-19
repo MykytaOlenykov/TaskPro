@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import { List, styled, ListItem, useTheme, useMediaQuery } from "@mui/material";
+import { List, styled, ListItem } from "@mui/material";
 
 import { useAppSelector } from "hooks";
 import { selectBoards } from "store/boards/selectors";
@@ -24,60 +24,31 @@ interface IProps {
 export const BoardsList: React.FC<IProps> = ({ onCloseSideBar }) => {
   const { boardId } = useParams();
 
-  const theme = useTheme();
-  const isTablet = useMediaQuery(theme.breakpoints.up("md"));
-
   const boards = useAppSelector(selectBoards);
 
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-
-  const minHeight = 61 * 3 + 4 * 2;
-
-  const mobileMaxHeight = windowHeight - 600;
-  const tabletMaxHeight = windowHeight - 652;
-  const maxHeight = isTablet ? tabletMaxHeight : mobileMaxHeight;
-
-  useEffect(() => {
-    const updateMaxHeight = () => {
-      setWindowHeight(window.innerHeight);
-    };
-
-    window.addEventListener("resize", updateMaxHeight);
-
-    return () => {
-      window.removeEventListener("resize", updateMaxHeight);
-    };
-  }, []);
-
   return (
-    <div
+    <StyledList
       style={{
-        padding: "40px 0",
+        maxHeight: "100%",
+        minHeight: 61 * 3 + 4 * 2,
       }}
     >
-      <StyledList
-        style={{
-          maxHeight: maxHeight < minHeight ? minHeight : maxHeight,
-          minHeight,
-        }}
-      >
-        {boards.map(({ _id, name, icon_id, background_id }) => {
-          const selected = boardId === _id;
+      {boards.map(({ _id, name, icon_id, background_id }) => {
+        const selected = boardId === _id;
 
-          return (
-            <ListItem key={_id} disablePadding>
-              <BoardCard
-                _id={_id}
-                name={name}
-                iconId={icon_id}
-                backgroundId={background_id}
-                selected={selected}
-                onCloseSideBar={onCloseSideBar}
-              />
-            </ListItem>
-          );
-        })}
-      </StyledList>
-    </div>
+        return (
+          <ListItem key={_id} disablePadding>
+            <BoardCard
+              _id={_id}
+              name={name}
+              iconId={icon_id}
+              backgroundId={background_id}
+              selected={selected}
+              onCloseSideBar={onCloseSideBar}
+            />
+          </ListItem>
+        );
+      })}
+    </StyledList>
   );
 };
