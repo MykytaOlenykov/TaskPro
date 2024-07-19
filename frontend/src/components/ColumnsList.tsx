@@ -19,22 +19,25 @@ const StyledList = styled(List)(({ theme }) => ({
   alignItems: "start",
   gap: 34,
   margin: 0,
-  padding: "0 20px 36px",
+  padding: "0 20px",
   height: "100%",
   overflowX: "auto",
   overflowY: "hidden",
   scrollbarColor: `${theme.palette.background.scrollThumb} ${theme.palette.background.scrollBar}`,
   [theme.breakpoints.up("md")]: {
-    padding: "0 32px 64px",
+    padding: "0 32px",
   },
   [theme.breakpoints.up("lg")]: {
-    padding: "0 24px 28px",
+    padding: "0 24px",
   },
 }));
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
   flexShrink: 0,
   flexGrow: 1,
+  height: "100%",
   maxWidth: "calc(100vw - 40px)",
   [theme.breakpoints.up("sm")]: {
     maxWidth: 335,

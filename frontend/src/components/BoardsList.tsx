@@ -29,7 +29,7 @@ export const BoardsList: React.FC<IProps> = ({ onCloseSideBar }) => {
   return (
     <StyledList
       style={{
-        maxHeight: "100%",
+        height: "100%",
         minHeight: 61 * 3 + 4 * 2,
       }}
     >

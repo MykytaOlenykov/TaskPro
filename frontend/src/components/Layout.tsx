@@ -34,7 +34,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
     height: "calc(100vh - 68px)",
   },
   [theme.breakpoints.up("lg")]: {
-    padding: "60px 0 8px",
+    padding: "60px 0 24px",
   },
 }));
 

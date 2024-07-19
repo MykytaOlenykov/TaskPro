@@ -17,20 +17,16 @@ const StyledList = styled(List)(({ theme }) => ({
 
 interface IProps {
   columnId: string;
-  taskListMaxHeight: number;
 }
 
-export const TasksList: React.FC<IProps> = ({
-  columnId,
-  taskListMaxHeight,
-}) => {
+export const TasksList: React.FC<IProps> = ({ columnId }) => {
   const filteredTasks = useAppSelector(selectFilteredTasks);
   const visibledTasks = filteredTasks.filter(
     ({ column_id }) => column_id === columnId
   );
 
   return visibledTasks.length ? (
-    <StyledList style={{ maxHeight: taskListMaxHeight }}>
+    <StyledList>
       {visibledTasks.map(({ _id, name, comment, priority_id, deadline }) => (
         <ListItem key={_id} disablePadding>
           <TaskCard
