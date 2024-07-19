@@ -91,14 +91,12 @@ export const UserAvatar: React.FC = () => {
   return (
     <Container hidePlaceholder={!!userNameAvatarUrl}>
       <AvatarThumb>
-        <Avatar
-          alt="user avatar"
-          src={
-            userNameAvatarUrl
-              ? VITE_API_STATIC_URL + userNameAvatarUrl
-              : undefined
-          }
-        />
+        {userNameAvatarUrl && (
+          <Avatar
+            alt="user avatar"
+            src={VITE_API_STATIC_URL + userNameAvatarUrl}
+          />
+        )}
       </AvatarThumb>
       <Button
         sx={(theme) => ({
