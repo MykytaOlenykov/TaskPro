@@ -8,6 +8,7 @@ const getCurrent = require("./getCurrent");
 const changeTheme = require("./changeTheme");
 const update = require("./update");
 const updateAvatar = require("./updateAvatar");
+const help = require("./help");
 
 module.exports = {
   register: ctrlWrapper(register),
@@ -18,4 +19,5 @@ module.exports = {
   changeTheme: ctrlWrapper(changeTheme),
   update: ctrlWrapper(update),
   updateAvatar: ctrlWrapper(updateAvatar),
+  help: ctrlWrapper(help),
 };

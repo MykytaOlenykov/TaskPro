@@ -3,6 +3,7 @@ const ctrlWrapper = require("./ctrlWrapper");
 const handleMongooseError = require("./handleMongooseError");
 const isValidObjectId = require("./isValidObjectId");
 const createTokens = require("./createTokens");
+const sendEmail = require("./sendEmail");
 
 module.exports = {
   HttpError,
@@ -10,4 +11,5 @@ module.exports = {
   handleMongooseError,
   isValidObjectId,
   createTokens,
+  sendEmail,
 };

@@ -70,11 +70,17 @@ const theme = Joi.object({
   theme: Joi.string().required(),
 });
 
+const help = Joi.object({
+  email: emailSchema,
+  comment: Joi.string().trim().max(1000).required(),
+});
+
 const validationSchemes = {
   user,
   register,
   login,
   theme,
+  help,
 };
 
 module.exports = {

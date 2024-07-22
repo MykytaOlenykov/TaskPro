@@ -46,4 +46,6 @@ router.patch(
   ctrl.updateAvatar
 );
 
+router.post("/help", validateBody(validationSchemes.help), ctrl.help);
+
 module.exports = router;

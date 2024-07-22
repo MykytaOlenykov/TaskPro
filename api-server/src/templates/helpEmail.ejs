@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Email</title>
+    <style>
+      .main {
+        box-sizing: border-box;
+        padding: 64px;
+        background-color: #f6f6f7;
+        background-image: linear-gradient(
+          180deg,
+          rgba(196, 196, 196, 0) 25%,
+          #bedbb0 92.19%
+        );
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        box-sizing: border-box;
+        margin: 0 auto;
+        background-color: #fcfcfc;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        height: min-content;
+        box-sizing: border-box;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+        color: #161616;
+      }
+      .content p:first-child {
+        margin: 0 0 10px;
+      }
+      .content,
+      .user-email {
+        color: #161616;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <div class="header">
+          <h1>Support Request</h1>
+        </div>
+        <div class="content">
+          <p>Dear <span class="user-email"><%= userEmail %></span>,</p>
+          <p>
+            Thank you for reaching out to our support team. We have received
+            your request and will get back to you as soon as possible.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
