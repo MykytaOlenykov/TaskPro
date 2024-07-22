@@ -120,3 +120,14 @@ export const changeUserAvatar = createAppAsyncThunk<string, FormData>(
     }
   }
 );
+
+export const sendHelpEmail = createAppAsyncThunk<
+  void,
+  { email: string; comment: string }
+>("auth/sendHelpEmail", async (data, { rejectWithValue }) => {
+  try {
+    await api.post("users/help", data);
+  } catch (error) {
+    return rejectWithValue(convertAsyncError(error));
+  }
+});

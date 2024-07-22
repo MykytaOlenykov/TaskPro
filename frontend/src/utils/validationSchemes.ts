@@ -45,6 +45,15 @@ const userSchema = yup.object({
   name,
 });
 
+const helpSchema = yup.object({
+  email,
+  comment: yup
+    .string()
+    .trim()
+    .max(1000, "Comment must be at most 1000 characters long.")
+    .required("Comment is required."),
+});
+
 // Board
 
 const titleSchema = yup
@@ -72,7 +81,7 @@ const taskSchema = yup.object({
   comment: yup
     .string()
     .trim()
-    .max(1000, "Comment must be at most 1000 characters long."),
+    .max(1000, "Description must be at most 1000 characters long."),
   deadline: yup
     .date()
     .nullable()
@@ -93,4 +102,5 @@ export {
   boardSchema,
   columnSchema,
   taskSchema,
+  helpSchema,
 };

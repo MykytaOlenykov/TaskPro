@@ -10,6 +10,7 @@ import {
   columnSchema,
   taskSchema,
   userSchema,
+  helpSchema,
 } from "./validationSchemes";
 
 export {
@@ -21,6 +22,7 @@ export {
   boardSchema,
   columnSchema,
   taskSchema,
+  helpSchema,
   convertToUtcDateString,
   convertAsyncError,
   isAsyncError,

@@ -25,7 +25,7 @@ const help = async (req, res) => {
   const hostEmailOptions = {
     to: process.env.EMAIL_HOST_USER,
     subject: "Support",
-    html: `User email: ${email}.<br/>Comment: ${comment}.`,
+    html: `User email: ${email}<br/>Comment: ${comment}`,
   };
 
   await Promise.all([sendEmail(userEmailOptions), sendEmail(hostEmailOptions)]);
