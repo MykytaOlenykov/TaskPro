@@ -73,6 +73,7 @@ const tasksSlice = createSlice({
       .addCase(logOut.fulfilled, (state) => {
         state.items = [];
         state.priorities = [];
+        state.filter = null;
       });
   },
 });

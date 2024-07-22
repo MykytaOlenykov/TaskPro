@@ -65,7 +65,7 @@ const authSlice = createSlice({
       })
       .addCase(logOut.fulfilled, (state) => {
         state.user = initialState.user;
-        state.loggedIn = initialState.loggedIn;
+        state.loggedIn = false;
       });
   },
 });

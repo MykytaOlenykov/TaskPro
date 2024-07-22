@@ -67,6 +67,7 @@ const boardsSlice = createSlice({
       .addCase(logOut.fulfilled, (state) => {
         state.items = [];
         state.loadingBoard = false;
+        state.boardNotFound = false;
       });
   },
 });
