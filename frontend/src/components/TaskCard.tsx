@@ -1,20 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { format } from "date-fns";
-import { IconButton, Menu, MenuItem, styled, Typography } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import { styled, Typography } from "@mui/material";
 
-import { useAppDispatch, useAppSelector } from "hooks";
+import { useAppSelector } from "hooks";
 import { selectTaskPriorities } from "store/tasks/selectors";
-import { changeTaskColumn, deleteTask, editTask } from "store/tasks/operations";
-import { selectColumns } from "store/columns/selectors";
 
-import { TaskForm } from "./TaskForm";
-import { DeleteModal } from "ui/DeleteModal";
-import { Modal } from "ui/Modal";
-
-import type { ITask } from "types";
+import { TaskActionBar } from "./TaskActionBar";
 
 const Card = styled("div")<{ statusColor?: string }>(
   ({ theme, statusColor }) => ({
@@ -106,55 +97,6 @@ const PriorityStatus = styled("div")<{ statusColor?: string }>(
   })
 );
 
-const Button = styled(IconButton)(({ theme }) => ({
-  padding: 0,
-  color: theme.palette.text.primary,
-  opacity: 0.5,
-  "&:hover": {
-    color: theme.palette.text.primaryAccent,
-  },
-}));
-
-const ColumnMenu = styled(Menu)(({ theme }) => ({
-  marginTop: 24,
-  ".MuiPaper-root": {
-    backgroundImage: "none",
-    backgroundColor: theme.palette.background.popup,
-    borderRadius: 8,
-    boxShadow: "0 4px 16px 0 rgba(17, 17, 17, 0.1)",
-  },
-  ".MuiList-root": {
-    display: "flex",
-    flexDirection: "column",
-    gap: 8,
-    padding: 18,
-    minWidth: 135,
-    maxWidth: 180,
-  },
-}));
-
-const ColumnItem = styled(MenuItem)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: 0,
-  color: theme.palette.text.popup,
-  "&:hover": {
-    color: theme.palette.text.primaryAccent,
-    background: "none !important",
-  },
-  "&.Mui-selected": {
-    color: theme.palette.text.primaryAccent,
-    background: "none !important",
-  },
-}));
-
-const ColumnName = styled(Typography)(() => ({
-  fontSize: 14,
-  letterSpacing: "-0.02em",
-  color: "inherit",
-}));
-
 interface IProps {
   taskId: string;
   taskName: string;
@@ -172,58 +114,10 @@ export const TaskCard: React.FC<IProps> = ({
   taskDeadline,
   columnId,
 }) => {
-  const dispatch = useAppDispatch();
-  const columns = useAppSelector(selectColumns);
   const taskPriorities = useAppSelector(selectTaskPriorities);
   const taskPriority = taskPriorities.find(({ _id }) => _id === taskPriorityId);
   const parsedTaskDeadline = new Date(taskDeadline + "T00:00:00");
   const formattedTaskDeadline = format(parsedTaskDeadline, "dd/MM/yyyy");
-
-  const [openEditTask, setOpenEditTask] = useState(false);
-  const [openDeleteTask, setOpenDeleteTask] = useState(false);
-  const [anchorElColumnMenu, setAnchorElColumnMenu] =
-    useState<null | HTMLElement>(null);
-
-  const handleOpenEditTask = () => {
-    setOpenEditTask(true);
-  };
-
-  const handleCloseEditTask = (
-    reason: "backdropClick" | "escapeKeyDown" | "button"
-  ) => {
-    if (reason === "backdropClick") return;
-    setOpenEditTask(false);
-  };
-
-  const handleEditTask = (data: Omit<ITask, "_id" | "column_id">) => {
-    setOpenEditTask(false);
-    dispatch(editTask({ ...data, _id: taskId }));
-  };
-
-  const handleOpenDeleteTask = () => {
-    setOpenDeleteTask(true);
-  };
-
-  const handleCloseDeleteTask = () => {
-    setOpenDeleteTask(false);
-  };
-
-  const handleDeleteTask = () => {
-    dispatch(deleteTask(taskId));
-  };
-
-  const handleOpenColumnMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElColumnMenu(event.currentTarget);
-  };
-
-  const handleCloseColumnMenu = () => {
-    setAnchorElColumnMenu(null);
-  };
-
-  const handleChangeColumn = (columnId: string) => {
-    handleCloseColumnMenu();
-    dispatch(changeTaskColumn({ _id: taskId, column_id: columnId }));
-  };
 
   return (
     <Card statusColor={taskPriority?.color}>
@@ -247,78 +141,16 @@ export const TaskCard: React.FC<IProps> = ({
           <SubTitle variant="body1">Deadline</SubTitle>
           <SubText>{formattedTaskDeadline}</SubText>
         </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            paddingLeft: "16px",
-            gap: 8,
-          }}
-        >
-          <Button type="button" onClick={handleOpenColumnMenu}>
-            <ArrowCircleRightOutlinedIcon sx={{ width: 20, height: 20 }} />
-          </Button>
-          <ColumnMenu
-            id="column-menu"
-            anchorEl={anchorElColumnMenu}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            open={Boolean(anchorElColumnMenu)}
-            onClose={handleCloseColumnMenu}
-          >
-            {columns
-              .filter(({ _id }) => _id !== columnId)
-              .map(({ _id, name }) => (
-                <ColumnItem
-                  key={_id}
-                  onClick={() => handleChangeColumn(_id)}
-                  disableRipple
-                  disableTouchRipple
-                  disableGutters
-                >
-                  <ColumnName textAlign="center" variant="body1" noWrap>
-                    {name}
-                  </ColumnName>
-                  <ArrowCircleRightOutlinedIcon
-                    sx={{ width: 20, height: 20 }}
-                  />
-                </ColumnItem>
-              ))}
-          </ColumnMenu>
 
-          <Button type="button" onClick={handleOpenEditTask}>
-            <EditOutlinedIcon sx={{ width: 20, height: 20 }} />
-          </Button>
-          <Button type="button" onClick={handleOpenDeleteTask}>
-            <DeleteOutlineOutlinedIcon sx={{ width: 20, height: 20 }} />
-          </Button>
-        </div>
-      </CardBar>
-
-      <Modal open={openEditTask} onClose={handleCloseEditTask}>
-        <TaskForm
+        <TaskActionBar
           taskName={taskName}
           taskComment={taskComment}
           taskPriorityId={taskPriorityId}
           taskDeadline={taskDeadline}
-          buttonText="Edit"
-          title="Edit card"
-          onSubmitForm={handleEditTask}
+          columnId={columnId}
+          taskId={taskId}
         />
-      </Modal>
-      <DeleteModal
-        text={`Are you sure you want to delete the task?`}
-        open={openDeleteTask}
-        onClose={handleCloseDeleteTask}
-        onDelete={handleDeleteTask}
-      />
+      </CardBar>
     </Card>
   );
 };

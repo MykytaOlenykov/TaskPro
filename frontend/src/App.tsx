@@ -1,8 +1,8 @@
 import { Suspense, lazy, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import { getCurrentUser } from "store/auth/operations";
-import { selectRefreshing } from "store/auth/selectors";
+import { selectLoggedIn, selectRefreshing } from "store/auth/selectors";
 import { useAppSelector, useAppDispatch } from "hooks";
 
 import { RegisterForm } from "components/RegisterForm";
@@ -19,6 +19,17 @@ const HomePage = lazy(() => import("pages/HomePage"));
 const IndexSubPage = lazy(() => import("pages/IndexSubPage"));
 const ScreensPage = lazy(() => import("pages/ScreensPage"));
 
+const RootRedirect = () => {
+  const loggedIn = useAppSelector(selectLoggedIn);
+  const refreshing = useAppSelector(selectRefreshing);
+
+  return !refreshing && !loggedIn ? (
+    <Navigate to="/welcome" />
+  ) : (
+    <Navigate to="/home" />
+  );
+};
+
 export function App() {
   const dispatch = useAppDispatch();
   const refreshing = useAppSelector(selectRefreshing);
@@ -32,6 +43,7 @@ export function App() {
   ) : (
     <Suspense fallback={<PageFallback />}>
       <Routes>
+        <Route path="/" element={<RootRedirect />} />
         <Route
           path="/welcome"
           element={
