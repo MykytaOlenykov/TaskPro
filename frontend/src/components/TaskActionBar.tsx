@@ -83,6 +83,7 @@ export const TaskActionBar: React.FC<IProps> = ({
   const dispatch = useAppDispatch();
 
   const columns = useAppSelector(selectColumns);
+  const filteredColumns = columns.filter(({ _id }) => _id !== columnId);
 
   const [anchorElColumnMenu, setAnchorElColumnMenu] =
     useState<null | HTMLElement>(null);
@@ -140,42 +141,46 @@ export const TaskActionBar: React.FC<IProps> = ({
         gap: 8,
       }}
     >
-      <Button type="button" onClick={handleOpenColumnMenu}>
-        <ArrowCircleRightOutlinedIcon sx={{ width: 20, height: 20 }} />
-      </Button>
-      {Boolean(anchorElColumnMenu) && (
-        <ColumnMenu
-          id="column-menu"
-          anchorEl={anchorElColumnMenu}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          open={Boolean(anchorElColumnMenu)}
-          onClose={handleCloseColumnMenu}
-        >
-          {columns
-            .filter(({ _id }) => _id !== columnId)
-            .map(({ _id, name }) => (
-              <ColumnItem
-                key={_id}
-                onClick={() => handleChangeColumn(_id)}
-                disableRipple
-                disableTouchRipple
-                disableGutters
-              >
-                <ColumnName textAlign="center" variant="body1" noWrap>
-                  {name}
-                </ColumnName>
-                <ArrowCircleRightOutlinedIcon sx={{ width: 20, height: 20 }} />
-              </ColumnItem>
-            ))}
-        </ColumnMenu>
+      {!!filteredColumns.length && (
+        <>
+          <Button type="button" onClick={handleOpenColumnMenu}>
+            <ArrowCircleRightOutlinedIcon sx={{ width: 20, height: 20 }} />
+          </Button>
+          {Boolean(anchorElColumnMenu) && (
+            <ColumnMenu
+              id="column-menu"
+              anchorEl={anchorElColumnMenu}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElColumnMenu)}
+              onClose={handleCloseColumnMenu}
+            >
+              {filteredColumns.map(({ _id, name }) => (
+                <ColumnItem
+                  key={_id}
+                  onClick={() => handleChangeColumn(_id)}
+                  disableRipple
+                  disableTouchRipple
+                  disableGutters
+                >
+                  <ColumnName textAlign="center" variant="body1" noWrap>
+                    {name}
+                  </ColumnName>
+                  <ArrowCircleRightOutlinedIcon
+                    sx={{ width: 20, height: 20 }}
+                  />
+                </ColumnItem>
+              ))}
+            </ColumnMenu>
+          )}
+        </>
       )}
 
       <Button type="button" onClick={handleOpenEditTask}>
