@@ -1,0 +1,69 @@
+version: "3.8"
+
+services:
+  mongodb:
+    restart: always
+    env_file:
+      - ./api-server/.env
+    networks:
+      - taskpro_db_network
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile
+    volumes:
+      - ./database/taskpro_db:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    depends_on:
+      - mongodb
+    networks:
+      - taskpro_db_network
+    ports:
+      - 8081:8081
+    env_file:
+      - ./api-server/.env
+
+  api-server:
+    restart: always
+    depends_on:
+      - mongodb
+    networks:
+      - taskpro_db_network
+      - web_network
+    ports:
+      - 15000:15000
+    volumes:
+      - ./api-server:/app
+      - /app/node_modules
+    env_file:
+      - ./api-server/.env
+    environment:
+      - CORS_ORIGIN=http://localhost:15500
+    build:
+      context: ./api-server
+      dockerfile: development.Dockerfile
+
+  frontend:
+    restart: always
+    depends_on:
+      - api-server
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - 15500:15500
+    networks:
+      - web_network
+    env_file:
+      - ./frontend/.env
+    build:
+      context: ./frontend
+      dockerfile: development.Dockerfile
+
+networks:
+  taskpro_db_network:
+    driver: bridge
+  web_network:
+    driver: bridge
