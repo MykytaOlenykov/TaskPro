@@ -8,7 +8,6 @@ import {
   getBoards,
 } from "./operations";
 import { logOut } from "store/auth/operations";
-import { isAsyncError } from "utils";
 
 import type { IBoard } from "types";
 
@@ -44,10 +43,7 @@ const boardsSlice = createSlice({
         state.boardNotFound = false;
       })
       .addCase(getBoard.rejected, (state, action) => {
-        if (
-          isAsyncError(action.payload) &&
-          action.payload.statusCode !== "ERR_CANCELED"
-        ) {
+        if (action.payload?.statusCode !== "ERR_CANCELED") {
           state.loadingBoard = false;
           state.boardNotFound = true;
         }
